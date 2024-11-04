@@ -1,0 +1,37 @@
+.main-page {
+    text-align: center;
+    height: 100vh; /* To'liq ekran balandligi */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-image: url('/images/main_backround.jpg'); /* public papkasidagi rasm */
+    background-size: cover; /* Rasmni to'liq ekranga sig'diradi */
+    background-position: center; /* Rasmni markaziy pozitsiyaga joylashtiradi */
+    background-repeat: no-repeat;
+
+    h1 {
+        color: #d20808;
+    }
+
+    p {
+        font-size: 18px;
+        color: #ae2525;
+    }
+
+    .login-button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s;
+  
+      &:hover {
+        background-color: #45a049;
+      }
+    }
+  }
