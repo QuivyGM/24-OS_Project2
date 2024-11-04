@@ -1,10 +1,37 @@
-h1 {
-  color: blue;
+.main-page {
+  text-align: center;
+  height: 100vh; /* To'liq ekran balandligi */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-image: url("/images/main_backround.jpg"); /* public papkasidagi rasm */
+  background-size: cover; /* Rasmni to'liq ekranga sig'diradi */
+  background-position: center; /* Rasmni markaziy pozitsiyaga joylashtiradi */
+  background-repeat: no-repeat;
+}
+.main-page h1 {
+  color: #d20808;
+}
+.main-page p {
+  font-size: 18px;
+  color: #ae2525;
+}
+.main-page .login-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+.main-page .login-button:hover {
+  background-color: #45a049;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
+body {
+  background-color: blueviolet;
 }/*# sourceMappingURL=style.css.map */
