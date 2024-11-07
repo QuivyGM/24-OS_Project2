@@ -1,37 +1,517 @@
-.main-page {
-    text-align: center;
-    height: 100vh; /* To'liq ekran balandligi */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-image: url('/images/main_backround.jpg'); /* public papkasidagi rasm */
-    background-size: cover; /* Rasmni to'liq ekranga sig'diradi */
-    background-position: center; /* Rasmni markaziy pozitsiyaga joylashtiradi */
+@import '../variables/colors';
+
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif; // Set global font to Poppins
+}
+
+.first-page {
+  text-align: center;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden; // Prevents the zoomed background from overflowing
+
+  // Add the background image as a pseudo-element
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('/images/main_backround.jpg'); // Background image
+    background-size: cover;
+    background-position: center;
     background-repeat: no-repeat;
+    transform: scale(1); // Start at the original size
+    z-index: -1; // Place it behind all other content
+    animation: backgroundZoom 5s ease forwards; // Zoom animation
+  }
 
-    h1 {
-        color: #d20808;
+  .overlay {
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.6); 
+    padding: 0px 20px;
+
+    &.scrolled {
+      background: $primary-color; // Background after scroll
+      transition: backround 0.3s ease; // Smooth transition
     }
 
-    p {
-        font-size: 18px;
-        color: #ae2525;
-    }
 
-    .login-button {
-      margin-top: 20px;
-      padding: 10px 20px;
-      background-color: #4CAF50;
-      color: #fff;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 16px;
-      transition: background-color 0.3s;
-  
-      &:hover {
-        background-color: #45a049;
+    .navbar-main {
+      background-color: transparent !important;
+
+      .navbar-box {
+        .navbar-toggler {
+          border: 1.5px solid $light-color;
+
+          .navbar-toggler-icon {
+            width: 20px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba(255, 255, 255, 0.8)' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+          }
+        }
+        .navbar-brand {
+          img {
+            width: 100px;
+          }
+        }
       }
     }
   }
+}
+
+// Keyframes for the background zoom animation
+@keyframes backgroundZoom {
+  from {
+    transform: scale(1); // Start at the original size
+  }
+  to {
+    transform: scale(1.08); // Zoom in slightly
+  }
+}
+.nav-center{
+  display: flex;
+  justify-content:flex-end;
+}
+.navbar-nav {
+  padding-right: 10px;
+  a {
+    color: $light-color !important; // Set link color
+    position: relative;
+    transition: color 0.3s ease; // Smooth color transition
+    margin: 0px 12px !important;
+    padding: 0;
+
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 0;
+      height: 2px;
+      background-color: $light-color; // Bottom line color
+      transition: width 0.3s ease; // Smooth line width transition
+    }
+
+    &:hover {
+      color: $light-color; // Keep the link color on hover
+
+      &::after {
+        width: 100%; // Extend the bottom line on hover
+      }
+    }
+  }
+}
+
+.nav-right {
+  display: flex;
+  gap: 18px;
+
+  button {
+    background-color: transparent !important;
+    border: 0;
+    position: relative;
+    cursor: pointer;
+    padding: 0px;
+    transition: color 0.3s ease;
+
+    img {
+      width: 24px; // Icon size for buttons
+      transition: color 0.3s ease; // Smooth color transition
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -8px;
+      width: 0;
+      height: 2px;
+      background-color: $light-color; // Bottom line color for button
+      transition: width 0.3s ease; // Smooth transition for line width
+    }
+
+    &:hover {
+      &::after {
+        width: 100%; // Show full line on hover
+      }
+    }
+  }
+}
+
+.search-button {
+  input {
+    background-color: transparent;
+    color: $light-color; 
+    width: 0;
+    opacity: 0;
+    transition: width 0.5s ease, opacity 0.5s ease; // Ko'rinish va kenglik o'zgarishi uchun animatsiya
+
+    &.show {
+      width: 150px; 
+      opacity: 1; 
+    }
+
+    &.hide {
+      width: 0; 
+      opacity: 0;
+    }
+
+    &::placeholder {
+      color: $dark-color;
+    }
+  }
+}
+
+.welcome-text {
+  h1 {
+    position: absolute;
+    top: 45%;
+    left: 10%;
+    color: $light-color;
+    font-size: 96px;
+    font-weight: 600;
+    margin: 0;
+    opacity: 0; // Initially hidden
+    transform: translateY(20px); // Starts slightly lower
+    animation: slideIn 1.2s ease forwards; // Slide-in animation
+    animation-delay: 0.3s; // Slight delay for staggered effect
+  }
+
+  h2 {
+    position: absolute;
+    top: 38%;
+    left: 5%;
+    color: $light-color;
+    font-size: 64px;
+    font-weight: 500;
+    opacity: 0; // Initially hidden
+    transform: translateY(20px); // Starts slightly lower
+    animation: slideIn 1.2s ease forwards; // Slide-in animation
+    animation-delay: 0.5s; // Delayed further to appear after h1
+  }
+}
+
+// Slide-in animation definition
+@keyframes slideIn {
+  from {
+    opacity: 0; // Starts fully transparent
+    transform: translateY(20px); // Starts slightly lower
+  }
+  to {
+    opacity: 1; // Ends fully visible
+    transform: translateY(0); // Ends in original position
+  }
+}
+
+
+/* Second Page Styles */
+
+.main-second {
+  padding: 160px 80px;
+
+  .what-we-provide {
+    padding-bottom: 80px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    .provide-image {
+      object-fit: cover;
+      width: 30%;
+      height: 70vh;
+      border-radius: 20px;
+    }
+
+    .green{
+      width: 437.38px;
+      height: 242.963px;
+      transform: rotate(5deg);
+      flex-shrink: 0;
+      position: absolute;
+      right:0%;
+      top: 96%;
+    }
+
+    .provide-content {
+      padding-left: 5%;
+      h2 {
+      font-size: 38px;
+      font-weight: 700;
+      color: $primary-color;
+      margin-bottom: 80px;
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+        margin-bottom: 50px;
+        li {
+          margin: 30px 0;
+
+          strong {
+            font-size: 28px;
+            font-weight: 500;
+            color: $dark-color;
+          }
+
+          p {
+            color: #8692A6;
+            font-size: 18px;
+            font-weight: 400;
+
+          }
+        }
+      }
+
+      .more-info-button {
+        margin-top: 10px;
+        padding: 10px 20px;
+        background-color: $primary-color;
+        color: $light-color;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, box-shadow 0.3s ease; // Smooth transition
+      
+        &:hover {
+          background-color: lighten($primary-color, 5%); // Slightly lighter color on hover
+          box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); // Subtle shadow effect
+        }
+      }
+    }
+  }
+
+  .individual-blogs {
+    margin-top: 50px;
+
+    h2 {
+      font-size: 36px;
+      color: $primary-color;
+    }
+
+    .blog-content {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+
+      .blog-image {
+        width: 300px;
+        height: auto;
+      }
+
+      .blog-details {
+        h3 {
+          font-size: 28px;
+          color: $primary-color;
+        }
+
+        h4 {
+          font-size: 20px;
+          color: $secondary-color;
+          margin-bottom: 10px;
+        }
+
+        h5 {
+          margin: 20px 0 10px;
+          font-size: 18px;
+          color: $secondary-color;
+        }
+
+        ul {
+          list-style: disc;
+          padding-left: 20px;
+          color: $dark-color;
+        }
+
+        .tags {
+          display: flex;
+          gap: 10px;
+          margin-top: 10px;
+
+          .tag {
+            background-color: $light-color;
+            color: $primary-color;
+            padding: 5px 10px;
+            border-radius: 5px;
+          }
+        }
+      }
+    }
+  }
+
+  .our-products {
+    margin-top: 50px;
+
+    h2 {
+      font-size: 36px;
+      color: $primary-color;
+    }
+
+    .product-list {
+      display: flex;
+      gap: 20px;
+
+      .product-item {
+        text-align: center;
+
+        img {
+          width: 100px;
+          height: auto;
+        }
+
+        h4 {
+          margin-top: 10px;
+          font-size: 16px;
+          color: $dark-color;
+        }
+
+        p {
+          font-size: 14px;
+          color: $secondary-color;
+        }
+
+        .add-to-cart {
+          padding: 5px 10px;
+          background-color: $primary-color;
+          color: $light-color;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          margin-top: 10px;
+        }
+      }
+    }
+  }
+
+  .user-comments {
+    margin-top: 50px;
+
+    h2 {
+      font-size: 36px;
+      color: $primary-color;
+    }
+
+    .comment-box {
+      background-color: $light-color;
+      padding: 20px;
+      border-radius: 5px;
+      margin-top: 20px;
+
+      .rating {
+        font-size: 24px;
+        color: $primary-color;
+        margin-bottom: 10px;
+      }
+
+      .comment-text {
+        color: $dark-color;
+      }
+
+      .comment-author {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 10px;
+
+        img {
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+        }
+
+        .author-name {
+          font-weight: bold;
+        }
+
+        .author-position {
+          font-size: 14px;
+          color: $secondary-color;
+        }
+      }
+
+      .drop-comment {
+        margin-top: 10px;
+        padding: 10px;
+        background-color: $primary-color;
+        color: $light-color;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: $primary-color;
+    color: $light-color;
+
+    .footer-logo img {
+      width: 100px;
+      height: auto;
+    }
+
+    .footer-links {
+      margin: 10px 0;
+      display: flex;
+      gap: 20px;
+
+      a {
+        color: $light-color;
+        text-decoration: none;
+      }
+    }
+
+    .footer-social {
+      margin: 10px 0;
+      display: flex;
+      gap: 10px;
+
+      a {
+        color: $light-color;
+        font-size: 20px;
+      }
+    }
+
+    .subscribe {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      margin-top: 10px;
+
+      input {
+        padding: 5px;
+        border-radius: 5px;
+        border: none;
+      }
+
+      button {
+        padding: 5px 10px;
+        border-radius: 5px;
+        background-color: $light-color;
+        color: $primary-color;
+        cursor: pointer;
+      }
+    }
+
+    .footer-note {
+      margin-top: 10px;
+      font-size: 14px;
+    }
+  }
+}
+
