@@ -1,6 +1,6 @@
 // src/components/Shop.js
 
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/pages/_shop.scss';
 
@@ -8,7 +8,6 @@ const Shop = () => {
     const navigate = useNavigate();
     const searchInputRef = useRef(null);
     const [showInput, setShowInput] = useState(false);
-    const [isScrolled, setIsScrolled] = useState(false);
 
 // Function to handle logo click and navigate to the main page
 const handleLogoClick = (event) => {
@@ -55,10 +54,10 @@ return (
             {/* Navbar links and right-side buttons */}
             <div className="collapse navbar-collapse nav-center" id="navbarSupportedContent">
               <ul className="navbar-nav mb-2 mb-lg-0">
-                <li className="nav-item"><a className="nav-link active" href="Product">Product</a></li>
+                <li className="nav-item"><a className="nav-link active" href="Plants">Plants</a></li>
+                <li className="nav-item"><a className="nav-link active" href="Community">Community</a></li>
                 <li onClick={handleShopClick} className="nav-item"><a className="nav-link active" href="Shop">Shop</a></li>
-                <li className="nav-item"><a className="nav-link active" href="About Us">About Us</a></li>
-                <li className="nav-item"><a className="nav-link active" href="Service">Service</a></li>
+                <li className="nav-item"><a className="nav-link active" href="Aboutus">About Us</a></li>
               </ul>
 
               {/* Right nav (search and login) */}

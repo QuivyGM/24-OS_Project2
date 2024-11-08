@@ -7,6 +7,11 @@
   font-family: 'Poppins', sans-serif; // Set global font to Poppins
 }
 
+body {
+  overflow-x: hidden; // Hide any accidental horizontal overflow
+}
+
+
 .first-page {
   text-align: center;
   height: 100vh;
