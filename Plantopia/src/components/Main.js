@@ -1,6 +1,6 @@
 // src/pages/Main.js
 
-import React, { useRef, useState, useEffect  } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/pages/_main.scss';
 
@@ -8,15 +8,13 @@ const MainPage = () => {
   const navigate = useNavigate();
   const searchInputRef = useRef(null);
   
-  // `showInput` state: input ko'rinishini boshqaradi
   const [showInput, setShowInput] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false); // New state
+  const [isScrolled, setIsScrolled] = useState(false);
 
-  // Search tugmasi bosilganda inputni ko'rsatish funksiyasi
   const handleSearchClick = () => {
-    setShowInput(true); // `showInput` ni true qilib inputni ko'rsatish
+    setShowInput(true);
     if (searchInputRef.current) {
-      searchInputRef.current.focus(); // Fokusni inputga o'rnatish
+      searchInputRef.current.focus();
     }
   };
 
@@ -33,47 +31,35 @@ const MainPage = () => {
     navigate('/shop');
   };
 
-
-
-  // useEffect to handle scroll event
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > window.innerHeight) { // Trigger after 100vh
-        setIsScrolled(true); // Set `isScrolled` to true
-      } else {
-        setIsScrolled(false); // Reset when scrolled back up
-      }
+      setIsScrolled(window.scrollY > window.innerHeight);
     };
-
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll); // Cleanup listener
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
-    <div className="main-page">
+    <div>
       {/* First Page Section */}
       <div className="first-page">
-        <div className={`overlay ${isScrolled ? 'scrolled' : ''}`}> {/* Conditional class addition */}
+        <div className={`overlay ${isScrolled ? 'scrolled' : ''}`}>
           <nav className="navbar navbar-expand-lg bg-body-tertiary navbar-main">
             <div className="container-fluid navbar-box d-flex">
-              
-              {/* Navbar brand/logo with click handler */}
-              <a className="navbar-brand" href="logo" onClick={handleLogoClick}>
+              <a className="navbar-brand" href="/" onClick={handleLogoClick}>
                 <img src='./images/logo.png' alt='logo' />
               </a>
-
-              {/* Navbar toggle button for mobile view */}
               <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
               </button>
 
-              {/* Navbar links and right-side buttons */}
+              {/* Navbar links */}
               <div className="collapse navbar-collapse nav-center" id="navbarSupportedContent">
                 <ul className="navbar-nav mb-2 mb-lg-0">
-                  <li className="nav-item"><a className="nav-link active" href="Plants">Plants</a></li>
-                  <li className="nav-item"><a className="nav-link active" href="Community">Community</a></li>
-                  <li onClick={handleShopClick} className="nav-item"><a className="nav-link active" href="Shop">Shop</a></li>
-                  <li className="nav-item"><a className="nav-link active" href="Aboutus">About Us</a></li>
+                  <li className="nav-item"><a className="nav-link active" onClick={() => navigate('/plants')} href='plants'>Plants</a></li>
+                  <li className="nav-item"><a className="nav-link active" onClick={() => navigate('/community')} href='community'>Community</a></li>
+                  <li className="nav-item"><a className="nav-link active" onClick={handleShopClick} href='shop'>Shop</a></li>
+                  <li className="nav-item"><a className="nav-link active" onClick={() => navigate('/aboutus')} href='aboutus'>About Us</a></li>
                 </ul>
 
                 {/* Right nav (search and login) */}
@@ -81,7 +67,7 @@ const MainPage = () => {
                   <form className="d-flex search-button" role="search" onSubmit={(e) => e.preventDefault()}>
                     <input 
                       ref={searchInputRef} 
-                      className={`form-control me-2 ${showInput ? 'show' : 'hide'}`} // Shartli class
+                      className={`form-control me-2 ${showInput ? 'show' : 'hide'}`} 
                       type="search" 
                       placeholder="Search" 
                       aria-label="Search" 
@@ -112,28 +98,43 @@ const MainPage = () => {
 
 
 
-
       {/* Second Page Section */}
       <div className="main-second">
-        <section className="what-we-provide">
-          <img src="./images/info_plant.jpg" alt="Plant" className="provide-image" />
-          <img src='./icons/green.png' alt='green' className='green'/>
-          <div className="provide-content">
-            <h2>What We Provide</h2>
-            <ul>
-              <li><strong>Schedule Vice Garden Maintain</strong><p>Garden management services, schedule your garden maintenance as needed.</p></li>
-              <li><strong>As Per Requirement Garden Maintain</strong><p>Customized maintenance based on garden needs.</p></li>
-              <li><strong>Online Plant Selling</strong><p>Order plants online with delivery and maintenance guidance.</p></li>
-            </ul>
-            <button className="more-info-button">More Info</button>
+        {/* What We Provide Section */}
+        <section className="what-we-provide text-center py-5">
+          <div className="row align-items-center">
+            <div className="col-md-4 info-plant-img">
+              <img src="./images/info_plant.jpg" alt="Plant" className="img-fluid provide-image" />
+            </div>
+            <div className="col-md-8 provide-content">
+              <h2>What We Provide</h2>
+              <ul className="list-unstyled">
+                <li>
+                  <strong>Schedule Vice Garden Maintain</strong>
+                  <p>Garden management services, schedule your garden maintenance as needed.</p>
+                </li>
+                <li>
+                  <strong>As Per Requirement Garden Maintain</strong>
+                  <p>Customized maintenance based on garden needs.</p>
+                </li>
+                <li>
+                  <strong>Online Plant Selling</strong>
+                  <p>Order plants online with delivery and maintenance guidance.</p>
+                </li>
+              </ul>
+              <button className="btn btn-success more-info-button mt-3">More Info</button>
+            </div>
           </div>
         </section>
 
-        <section className="individual-blogs">
-          <h2>Individual Blogs</h2>
-          <div className="blog-content">
-            <img src="./images/1.jpg" alt="Blog" className="blog-image" />
-            <div className="blog-details">
+        {/* Individual Blogs Section */}
+        <section className="individual-blogs py-5">
+          <h2 className="text-center mb-4">Individual Blogs</h2>
+          <div className="row align-items-center">
+            <div className="col-md-6">
+              <img src="./images/1.jpg" alt="Blog" className="img-fluid blog-image" />
+            </div>
+            <div className="col-md-6 blog-details">
               <h3>Echinocereus Cactus</h3>
               <h4>A Majestic Addition to Your Plant Collection</h4>
               <h5>Features</h5>
@@ -144,47 +145,81 @@ const MainPage = () => {
               </ul>
               <h5>Description</h5>
               <p>The Echinocereus Cactus is a unique addition to any collection, known for its resilience and beauty. Ideal for both beginner and experienced gardeners.</p>
-              <div className="tags">
-                <div className="tag">Sunlight</div>
-                <div className="tag">Soil</div>
+              <div className="tags mt-2">
+                <span className="badge bg-success me-2">Sunlight</span>
+                <span className="badge bg-success">Soil</span>
               </div>
             </div>
           </div>
         </section>
 
-        <section className="our-products">
-          <h2>Our Products</h2>
-          <div className="product-list">
-            <div className="product-item"><img src="./images/1.jpg" alt="Modern Plant" /><h4>Modern Picture</h4><p>$15.99</p><button className="add-to-cart">Add to Cart</button></div>
-            <div className="product-item"><img src="./images/2.jpg" alt="Modern Plant" /><h4>Modern Picture</h4><p>$15.99</p><button className="add-to-cart">Add to Cart</button></div>
+        {/* Our Products Section */}
+        <section className="our-products py-5">
+          <h2 className="text-center mb-4">Our Products</h2>
+          <div className="row">
+            {[1, 2, 3, 4].map((item) => (
+              <div key={item} className="col-6 col-md-3 mb-4">
+                <div className="card product-item">
+                  <img src={`./images/${item}.jpg`} alt="Product" className="card-img-top" />
+                  <div className="card-body text-center">
+                    <h5 className="card-title">Modern Picture</h5>
+                    <p className="price">$15.99</p>
+                    <button className="btn btn-outline-primary">Add to Cart</button>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </section>
 
-        <section className="user-comments">
-          <h2>User Comments</h2>
-          <div className="comment-box">
-            <div className="rating"><span>4.2 ★</span></div>
-            <p className="comment-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum imperdiet ex ac eros sagittis.</p>
-            <div className="comment-author">
-              <img src="./images/4.jpg" alt="User" />
-              <span className="author-name">Danny Sena</span>
-              <span className="author-position">Co-founder of MyCompany</span>
+        {/* User Comments Section */}
+        <section className="user-comments py-5">
+          <h2 className="text-center mb-4">User Comments</h2>
+          <div className="comment-box p-4">
+            <div className="d-flex align-items-center">
+              <div className="rating">4.2 ★</div>
+              <div className="comment-text mx-3">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum imperdiet ex ac eros sagittis.</p>
+              </div>
             </div>
-            <button className="drop-comment">Drop Comment</button>
+            <div className="comment-author mt-3 d-flex align-items-center">
+              <img src="./images/4.jpg" alt="User" className="rounded-circle" />
+              <div className="ms-3">
+                <p className="author-name">Danny Sena</p>
+                <p className="author-position">Co-founder of MyCompany</p>
+              </div>
+            </div>
+            <button className="btn btn-link drop-comment mt-3">Drop Comment</button>
           </div>
         </section>
 
-        <footer className="footer">
-          <div className="footer-logo"><img src="./images/3.jpg" alt="Plantopia Logo" /></div>
-          <div className="footer-links"><a href="#home">Home</a><a href="#gardner">Gardner</a><a href="#contact">Contact</a><a href="#privacy">Privacy</a></div>
-          <div className="footer-social"><h3>Social</h3><a href="#facebook"><i className="fab fa-facebook"></i></a><a href="#linkedin"><i className="fab fa-linkedin"></i></a><a href="#instagram"><i className="fab fa-instagram"></i></a></div>
-          <div className="subscribe">
-            <h3>Subscribe For Updates</h3>
-            <input type="email" placeholder="Enter email..." />
-            <button>Subscribe</button>
+        {/* Footer Section */}
+        <footer className="footer py-5">
+          <div className="row text-center">
+            <div className="col-md-3 footer-logo">
+              <img src="./images/1.jpg" alt="Plantopia Logo" />
+            </div>
+            <div className="col-md-3 footer-links">
+              <a href="#home">Home</a>
+              <a href="#gardner">Gardner</a>
+              <a href="#contact">Contact</a>
+              <a href="#privacy">Privacy</a>
+            </div>
+            <div className="col-md-3 footer-social">
+              <h3>Social</h3>
+              <a href="#facebook"><i className="fab fa-facebook"></i></a>
+              <a href="#linkedin"><i className="fab fa-linkedin"></i></a>
+              <a href="#instagram"><i className="fab fa-instagram"></i></a>
+            </div>
+            <div className="col-md-3 subscribe">
+              <h3>Subscribe For Updates</h3>
+              <input type="email" placeholder="Enter email..." className="form-control mb-2" />
+              <button className="btn btn-primary">Subscribe</button>
+            </div>
           </div>
-          <p className="footer-note">garden.com © All rights reserved</p>
+          <p className="footer-note text-center mt-4">garden.com © All rights reserved</p>
         </footer>
+
       </div>
     </div>
   );
