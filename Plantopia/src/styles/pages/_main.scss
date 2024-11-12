@@ -32,6 +32,7 @@ html, body {
     background-repeat: no-repeat;
     width: 100vw; // Ensure full viewport width
     z-index: -1; // Place it behind all other content
+    animation: backgroundZoom 8s ease forwards; // Add the background zoom animation
   }
 
   .overlay {
@@ -193,6 +194,59 @@ html, body {
   }
 }
 
+
+// -----------media for resposive-------------------
+
+@media (max-width: 768px) {
+  .welcome-text {
+    h1 {
+      position: absolute;
+      top: 52%;
+      left: 10%;
+      color: $light-color;
+      font-size: 66px;
+      font-weight: 600;
+      margin: 0;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: slideIn 1.2s ease forwards;
+      animation-delay: 0.3s;
+
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); // Add shadow to improve visibility
+    }
+  
+    h2 {
+      position: absolute;
+      top: 47%;
+      left: 10%;
+      color: $light-color;
+      font-size: 34px;
+      font-weight: 700;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: slideIn 1.2s ease forwards;
+      animation-delay: 0.5s;
+
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); // Add shadow to improve visibility
+    }
+  }
+
+
+  .main-second {
+    .what-we-provide,
+    .individual-blogs,
+    .our-products,
+    .user-comments {
+
+      .provide-image{
+      width: 300px !important;
+        height: 300px !important;
+      }
+    }
+  }
+}
+// ---------------------------------------------
+
 @keyframes slideIn {
   from {
     opacity: 0;
@@ -220,6 +274,9 @@ html, body {
       color: $primary-color;
       text-align: center;
       margin-bottom: 2rem;
+      font-weight: 700;
+      line-height: 127%; /* 48.26px */
+      text-align: left;
     }
     .provide-image{
       width: 400px;
@@ -228,12 +285,12 @@ html, body {
       object-fit: cover;
       border-radius: 20px;
       background: url(<path-to-image>) lightgray 50% / cover no-repeat;
-      box-shadow: 0px 26.453px 21.163px 0px rgba(0, 0, 0, 0.09), 0px 16.057px 12.846px 0px rgba(0, 0, 0, 0.08), 0px 9.675px 7.74px 0px rgba(0, 0, 0, 0.06), 0px 5.388px 4.31px 0px rgba(0, 0, 0, 0.05), 0px 2.317px 1.854px 0px rgba(0, 0, 0, 0.04);
+      box-shadow: 0px 26.453px 21.163px 0px rgba(0, 0, 0, 0.09), 0px 12.057px 12.846px 0px rgba(0, 0, 0, 0.08);
     }
   }
 
-  .provide-content,
-  .blog-details {
+  .provide-content{
+    padding-left: 2rem;
     h3, h4, h5 {
       color: $primary-color;
     }
@@ -242,6 +299,37 @@ html, body {
     }
   }
 
+  .blog-title{
+    margin-bottom: 4rem !important;
+  }
+  .blog-details {
+    padding-left: 2rem;
+    h3{
+      color: $dark-color;
+      font-size: 2rem;
+      font-weight: 600;
+      text-transform: capitalize;
+      opacity: 80%;
+    }
+    h4{
+      color: $info-color;
+    }
+    h5{
+      padding-top: 2rem;
+      color: $dark-color;
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+    ul{
+      font-weight: 400;
+      line-height: 154.5%; /* 24.72px */
+    }
+  }
+  .blog-image-box{
+    .blog-image{
+      border-radius: 24px;
+    }
+  }
   .info-plant-img{
     padding-bottom: 40px;
     text-align: center;
@@ -251,7 +339,7 @@ html, body {
   .provide-content{
     text-align: left;
     h2{
-      font-size: 38px;
+      font-size: 2rem;
       font-weight: 700;
       line-height: 127%; /* 48.26px */
       text-align: left;
@@ -278,6 +366,9 @@ html, body {
   .more-info-button {
     background-color: $primary-color;
     color: $light-color;
+    border: 0;
+    margin-top: 50px !important;
+    
     &:hover {
       background-color: darken($primary-color, 10%);
       box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
@@ -287,15 +378,37 @@ html, body {
   .tags .badge {
     margin-right: 0.5rem;
     font-size: 0.9rem;
+    color: $light-green-color;
+    border: 1px solid $light-green-color;
+    font-weight: 400;
+    margin-bottom: 2rem;
   }
 
   .product-item {
+    border-radius: 24px;
+    box-shadow: 0px 6.476px 6px 0px rgba(41, 41, 41, 0.08);
+    border: 0;
     .card-title {
       font-size: 1.1rem;
       color: $primary-color;
     }
     .price {
       color: $secondary-color;
+    }
+    .card-img-top{
+      border-radius: 24px 24px 0px 0px;
+    }
+    .card-body{
+      .btn-outline-primary{
+        color: $primary-color;
+        border: 1px solid $primary-color;
+
+        &:hover {
+          background-color: $primary-color;
+          box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+          color: $light-color;
+        }
+      }
     }
   }
 
@@ -319,7 +432,7 @@ html, body {
   }
 
   .footer {
-    background-color: $dark-color;
+    background-color: $footer-color;
     color: $light-color;
     .footer-logo img {
       width: 100px;

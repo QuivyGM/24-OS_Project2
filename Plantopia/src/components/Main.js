@@ -129,14 +129,18 @@ const MainPage = () => {
 
         {/* Individual Blogs Section */}
         <section className="individual-blogs py-5">
-          <h2 className="text-center mb-4">Individual Blogs</h2>
+          <h2 className="text-center blog-title">Individual Blogs</h2>
           <div className="row align-items-center">
-            <div className="col-md-6">
+            <div className="col-md-5 blog-image-box">
               <img src="./images/1.jpg" alt="Blog" className="img-fluid blog-image" />
             </div>
-            <div className="col-md-6 blog-details">
+            <div className="col-md-7 blog-details">
               <h3>Echinocereus Cactus</h3>
               <h4>A Majestic Addition to Your Plant Collection</h4>
+              <div className="tags mt-2">
+                <span className="badge me-2">Sunlight</span>
+                <span className="badge">Soil</span>
+              </div>
               <h5>Features</h5>
               <ul>
                 <li>Low maintenance and requires minimal watering.</li>
@@ -144,11 +148,7 @@ const MainPage = () => {
                 <li>Perfect for indoor and outdoor environments.</li>
               </ul>
               <h5>Description</h5>
-              <p>The Echinocereus Cactus is a unique addition to any collection, known for its resilience and beauty. Ideal for both beginner and experienced gardeners.</p>
-              <div className="tags mt-2">
-                <span className="badge bg-success me-2">Sunlight</span>
-                <span className="badge bg-success">Soil</span>
-              </div>
+              <p>TLadyfinger cactus (*Echinocereus pentalophus*) is also known as Alice, Devil's Fingers, and Dog Tail. It needs bright sunlight, light fertilizer, and is prone to root rot. The root system is shallow and weak. Aphids and mealybugs are also a danger. Avoiding wet soil can help with success with a ladyfinger cactus.</p>
             </div>
           </div>
         </section>
@@ -197,7 +197,7 @@ const MainPage = () => {
         <footer className="footer py-5">
           <div className="row text-center">
             <div className="col-md-3 footer-logo">
-              <img src="./images/1.jpg" alt="Plantopia Logo" />
+              <img src="./images/logo.png" alt="Plantopia Logo" />
             </div>
             <div className="col-md-3 footer-links">
               <a href="#home">Home</a>
