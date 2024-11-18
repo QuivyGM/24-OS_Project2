@@ -100,7 +100,22 @@ return (
         </div>
       </div>
     </div>
-
+    <div className="service-page">
+      <div className="services-list">
+        <div className="service-card">
+          <h2>Garden Maintenance</h2>
+          <p>We offer tailored garden maintenance plans to suit your schedule and needs.</p>
+        </div>
+        <div className="service-card">
+          <h2>Plant Consultation</h2>
+          <p>Our experts can help you choose and care for the best plants for your environment.</p>
+        </div>
+        <div className="service-card">
+          <h2>Online Plant Store</h2>
+          <p>Order plants online with delivery options right to your doorstep.</p>
+        </div>
+      </div>
+    </div>
   </div>
   );
 };

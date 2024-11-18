@@ -130,7 +130,7 @@ const MainPage = () => {
         {/* Individual Blogs Section */}
         <section className="individual-blogs py-5">
           <h2 className="text-center blog-title">Individual Blogs</h2>
-          <div className="row align-items-center">
+          <div className="row ">
             <div className="col-md-5 blog-image-box">
               <img src="./images/1.jpg" alt="Blog" className="img-fluid blog-image" />
             </div>
@@ -149,6 +149,37 @@ const MainPage = () => {
               </ul>
               <h5>Description</h5>
               <p>TLadyfinger cactus (*Echinocereus pentalophus*) is also known as Alice, Devil's Fingers, and Dog Tail. It needs bright sunlight, light fertilizer, and is prone to root rot. The root system is shallow and weak. Aphids and mealybugs are also a danger. Avoiding wet soil can help with success with a ladyfinger cactus.</p>
+              {/* Accordion Sunlight and Soil */}
+              <div class="container mt-4">
+                <div class="accordion" id="accordionExample">
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                      <button class="accordion-button collapsed bg-light-blue" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                        <img src="./icons/Sunlight.png" alt="Sunlight Icon" class="me-2" width="48" height="48" /> Sunlight
+                      </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                      <div class="accordion-body">
+                        Content about sunlight.
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum imperdiet ex ac eros sagittis.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingTwo">
+                      <button class="accordion-button collapsed bg-light-gray" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        <img src="./icons/Soil.png" alt="Soil Icon" class="me-2" width="48" height="48" /> Soil
+                      </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                      <div class="accordion-body">
+                        Content about soil.
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum imperdiet ex ac eros sagittis.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div> 
             </div>
           </div>
         </section>
@@ -176,17 +207,17 @@ const MainPage = () => {
         <section className="user-comments py-5">
           <h2 className="text-center mb-4">User Comments</h2>
           <div className="comment-box p-4">
-            <div className="d-flex align-items-center">
-              <div className="rating">4.2 ★</div>
-              <div className="comment-text mx-3">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum imperdiet ex ac eros sagittis.</p>
-              </div>
-            </div>
             <div className="comment-author mt-3 d-flex align-items-center">
               <img src="./images/4.jpg" alt="User" className="rounded-circle" />
               <div className="ms-3">
                 <p className="author-name">Danny Sena</p>
                 <p className="author-position">Co-founder of MyCompany</p>
+              </div>
+            </div>
+            <div className=" star-info">
+              <div className="rating">4.2 ★★★★</div>
+              <div className="comment-text mx-3">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum imperdiet ex ac eros sagittis.</p>
               </div>
             </div>
             <button className="btn btn-link drop-comment mt-3">Drop Comment</button>
@@ -214,7 +245,7 @@ const MainPage = () => {
             <div className="col-md-3 subscribe">
               <h3>Subscribe For Updates</h3>
               <input type="email" placeholder="Enter email..." className="form-control mb-2" />
-              <button className="btn btn-primary">Subscribe</button>
+              <button className="btn button-subscribe">Subscribe</button>
             </div>
           </div>
           <p className="footer-note text-center mt-4">garden.com © All rights reserved</p>

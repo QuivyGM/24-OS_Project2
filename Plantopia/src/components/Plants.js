@@ -86,7 +86,7 @@ return (
     <div className="product-page">
       <h1>Our Products</h1>
       <div className="products-list">
-        {[1, 2, 3, 4].map((item) => (
+        {[1, 2, 3, 4, 1, 2, 3, 4, 1, 2].map((item) => (
           <div key={item} className="product-card">
             <img src={`./images/${item}.jpg`} alt={`Product ${item}`} />
             <h2>Product {item}</h2>
@@ -95,6 +95,7 @@ return (
           </div>
         ))}
       </div>
+      
     </div>
   </div>
   );
