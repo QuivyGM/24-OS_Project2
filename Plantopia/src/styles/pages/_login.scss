@@ -1,42 +1,124 @@
 @import '../variables/colors';
 
-* {
-  margin: 0px;
-  padding: 0px;
-  box-sizing: border-box;
-  font-family: 'Poppins', sans-serif; // Set global font to Poppins
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: auto;
+
+    .login-left {
+        .plant-image {
+            width: 400px;
+            margin-bottom: 20px;
+            margin-right: 200px;
+        }
+
+        .logo-text {
+            font-size: 2.5rem;
+            color: $primary-color;
+            margin-top: 20px;
+            font-weight: bold;
+            margin-right: 100px;
+        }
+    }
+
+    .login-right {
+        max-width: 400px;
+        padding: 20px;
+
+        .back-button {
+            background: none;
+            border: none;
+            color: $primary-color;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-bottom: 30px;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        p {
+            color: $text-secondary-color;
+            font-size: 0.9rem;
+            margin-bottom: 30px;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+
+            label {
+                font-size: 0.9rem;
+                margin-bottom: 8px;
+            }
+
+            input[type="email"],
+            input[type="password"] {
+                padding: 10px;
+                margin-bottom: 20px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                font-size: 1rem;
+            }
+
+            .remember-me {
+                display: flex;
+                align-items: center;
+                margin-bottom: 30px;
+
+                label {
+                    margin-left: 5px;
+                    font-size: 0.9rem;
+                }
+            }
+
+            .login-button {
+                background-color: $primary-color;
+                color: white;
+                padding: 10px;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+
+                &:hover {
+                    background-color: darken($primary-color, 10%);
+                }
+            }
+        }
+
+        .signup-link {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            a {
+                color: $primary-color;
+                text-decoration: none;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
 }
 
-
-.login-page {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-    text-align: center;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-
-    h2 {
-        color: #4CAF50;
+// Media query for mobile responsiveness
+@media (max-width: 768px) {
+    .login-left {
+        display: none; // Hide the left section on small screens
     }
 
-    label {
-        display: block;
-        margin: 10px 0 5px;
-    }
-
-    input {
+    .login-right {
+        padding: 20px;
         width: 100%;
-        padding: 8px;
-        margin-bottom: 10px;
-    }
-
-    button {
-        padding: 10px 20px;
-        background-color: #4CAF50;
-        color: #fff;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
+        max-width: 100%; // Allow full width for mobile
     }
 }

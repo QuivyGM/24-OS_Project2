@@ -1,23 +1,47 @@
 // src/pages/Login.js
 import React from 'react';
-// Login.js
+import { useNavigate } from 'react-router-dom';
 import '../styles/pages/_login.scss';
 
 const Login = () => {
-return (
-    <div className="login-page">
-        <h2>Login to Plantopia</h2>
-        <form>
-        <label htmlFor="username">Username:</label>
-        <input type="text" id="username" name="username" />
+    const navigate = useNavigate();
 
-        <label htmlFor="password">Password:</label>
-        <input type="password" id="password" name="password" />
+    const handleBackClick = () => {
+        navigate('/'); // Navigate to the main page
+    };
 
-        <button type="submit">Login</button>
-        </form>
-    </div>
-);
+    return (
+        <div className="login-container container">
+            <div className="row align-items-center justify-content-center">
+                <div className="col-12 col-md-6 text-center login-left">
+                    <img src="./icons/login-plant.svg" alt="Plant Pot" className="plant-image" /> {/* Replace with actual image path */}
+                    <h1 className="logo-text">Plantopia</h1>
+                </div>
+                <div className="col-12 col-md-6 login-right">
+                    <button className="back-button" onClick={handleBackClick}>← Back</button>
+                    <h2>Account Login</h2>
+                    <p>If you are already a member you can login with your email address and password.</p>
+                    <form className="login-form">
+                        <label htmlFor="email">Email address</label>
+                        <input type="email" id="email" name="email" placeholder="Email address" />
+
+                        <label htmlFor="password">Password</label>
+                        <input type="password" id="password" name="password" placeholder="Password" />
+
+                        <div className="remember-me">
+                            <input type="checkbox" id="remember" />
+                            <label htmlFor="remember">Remember me</label>
+                        </div>
+
+                        <button type="submit" className="login-button">Register Account</button>
+                    </form>
+                    <p className="signup-link">
+                        Don’t have an account? <a href="/signup">Sign up here</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    );
 };
 
 export default Login;

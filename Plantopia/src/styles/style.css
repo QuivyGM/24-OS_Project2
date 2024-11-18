@@ -208,6 +208,11 @@ html, body {
     width: 300px !important;
     height: 300px !important;
   }
+  .footer-links {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0px;
+  }
 }
 @keyframes slideIn {
   from {
@@ -258,6 +263,7 @@ html, body {
 }
 .main-second .blog-details {
   padding-left: 2rem;
+  padding-top: 20px;
 }
 .main-second .blog-details h3 {
   color: #343a40;
@@ -286,6 +292,36 @@ html, body {
   padding-bottom: 40px;
   text-align: center;
   padding-right: 2.5rem;
+}
+.main-second .accordion-item {
+  border: 0;
+}
+.main-second .bg-light-blue {
+  background-color: #e3f7ff !important; /* Custom light blue background */
+  color: #343a40;
+  font-size: 24px;
+  font-weight: 600;
+}
+.main-second .bg-light-gray {
+  background-color: #f5f5f5 !important; /* Custom light gray background */
+  color: #343a40;
+  font-size: 24px;
+  font-weight: 600;
+}
+.main-second .accordion-button {
+  display: flex;
+  align-items: center;
+  border: none; /* Remove default border */
+  border-radius: 8px; /* Rounded corners */
+  border: 0;
+}
+.main-second .accordion-button:not(.collapsed) {
+  box-shadow: none; /* Remove default shadow */
+  border: 0;
+}
+.main-second .accordion-body {
+  padding: 1rem; /* Add padding to accordion content */
+  border: 0;
 }
 .main-second .provide-content {
   text-align: left;
@@ -323,8 +359,8 @@ html, body {
 .main-second .tags .badge {
   margin-right: 0.5rem;
   font-size: 0.9rem;
-  color: rgb(48, 191, 84);
-  border: 1px solid rgb(48, 191, 84);
+  color: rgb(37, 165, 69);
+  border: 1px solid rgb(37, 165, 69);
   font-weight: 400;
   margin-bottom: 2rem;
 }
@@ -359,6 +395,7 @@ html, body {
 .main-second .comment-box .rating {
   font-size: 1.5rem;
   color: #2D9D49;
+  padding-left: 10px;
 }
 .main-second .comment-box .author-name {
   font-weight: bold;
@@ -370,12 +407,18 @@ html, body {
 .main-second .comment-box img {
   width: 100px;
 }
+.main-second .comment-box .drop-comment {
+  color: #2D9D49;
+}
+.main-second .comment-box .star-info {
+  padding: 20px 0px;
+}
 .main-second .footer {
   background-color: #15762D;
   color: #f8f9fa;
 }
 .main-second .footer .footer-logo img {
-  width: 100px;
+  width: 150px;
 }
 .main-second .footer .footer-links a,
 .main-second .footer .footer-social a,
@@ -389,8 +432,25 @@ html, body {
 .main-second .footer .subscribe a:hover {
   color: #25823C;
 }
+.main-second .footer .footer-links .button-subscribe,
+.main-second .footer .footer-social .button-subscribe,
+.main-second .footer .subscribe .button-subscribe {
+  color: #f8f9fa;
+  border: 1px solid #f8f9fa;
+}
+.main-second .footer .footer-links .button-subscribe:hover,
+.main-second .footer .footer-social .button-subscribe:hover,
+.main-second .footer .subscribe .button-subscribe:hover {
+  background-color: #f8f9fa;
+  color: #25823C;
+}
 .main-second .footer .subscribe .form-control {
   max-width: 80%;
+  margin: auto;
+}
+.main-second .footer .footer-links {
+  display: flex;
+  gap: 2rem;
 }
 
 section {
@@ -398,42 +458,108 @@ section {
   margin-top: 50px;
 }
 
-* {
-  margin: 0px;
-  padding: 0px;
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: auto;
 }
-
-.login-page {
+.login-container .login-left .plant-image {
+  width: 400px;
+  margin-bottom: 20px;
+  margin-right: 200px;
+}
+.login-container .login-left .logo-text {
+  font-size: 2.5rem;
+  color: #2D9D49;
+  margin-top: 20px;
+  font-weight: bold;
+  margin-right: 100px;
+}
+.login-container .login-right {
   max-width: 400px;
-  margin: 0 auto;
   padding: 20px;
-  text-align: center;
-  border: 1px solid #ddd;
-  border-radius: 8px;
 }
-.login-page h2 {
-  color: #4CAF50;
-}
-.login-page label {
-  display: block;
-  margin: 10px 0 5px;
-}
-.login-page input {
-  width: 100%;
-  padding: 8px;
-  margin-bottom: 10px;
-}
-.login-page button {
-  padding: 10px 20px;
-  background-color: #4CAF50;
-  color: #fff;
+.login-container .login-right .back-button {
+  background: none;
   border: none;
-  border-radius: 4px;
+  color: #2D9D49;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-bottom: 30px;
+}
+.login-container .login-right .back-button:hover {
+  text-decoration: underline;
+}
+.login-container .login-right h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+.login-container .login-right p {
+  color: #6c757d;
+  font-size: 0.9rem;
+  margin-bottom: 30px;
+}
+.login-container .login-right .login-form {
+  display: flex;
+  flex-direction: column;
+}
+.login-container .login-right .login-form label {
+  font-size: 0.9rem;
+  margin-bottom: 8px;
+}
+.login-container .login-right .login-form input[type=email],
+.login-container .login-right .login-form input[type=password] {
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+.login-container .login-right .login-form .remember-me {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+}
+.login-container .login-right .login-form .remember-me label {
+  margin-left: 5px;
+  font-size: 0.9rem;
+}
+.login-container .login-right .login-form .login-button {
+  background-color: #2D9D49;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
   cursor: pointer;
 }
+.login-container .login-right .login-form .login-button:hover {
+  background-color: #227537;
+}
+.login-container .login-right .signup-link {
+  margin-top: 20px;
+  font-size: 0.9rem;
+}
+.login-container .login-right .signup-link a {
+  color: #2D9D49;
+  text-decoration: none;
+}
+.login-container .login-right .signup-link a:hover {
+  text-decoration: underline;
+}
 
+@media (max-width: 768px) {
+  .login-left {
+    display: none;
+  }
+  .login-right {
+    padding: 20px;
+    width: 100%;
+    max-width: 100%;
+  }
+}
 * {
   margin: 0px;
   padding: 100px;
