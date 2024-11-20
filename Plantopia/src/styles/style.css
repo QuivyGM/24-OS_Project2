@@ -76,24 +76,23 @@ html, body {
   padding-right: 10px;
 }
 .navbar-nav a {
-  color: #f8f9fa !important;
-  position: relative;
-  transition: color 0.3s ease;
-  margin: 0px 12px !important;
+  color: #f8f9fa;
+  display: block;
+  margin-bottom: 0.5rem;
   padding: 0;
+  position: relative;
+  text-decoration: none;
+  transition: transform 0.4s ease !important;
 }
 .navbar-nav a::after {
   content: "";
   position: absolute;
   left: 0;
-  bottom: -4px;
+  bottom: -2px;
   width: 0;
   height: 2px;
   background-color: #f8f9fa;
-  transition: width 0.3s ease;
-}
-.navbar-nav a:hover {
-  color: #f8f9fa;
+  transition: width 0.3s ease !important;
 }
 .navbar-nav a:hover::after {
   width: 100%;
@@ -208,10 +207,17 @@ html, body {
     width: 300px !important;
     height: 300px !important;
   }
+  .footer-logo {
+    width: 100% !important;
+    text-align: center;
+  }
   .footer-links {
     display: flex;
     flex-direction: column;
     padding: 20px 0px;
+  }
+  .footer-links a {
+    text-align: center;
   }
 }
 @keyframes slideIn {
@@ -315,9 +321,9 @@ html, body {
   border-radius: 8px; /* Rounded corners */
   border: 0;
 }
-.main-second .accordion-button:not(.collapsed) {
-  box-shadow: none; /* Remove default shadow */
-  border: 0;
+.main-second .accordion-button:focus {
+  outline: none; /* Removes the blue focus outline */
+  box-shadow: none; /* Removes any shadow effects on focus */
 }
 .main-second .accordion-body {
   padding: 1rem; /* Add padding to accordion content */
@@ -374,83 +380,144 @@ html, body {
   color: #2D9D49;
 }
 .main-second .product-item .price {
-  color: #25823C;
+  color: #343a40;
+  font-weight: 500;
 }
 .main-second .product-item .card-img-top {
   border-radius: 24px 24px 0px 0px;
 }
 .main-second .product-item .card-body .btn-outline-primary {
-  color: #2D9D49;
+  color: #f8f9fa;
   border: 1px solid #2D9D49;
+  background-color: #2D9D49;
 }
 .main-second .product-item .card-body .btn-outline-primary:hover {
-  background-color: #2D9D49;
+  background-color: #25823C;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
   color: #f8f9fa;
 }
-.main-second .comment-box {
+.main-second .more-button-div {
+  display: flex;
+  justify-content: end;
+  border: 0;
+}
+.main-second .more-button-div .more-button {
+  background-color: transparent;
+  color: #25823C;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+.main-second .more-button-div .more-button:hover {
+  color: #2D9D49;
+}
+.main-second .more-button-div .more-button:focus {
+  outline: none;
+  background-color: transparent;
+  color: #2D9D49;
+}
+.main-second .user-comments .comment-box {
   background-color: #f8f8f8;
   border-radius: 8px;
 }
-.main-second .comment-box .rating {
+.main-second .user-comments .comment-box .rating {
   font-size: 1.5rem;
   color: #2D9D49;
   padding-left: 10px;
 }
-.main-second .comment-box .author-name {
+.main-second .user-comments .comment-box .author-name {
   font-weight: bold;
 }
-.main-second .comment-box .author-position {
+.main-second .user-comments .comment-box .author-position {
   font-size: 0.9rem;
   color: #6c757d;
 }
-.main-second .comment-box img {
+.main-second .user-comments .comment-box img {
   width: 100px;
 }
-.main-second .comment-box .drop-comment {
+.main-second .user-comments .comment-box .drop-comment {
   color: #2D9D49;
 }
-.main-second .comment-box .star-info {
+.main-second .user-comments .comment-box .star-info {
   padding: 20px 0px;
+}
+.main-second .user-comments .top {
+  display: flex;
+  justify-content: end;
+  padding-top: 20px;
+}
+.main-second .user-comments .top .back-to-top {
+  width: 50px;
+  height: 50px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: bold;
+  color: #f8f9fa;
+  background-color: #2D9D49;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  box-shadow: 0px 6.476px 6px 0px rgba(41, 41, 41, 0.08);
+}
+.main-second .user-comments .top .back-to-top:hover {
+  background-color: #25823C;
+  transform: translateY(-5px);
+}
+.main-second .user-comments .top .back-to-top:focus {
+  outline: none;
+  box-shadow: 0 0 5px #2D9D49;
 }
 .main-second .footer {
   background-color: #15762D;
   color: #f8f9fa;
+  padding: 24px 0px !important;
+}
+.main-second .footer .logo-links {
+  display: flex;
+  justify-content: space-between;
+  padding: 0px 80px;
+  cursor: pointer;
+}
+.main-second .footer .footer-logo {
+  width: 20%;
 }
 .main-second .footer .footer-logo img {
   width: 150px;
 }
-.main-second .footer .footer-links a,
-.main-second .footer .footer-social a,
-.main-second .footer .subscribe a {
+.main-second .footer .footer-links {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 2rem;
+  align-items: center;
+}
+.main-second .footer .footer-links a {
   color: #f8f9fa;
   display: block;
   margin-bottom: 0.5rem;
+  padding: 0;
+  position: relative;
+  text-decoration: none;
+  transition: transform 0.3s ease;
 }
-.main-second .footer .footer-links a:hover,
-.main-second .footer .footer-social a:hover,
-.main-second .footer .subscribe a:hover {
-  color: #25823C;
+.main-second .footer .footer-links a:hover {
+  transform: scale(1.12);
 }
-.main-second .footer .footer-links .button-subscribe,
-.main-second .footer .footer-social .button-subscribe,
-.main-second .footer .subscribe .button-subscribe {
-  color: #f8f9fa;
-  border: 1px solid #f8f9fa;
-}
-.main-second .footer .footer-links .button-subscribe:hover,
-.main-second .footer .footer-social .button-subscribe:hover,
-.main-second .footer .subscribe .button-subscribe:hover {
+.main-second .footer .footer-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0;
+  height: 2px;
   background-color: #f8f9fa;
-  color: #25823C;
+  transition: width 0.3s ease;
 }
-.main-second .footer .subscribe .form-control {
-  max-width: 80%;
-  margin: auto;
-}
-.main-second .footer .footer-links {
-  display: flex;
-  gap: 2rem;
+.main-second .footer .footer-links a:hover::after {
+  width: 100%;
 }
 
 section {

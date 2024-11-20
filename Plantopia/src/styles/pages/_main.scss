@@ -83,29 +83,28 @@ html, body {
 .navbar-nav {
   padding-right: 10px;
   a {
-    color: $light-color !important;
-    position: relative;
-    transition: color 0.3s ease;
-    margin: 0px 12px !important;
+    color: $light-color;
+    display: block;
+    margin-bottom: 0.5rem;
     padding: 0;
-
+    position: relative;
+    text-decoration: none; // Remove default underline
+    transition: transform 0.4s ease !important; // Smooth scaling effect
+    // Add an animated underline effect
     &::after {
-      content: "";
+      content: '';
       position: absolute;
       left: 0;
-      bottom: -4px;
-      width: 0;
+      bottom: -2px;
+      width: 0; // Initially set to 0
       height: 2px;
-      background-color: $light-color;
-      transition: width 0.3s ease;
+      background-color: $light-color; // Set the underline color
+      transition: width 0.3s ease !important; // Smoothly expand the underline
     }
-
-    &:hover {
-      color: $light-color;
-
-      &::after {
-        width: 100%;
-      }
+  
+    // On hover, expand the underline
+    &:hover::after {
+      width: 100%; // Fully expand the underline
     }
   }
 }
@@ -245,14 +244,20 @@ html, body {
     }
   }
 
-
+  .footer-logo{
+    width: 100% !important;
+    text-align: center;
+  }
   .footer-links{
     display: flex;
     flex-direction: column;
     padding: 20px 0px;
+    a{
+      text-align: center;
+    }
   }
 }
-// ---------------------------------------------
+// --------media 끝------------------------------------- 
 
 @keyframes slideIn {
   from {
@@ -368,18 +373,18 @@ html, body {
     border: none; /* Remove default border */
     border-radius: 8px; /* Rounded corners */
     border: 0;
+
   }
   
-  .accordion-button:not(.collapsed) {
-    box-shadow: none; /* Remove default shadow */
-    border: 0;
+  .accordion-button:focus {
+    outline: none; /* Removes the blue focus outline */
+    box-shadow: none; /* Removes any shadow effects on focus */
   }
-  
+
   .accordion-body {
     padding: 1rem; /* Add padding to accordion content */
     border: 0;
   }
-  
   // end accordion 
 
   .provide-content{
@@ -430,6 +435,7 @@ html, body {
     margin-bottom: 2rem;
   }
 
+// Our products
   .product-item {
     border-radius: 24px;
     box-shadow: 0px 6.476px 6px 0px rgba(41, 41, 41, 0.08);
@@ -439,25 +445,53 @@ html, body {
       color: $primary-color;
     }
     .price {
-      color: $secondary-color;
+      color: $text-color;
+      font-weight: 500;
     }
     .card-img-top{
       border-radius: 24px 24px 0px 0px;
     }
     .card-body{
       .btn-outline-primary{
-        color: $primary-color;
+        color: $light-color;
         border: 1px solid $primary-color;
-
+        background-color: $primary-color;
         &:hover {
-          background-color: $primary-color;
+          background-color: $secondary-color;
           box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
           color: $light-color;
         }
       }
     }
   }
+  .more-button-div{
+    display: flex;
+    justify-content: end;
+    border: 0;
 
+    .more-button {
+      background-color: transparent;
+      color: $secondary-color;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    
+      &:hover {
+        color: $primary-color;
+      }
+    
+      &:focus {
+        outline: none;
+        background-color: transparent;
+        color: $primary-color;
+      }
+    }
+  }
+//-------------------------- Our Products ---------------------------- 
+
+// user comments
+.user-comments{
   .comment-box {
     background-color: #f8f8f8;
     border-radius: 8px;
@@ -485,43 +519,98 @@ html, body {
     }
   }
 
+  .top{  // top button
+    display: flex;
+    justify-content: end;
+    padding-top: 20px;
+    .back-to-top {
+      width: 50px; // Width of the button
+      height: 50px; // Height of the button
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px; // Font size for the arrow
+      font-weight: bold;
+      color: $light-color; // Text color
+      background-color: $primary-color; // Background color
+      border: none;
+      border-radius: 50%; // Makes the button circular
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      box-shadow: $box-shadow-primary;
+    
+      &:hover {
+        background-color: $secondary-color; // Darken background on hover
+        transform: translateY(-5px); // Slight upward movement on hover
+      }
+    
+      &:focus {
+        outline: none;
+        box-shadow: 0 0 5px $primary-color; // Add a glowing outline on focus
+      }
+    }
+  }
+}
+// ----------- user comments end ------------------------
+
+//  Footer
   .footer {
     background-color: $footer-color;
     color: $light-color;
-    .footer-logo img {
-      width: 150px;
+    padding: 24px 0px !important;
+    .logo-links{
+      display: flex;
+      justify-content: space-between;
+      padding: 0px 80px;
+      cursor: pointer;
     }
-    .footer-links,
-    .footer-social,
-    .subscribe {
+    .footer-logo{
+      width: 20%;
+        img{
+          width: 150px;
+        }
+    }
+    .footer-links{
+      display: flex;
+      justify-content: space-evenly;
+      gap: 2rem;
+      align-items: center;
       a {
         color: $light-color;
         display: block;
         margin-bottom: 0.5rem;
+        padding: 0;
+        position: relative;
+        text-decoration: none; // Remove default underline
+        transition: transform 0.3s ease; // Smooth scaling effect
+      
+        // Hover animation
         &:hover {
-          color: $secondary-color;
+          transform: scale(1.12); // Slightly enlarge the link on hover
+        }
+      
+        // Add an animated underline effect
+        &::after {
+          content: '';
+          position: absolute;
+          left: 0;
+          bottom: -2px;
+          width: 0; // Initially set to 0
+          height: 2px;
+          background-color: $light-color; // Set the underline color
+          transition: width 0.3s ease; // Smoothly expand the underline
+        }
+      
+        // On hover, expand the underline
+        &:hover::after {
+          width: 100%; // Fully expand the underline
         }
       }
-      .button-subscribe{
-        color: $light-color;
-        border: 1px solid $light-color;
-
-        &:hover{
-          background-color: $light-color;
-          color: $secondary-color;
-        }
-      }
-    }
-    .subscribe .form-control {
-      max-width: 80%;
-      margin: auto;
-    }
-    .footer-links{
-      display: flex;
-      gap: 2rem;
     }
   }
 }
+// -------- Footer end -------------------------------------------------
+
 
 section{
   padding: 50px 50px !important;
