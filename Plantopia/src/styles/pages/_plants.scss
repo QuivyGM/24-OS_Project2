@@ -243,3 +243,40 @@ body {
 
     
 }
+
+.footer {
+    background-color: $footer-color;
+    color: $light-color;
+    .footer-logo img {
+      width: 150px;
+    }
+    .footer-links,
+    .footer-social,
+    .subscribe {
+      a {
+        color: $light-color;
+        display: block;
+        margin-bottom: 0.5rem;
+        &:hover {
+          color: $secondary-color;
+        }
+      }
+      .button-subscribe{
+        color: $light-color;
+        border: 1px solid $light-color;
+
+        &:hover{
+          background-color: $light-color;
+          color: $secondary-color;
+        }
+      }
+    }
+    .subscribe .form-control {
+      max-width: 80%;
+      margin: auto;
+    }
+    .footer-links{
+      display: flex;
+      gap: 2rem;
+    }
+  }
