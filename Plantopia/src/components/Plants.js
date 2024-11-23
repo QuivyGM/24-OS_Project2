@@ -1,104 +1,216 @@
-// src/components/Product.js
-
+// Import necessary modules and components
 import React, { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/pages/_plants.scss';
 
+// Plants component
 const Plants = () => {
-  const navigate = useNavigate();
-  const searchInputRef = useRef(null);
-  const [showInput, setShowInput] = useState(false);
+    // State and references
+    const navigate = useNavigate();
+    const searchInputRef = useRef(null);
+    const [showInput, setShowInput] = useState(false);
 
-// Function to handle logo click and navigate to the main page
-const handleLogoClick = (event) => {
-  event.preventDefault();
-  navigate('/');
-};
+    // Handlers for navigation
+    const handleLogoClick = (event) => {
+        event.preventDefault();
+        navigate('/');
+    };
 
-// Function to handle login button click and navigate to the login page
-const handleLoginClick = () => {
-  navigate('/login');
-};
+    const handleLoginClick = () => navigate('/login');
+    const handleShopClick = () => navigate('/shop');
+    const handleSearchClick = () => {
+        setShowInput(true);
+        if (searchInputRef.current) searchInputRef.current.focus();
+    };
 
-// Function to handle shop button click and navigate to the shop page
-const handleShopClick = () => {
-  navigate('/shop');
-};
+    return (
+        <div className="plants-page">
+            {/* Header Section */}
+            <header className="overlay">
+                <nav className="navbar navbar-expand-lg bg-body-tertiary navbar-main">
+                    <div className="container-fluid navbar-box d-flex">
+                        {/* Navbar Brand */}
+                        <a className="navbar-brand" href="#" onClick={handleLogoClick}>
+                            <img src="./images/logo.png" alt="logo" />
+                        </a>
 
-// Function to show the search input when the search button is clicked
-const handleSearchClick = () => {
-  setShowInput(true);
-  if (searchInputRef.current) {
-      searchInputRef.current.focus();
-  }
-};
+                        {/* Navbar Toggle for Mobile View */}
+                        <button
+                            className="navbar-toggler"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#navbarSupportedContent"
+                            aria-controls="navbarSupportedContent"
+                            aria-expanded="false"
+                            aria-label="Toggle navigation"
+                        >
+                            <span className="navbar-toggler-icon"></span>
+                        </button>
 
+                        {/* Navbar Links */}
+                        <div className="collapse navbar-collapse nav-center" id="navbarSupportedContent">
+                            <ul className="navbar-nav mb-2 mb-lg-0">
+                                <li className="nav-item">
+                                    <a className="nav-link active" href="#">
+                                        Plants
+                                    </a>
+                                </li>
+                                <li className="nav-item">
+                                    <a className="nav-link active" href="#">
+                                        Community
+                                    </a>
+                                </li>
+                                <li className="nav-item" onClick={handleShopClick}>
+                                    <a className="nav-link active" href="#">
+                                        Shop
+                                    </a>
+                                </li>
+                                <li className="nav-item">
+                                    <a className="nav-link active" href="#">
+                                        About Us
+                                    </a>
+                                </li>
+                            </ul>
 
-return (
-  <div className="plants-page container">
-    {/* Header Section */}
-    <div className="overlay">
-      <nav className="navbar navbar-expand-lg bg-body-tertiary navbar-main">
-        <div className="container-fluid navbar-box d-flex">
-          
-          {/* Navbar brand/logo with click handler */}
-          <a className="navbar-brand" href="logo" onClick={handleLogoClick}>
-            <img src='./images/logo.png' alt='logo' />
-          </a>
+                            {/* Search and Login */}
+                            <div className="nav-right">
+                                <form
+                                    className="d-flex search-button"
+                                    role="search"
+                                    onSubmit={(e) => e.preventDefault()}
+                                >
+                                    <input
+                                        ref={searchInputRef}
+                                        className={`form-control me-2 ${showInput ? 'show' : 'hide'}`}
+                                        type="search"
+                                        placeholder="Search"
+                                        aria-label="Search"
+                                    />
+                                    <button
+                                        className="btn btn-outline-success"
+                                        type="button"
+                                        onClick={handleSearchClick}
+                                    >
+                                        <img src="./icons/search-normal.svg" alt="search" />
+                                    </button>
+                                </form>
+                                <button onClick={handleLoginClick} className="login-button">
+                                    <img src="./icons/user.svg" alt="login" />
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </header>
 
-          {/* Navbar toggle button for mobile view */}
-          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span className="navbar-toggler-icon"></span>
-          </button>
+            {/* Title */}
+            <main className="product-page">
+                <h1 className="title-text">
+                    Find Your <br />
+                    Perfect Plant
+                    <img src="./images/plant_icon.png" alt="Plant Icon" className="plant-icon" />
+                </h1>
 
-          {/* Navbar links and right-side buttons */}
-          <div className="collapse navbar-collapse nav-center" id="navbarSupportedContent">
-            <ul className="navbar-nav mb-2 mb-lg-0">
-              <li className="nav-item"><a className="nav-link active" href="Plants">Plants</a></li>
-              <li className="nav-item"><a className="nav-link active" href="Community">Community</a></li>
-              <li onClick={handleShopClick} className="nav-item"><a className="nav-link active" href="Shop">Shop</a></li>
-              <li className="nav-item"><a className="nav-link active" href="Aboutus">About Us</a></li>
-            </ul>
+                <section className="Weekly_frame">
+                    <h2>Plant of the Week</h2>
+                    <hr className="custom-hr" />
 
-            {/* Right nav (search and login) */}
-            <div className="nav-right">
-              <form className="d-flex search-button" role="search" onSubmit={(e) => e.preventDefault()}>
-                <input 
-                  ref={searchInputRef} 
-                  className={`form-control me-2 ${showInput ? 'show' : 'hide'}`}
-                  type="search" 
-                  placeholder="Search" 
-                  aria-label="Search" 
-                />
-                <button className="btn btn-outline-success" type="button" onClick={handleSearchClick}>
-                  <img src='./icons/search-normal.svg' alt='search' />
-                </button>
-              </form>
-              <button onClick={handleLoginClick} className="login-button">
-                <img src='./icons/user.svg' alt='login' />
-              </button>
-            </div>
-          </div>
+                    {/* Plant Details */}
+                    <div className="weekly_plant">
+                        {/* Weekly - Image */}
+                        <div>
+                            <div className="image_frame">
+                                <img src="./images/1.jpg" alt="Echinocereus Cactus" className="top_plant" />
+                                <img src="./images/crown.png" alt="Crown" className="crown_image" />
+                            </div>
+                        </div>
+
+                        {/* Weekly - Info */}
+                        <div className="info_frame">
+                            <h2>Echinocereus Cactus</h2>
+
+                            <div className="tags">
+                                <span className="badge bg-success">Indoor</span>
+                                <span className="badge bg-success">Cactus</span>
+                            </div>
+                            <hr className="custom-hr" />
+                            <div className="features">
+                                <h4>Features</h4>
+                                <ul>
+                                    <li>Species: Echinocereus spp.</li>
+                                    <li>Size: Varies by species, 4-12 inches in height</li>
+                                    <li>Season: Spring or summer</li>
+                                    <li>Available in various pot sizes</li>
+                                    <li>Carefully packaged for safe delivery</li>
+                                </ul>
+                            </div>
+                            <div className="description mt-3">
+                                <h4>Description</h4>
+                                <p>
+                                    The Echinocereus Cactus is known for its beauty and resilience. Perfect for both indoor
+                                    and outdoor settings.
+                                </p>
+                            </div>
+                        </div>
+
+                        {/* Weekly - Others Carousel */}    
+                        <div className="weekly_others">
+                            <h2>Other Popular Plants</h2>
+                            <hr className="custom-hr" />
+    <div id="horizontalCarousel" className="carousel slide" data-bs-ride="carousel">
+        <div className="carousel-inner">
+            {['1.jpg', '2.jpg', '3.jpg', '4.jpg'].map((fileName, index) => (
+                <div
+                    key={fileName}
+                    className={`carousel-item ${index === 0 ? 'active' : ''}`}
+                >
+                    <div className="product-card card mx-auto">
+                        <img
+                            src={`./images/${fileName}`}
+                            alt={fileName}
+                            className="card-img-top"
+                        />
+                        <div className="card-body">
+                            <h5 className="card-title">{fileName}</h5>
+                        </div>
+                    </div>
+                </div>
+            ))}
         </div>
-      </nav>
+        <button
+            className="carousel-control-prev"
+            type="button"
+            data-bs-target="#horizontalCarousel"
+            data-bs-slide="prev"
+        >
+            <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span className="visually-hidden">Previous</span>
+        </button>
+        <button
+            className="carousel-control-next"
+            type="button"
+            data-bs-target="#horizontalCarousel"
+            data-bs-slide="next"
+        >
+            <span className="carousel-control-next-icon" aria-hidden="true"></span>
+            <span className="visually-hidden">Next</span>
+        </button>
     </div>
+</div>
 
-    <div className="product-page">
-      <h1>Our Products</h1>
-      <div className="products-list">
-        {[1, 2, 3, 4, 1, 2, 3, 4, 1, 2].map((item) => (
-          <div key={item} className="product-card">
-            <img src={`./images/${item}.jpg`} alt={`Product ${item}`} />
-            <h2>Product {item}</h2>
-            <p className="price">$25.00</p>
-            <button className="add-to-cart">Add to Cart</button>
-          </div>
-        ))}
-      </div>
-      
-    </div>
-  </div>
-  );
+
+                    </div>   {/* end of weekly plant */}
+                </section> {/* end of weekly frame */}
+
+                {/* plant catalogue*/}
+                <section className="catalogue">
+
+                </section>
+
+                
+            </main>
+        </div>
+    );
 };
 
 export default Plants;
