@@ -1,64 +1,309 @@
 @import '../variables/colors';
 
+// Global Styles
 * {
-  margin: 0px;
-  padding: 0px;
-  box-sizing: border-box;
-  font-family: 'Poppins', sans-serif; // Set global font to Poppins
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
 }
 
+body {
+    margin: 0;
+    padding: 0;
+    line-height: 1.5;
+}
 
+// Product Page
 .product-page {
-    padding: 20px;
-    margin-top: 70px;
+    max-width: 1700px;
+    margin: 110px auto;
+    padding: 0 20px;
+
     h1 {
-      text-align: center;
-      color: $primary-color;
-      margin-bottom: 50px;
-    }
-  
-    .products-list {
-      display: flex;
-      justify-content: space-around;
-      flex-wrap: wrap;
-      gap: 20px;
-    }
-  
-    .product-card {
-      width: 200px;
-      padding: 15px;
-      background-color: #f9f9f9;
-      border-radius: 8px;
-      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-      text-align: center;
-      
-      img {
-        width: 100%;
-        border-radius: 4px;
-      }
-  
-      h2 {
-        font-size: 1.2em;
-        color: $text-color;
-      }
-  
-      .price {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         color: $primary-color;
-        font-weight: bold;
-      }
-  
-      .add-to-cart {
-        background-color: $primary-color;
-        color: #fff;
-        padding: 8px 16px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-  
-        &:hover {
-          background-color: darken($primary-color, 10%);
+        margin: 0;
+        font-size: 4em;
+
+        .plant-icon {
+            width: 4em;
+            height: auto;
+            margin-left: 10px;
         }
-      }
     }
-  }
+
+    .custom-hr {
+        border: none;
+        border-top: 10px solid $primary-color;
+        margin: 0;
+        width: 100%;
+    }
+
+    // Weekly Frame Section
+    .Weekly_frame {
+        margin: 0;
+        padding: 20px 0;
+
+        .weekly_plant {
+            display: flex;
+            flex-direction: row; // Side-by-side layout
+            gap: 30px; // Adjusted for a cleaner gap
+        
+            .image_frame {
+                position: relative;
+                flex: 1;
+                max-width: 500px; // Slightly smaller for balanced layout
+                text-align: left;
+        
+                .top_plant {
+                    width: 100%;
+                    max-width: 450px;
+                    height: auto;
+                    object-fit: cover;
+                    border-radius: 8px;
+                }
+        
+                .crown_image {
+                    position: absolute;
+                    top: -10px; // Adjust position to look natural
+                    left: -10px;
+                    transform: rotate(-30deg);
+                    width: 20%; // Smaller size for balance
+                    height: auto;
+                    z-index: 1;
+                }
+            }
+        
+            .info_frame {
+                max-width: 550px; // Reduced width for balance
+                flex: 2;
+                padding: 20px;
+                text-align: left;
+        
+                h2 {
+                    font-size: 2.2rem; // Slightly smaller for readability
+                    margin: 0 0 10px;
+                    color: $primary-color;
+                }
+        
+                .tags {
+                    .badge {
+                        margin-right: 5px;
+                        font-size: 0.8rem;
+                    }
+                }
+        
+                .custom-hr {
+                    border: none;
+                    border-top: 3px solid $primary-color;
+                    margin: 10px 0;
+                    width: 50%;
+                }
+        
+                .features,
+                .description {
+                    margin-top: 15px;
+        
+                    h4 {
+                        font-size: 1.8rem; // Reduced for hierarchy
+                        margin-bottom: 8px;
+                        color: $primary-color;
+                    }
+        
+                    p,
+                    li {
+                        font-size: 1.2rem; // Adjusted for readability
+                        color: $text-color;
+                    }
+                }
+            }
+        
+            .weekly_others {
+                margin-top: 20px;
+                text-align: center;
+        
+                h2 {
+                    font-size: 1.8rem; // Increased slightly for emphasis
+                    color: $primary-color;
+                    margin-bottom: 15px;
+                }
+        
+                .carousel {
+                    width: 60%; // Slightly wider for better balance
+                    margin: auto;
+        
+                    .carousel-inner {
+                        display: flex;
+                        flex-wrap: nowrap;
+                    }
+        
+                    .carousel-item {
+                        flex: 0 0 auto;
+                        width: 100%;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        text-align: center;
+                    }
+        
+                    .product-card {
+                        max-width: 80%; // Allow cards to take more space
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: space-between;
+        
+                        .card-img-top {
+                            height: auto;
+                            max-height: 120px; // Adjusted height for consistency
+                            object-fit: cover;
+                            border-radius: 5px;
+                        }
+                    }
+        
+                    .carousel-control-prev,
+                    .carousel-control-next {
+                        width: 5%;
+                        height: 5%;
+                        background-color: rgba(0, 0, 0, 0.5);
+                        border-radius: 50%;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        transition: transform 0.2s ease;
+        
+                        &:hover {
+                            transform: scale(1.1);
+                        }
+                    }
+        
+                    .carousel-control-prev-icon,
+                    .carousel-control-next-icon {
+                        filter: invert(1);
+                        width: 70%;
+                        height: auto;
+                    }
+                }
+        
+                // Responsive Adjustments
+                @media (max-width: 768px) {
+                    .carousel {
+                        width: 80%;
+        
+                        .carousel-item {
+                            width: 100%;
+                        }
+        
+                        .product-card {
+                            max-width: 90%; // Allow cards to grow slightly
+                            .card-img-top {
+                                max-height: 100px; // Smaller height for mobile
+                            }
+                        }
+        
+                        .carousel-control-prev,
+                        .carousel-control-next {
+                            width: 6%;
+                            height: 6%;
+                        }
+                    }
+                }
+        
+                @media (max-width: 576px) {
+                    .carousel {
+                        width: 100%;
+        
+                        .carousel-item {
+                            width: 100%;
+                        }
+        
+                        .product-card {
+                            max-width: 100%; // Full width for small screens
+                            .card-img-top {
+                                max-height: 80px; // Further reduce height
+                            }
+                        }
+        
+                        .carousel-control-prev,
+                        .carousel-control-next {
+                            width: 7%;
+                            height: 7%;
+                        }
+        
+                        .carousel-control-prev-icon,
+                        .carousel-control-next-icon {
+                            width: 60%;
+                        }
+                    }
+                }
+            }
+        }
+        
+    }
+
+    // Responsive Adjustments
+    @media (max-width: 768px) {
+        .weekly_plant {
+            flex-direction: column;
+            align-items: center;
+
+            .info_frame {
+                margin-bottom: 20px;
+            }
+
+            .image_frame .top_plant {
+                max-width: 300px;
+            }
+
+            .crown_image {
+                width: 15%;
+            }
+        }
+    }
+}
+
+// Footer
+.footer {
+    background-color: $footer-color;
+    color: $light-color;
+
+    .footer-logo img {
+        width: 150px;
+    }
+
+    .footer-links,
+    .footer-social,
+    .subscribe {
+        a {
+            color: $light-color;
+            display: block;
+            margin-bottom: 0.5rem;
+
+            &:hover {
+                color: $secondary-color;
+            }
+        }
+
+        .button-subscribe {
+            color: $light-color;
+            border: 1px solid $light-color;
+
+            &:hover {
+                background-color: $light-color;
+                color: $secondary-color;
+            }
+        }
+    }
+
+    .subscribe .form-control {
+        max-width: 80%;
+        margin: auto;
+    }
+
+    .footer-links {
+        display: flex;
+        gap: 2rem;
+    }
+}
