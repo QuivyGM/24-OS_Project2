@@ -46,100 +46,102 @@ body {
     .Weekly_frame {
         margin: 0;
         padding: 20px 0;
-
+    
         .weekly_plant {
             display: flex;
-            flex-direction: row; // Side-by-side layout
-            gap: 30px; // Adjusted for a cleaner gap
-        
+            flex-wrap: wrap; // Allow wrapping for smaller screens
+            justify-content: space-between; // Space between elements
+            gap: 20px;
+    
             .image_frame {
+                flex: 1 1 30%; // Allow it to take one-third of the row
+                max-width: 400px; // Set a maximum width for balance
                 position: relative;
-                flex: 1;
-                max-width: 500px; // Slightly smaller for balanced layout
                 text-align: left;
-        
+    
                 .top_plant {
                     width: 100%;
-                    max-width: 450px;
+                    max-width: 400px;
                     height: auto;
                     object-fit: cover;
                     border-radius: 8px;
                 }
-        
+    
                 .crown_image {
                     position: absolute;
-                    top: -10px; // Adjust position to look natural
+                    top: -10px;
                     left: -10px;
                     transform: rotate(-30deg);
-                    width: 20%; // Smaller size for balance
+                    width: 20%;
                     height: auto;
                     z-index: 1;
                 }
             }
-        
+    
             .info_frame {
-                max-width: 550px; // Reduced width for balance
-                flex: 2;
+                flex: 1 1 30%; // Allow it to take one-third of the row
+                max-width: 400px;
                 padding: 20px;
                 text-align: left;
-        
+    
                 h2 {
-                    font-size: 2.2rem; // Slightly smaller for readability
+                    font-size: 2.2rem;
                     margin: 0 0 10px;
                     color: $primary-color;
                 }
-        
+    
                 .tags {
                     .badge {
                         margin-right: 5px;
                         font-size: 0.8rem;
                     }
                 }
-        
+    
                 .custom-hr {
                     border: none;
                     border-top: 3px solid $primary-color;
                     margin: 10px 0;
                     width: 50%;
                 }
-        
+    
                 .features,
                 .description {
                     margin-top: 15px;
-        
+    
                     h4 {
-                        font-size: 1.8rem; // Reduced for hierarchy
+                        font-size: 1.8rem;
                         margin-bottom: 8px;
                         color: $primary-color;
                     }
-        
+    
                     p,
                     li {
-                        font-size: 1.2rem; // Adjusted for readability
+                        font-size: 1.2rem;
                         color: $text-color;
                     }
                 }
             }
-        
+    
             .weekly_others {
-                margin-top: 20px;
+                flex: 1 1 30%; // Allow it to take one-third of the row
+                max-width: 400px;
                 text-align: center;
-        
+    
                 h2 {
-                    font-size: 1.8rem; // Increased slightly for emphasis
+                    font-size: 1.8rem;
                     color: $primary-color;
                     margin-bottom: 15px;
                 }
-        
+    
                 .carousel {
-                    width: 60%; // Slightly wider for better balance
+                    width: 100%; // Full width of this section
                     margin: auto;
-        
+    
                     .carousel-inner {
                         display: flex;
                         flex-wrap: nowrap;
                     }
-        
+    
                     .carousel-item {
                         flex: 0 0 auto;
                         width: 100%;
@@ -148,21 +150,21 @@ body {
                         align-items: center;
                         text-align: center;
                     }
-        
+    
                     .product-card {
-                        max-width: 80%; // Allow cards to take more space
+                        max-width: 100%; 
                         display: flex;
                         flex-direction: column;
                         justify-content: space-between;
-        
+    
                         .card-img-top {
                             height: auto;
-                            max-height: 120px; // Adjusted height for consistency
+                            max-height: 120px;
                             object-fit: cover;
                             border-radius: 5px;
                         }
                     }
-        
+    
                     .carousel-control-prev,
                     .carousel-control-next {
                         width: 5%;
@@ -173,12 +175,12 @@ body {
                         justify-content: center;
                         align-items: center;
                         transition: transform 0.2s ease;
-        
+    
                         &:hover {
                             transform: scale(1.1);
                         }
                     }
-        
+    
                     .carousel-control-prev-icon,
                     .carousel-control-next-icon {
                         filter: invert(1);
@@ -186,62 +188,142 @@ body {
                         height: auto;
                     }
                 }
-        
-                // Responsive Adjustments
-                @media (max-width: 768px) {
-                    .carousel {
-                        width: 80%;
-        
-                        .carousel-item {
-                            width: 100%;
-                        }
-        
-                        .product-card {
-                            max-width: 90%; // Allow cards to grow slightly
-                            .card-img-top {
-                                max-height: 100px; // Smaller height for mobile
-                            }
-                        }
-        
-                        .carousel-control-prev,
-                        .carousel-control-next {
-                            width: 6%;
-                            height: 6%;
-                        }
-                    }
+            }
+        }
+    
+        // Responsive Adjustments
+        @media (max-width: 768px) {
+            .weekly_plant {
+                flex-wrap: wrap; // Allow wrapping
+                justify-content: center;
+    
+                .image_frame,
+                .info_frame,
+                .weekly_others {
+                    flex: 1 1 100%; // Full width for smaller screens
+                    max-width: none;
+                    margin-bottom: 20px; // Add spacing between sections
                 }
-        
-                @media (max-width: 576px) {
-                    .carousel {
-                        width: 100%;
-        
-                        .carousel-item {
-                            width: 100%;
-                        }
-        
-                        .product-card {
-                            max-width: 100%; // Full width for small screens
-                            .card-img-top {
-                                max-height: 80px; // Further reduce height
-                            }
-                        }
-        
-                        .carousel-control-prev,
-                        .carousel-control-next {
-                            width: 7%;
-                            height: 7%;
-                        }
-        
-                        .carousel-control-prev-icon,
-                        .carousel-control-next-icon {
-                            width: 60%;
+    
+                .carousel {
+                    .product-card {
+                        .card-img-top {
+                            max-height: 100px; // Adjust for smaller screens
                         }
                     }
                 }
             }
         }
-        
+    
+        @media (max-width: 576px) {
+            .weekly_plant {
+                .image_frame,
+                .info_frame,
+                .weekly_others {
+                    flex: 1 1 100%; // Ensure full width on small screens
+                    text-align: center; // Center-align all content
+                }
+    
+                .carousel {
+                    .product-card {
+                        .card-img-top {
+                            max-height: 80px; // Further reduce height
+                        }
+                    }
+                }
+            }
+        }
     }
+
+    // Catalogue Section
+    .catalogue {
+        margin-top: 20px;
+        
+
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px; // Minimized gap between cards
+        margin-left: 0px; // Adjust negative margins to counter padding
+        margin-right: 0px;
+        
+
+        .col-md-3 {
+            padding-left: 5px; // Minimal padding inside columns
+            padding-right: 5px;
+            flex: 0 0 calc(25% - 5px); // Subtract extra space for tighter fit
+            max-width: calc(25% - 5px); // Adjust width accordingly
+        }
+    }
+
+    .product-card {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+        width: 100%;
+        max-width: 240px; // Slightly narrower cards
+        margin: 10px; // No margins on cards
+        border: 1px solid #ddd;
+        padding: 10px;
+        border-radius: 5px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+        .card-img-top {
+            height: 200px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .card-body {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            .card-title {
+                font-size: 1rem;
+                font-weight: bold;
+                margin-bottom: 10px;
+            }
+
+            .star-rating {
+                margin-bottom: 10px;
+
+                .star {
+                    font-size: 0.9rem;
+                    color: #ffd700;
+                }
+
+                .star.filled {
+                    color: #ffcc00;
+                }
+            }
+
+            .btn {
+                margin-top: auto;
+                align-self: center;
+            }
+        }
+    }
+
+
+    
+        // Responsive Adjustments
+        @media (max-width: 768px) {
+            .product-card {
+                max-width: 200px; // Adjust width for tablets
+            }
+        }
+    
+        @media (max-width: 576px) {
+            .product-card {
+                max-width: 100%; // Full width for smaller screens
+            }
+        }
+    }
+    
+
 
     // Responsive Adjustments
     @media (max-width: 768px) {

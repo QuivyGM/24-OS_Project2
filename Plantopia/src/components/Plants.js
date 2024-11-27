@@ -76,44 +76,58 @@ const Catalogue = () => {
         { id: 6, image: './images/6.jpg', title: 'Modern Picture 6', rating: 4 },
         { id: 7, image: './images/7.jpg', title: 'Modern Picture 7', rating: 4 },
         { id: 8, image: './images/8.jpg', title: 'Modern Picture 8', rating: 4 },
+        { id: 9, image: './images/1.jpg', title: 'Modern Picture 1', rating: 5 },
+        { id: 10, image: './images/2.jpg', title: 'Modern Picture 2', rating: 4 },
+        { id: 11, image: './images/3.jpg', title: 'Modern Picture 3', rating: 3 },
+        { id: 12, image: './images/4.jpg', title: 'Modern Picture 4', rating: 4 },
+        { id: 13, image: './images/5.jpg', title: 'Modern Picture 5', rating: 4 },
+        { id: 14, image: './images/6.jpg', title: 'Modern Picture 6', rating: 4 },
+        { id: 15, image: './images/7.jpg', title: 'Modern Picture 7', rating: 4 },
+        { id: 16, image: './images/8.jpg', title: 'Modern Picture 8', rating: 4 },
+        { id: 17, image: './images/1.jpg', title: 'Modern Picture 1', rating: 5 },
+        { id: 18, image: './images/2.jpg', title: 'Modern Picture 2', rating: 4 },
+        { id: 19, image: './images/3.jpg', title: 'Modern Picture 3', rating: 3 },
+        { id: 20, image: './images/4.jpg', title: 'Modern Picture 4', rating: 4 },
+        { id: 21, image: './images/5.jpg', title: 'Modern Picture 5', rating: 4 },
+        { id: 22, image: './images/6.jpg', title: 'Modern Picture 6', rating: 4 },
+        { id: 23, image: './images/7.jpg', title: 'Modern Picture 7', rating: 4 },
+        { id: 34, image: './images/8.jpg', title: 'Modern Picture 8', rating: 4 },
     ];
 
     return (
-        <section className="catalogue mt-5">
+        <section className="catalogue">
             <h2>Catalogue</h2>
             <div className="row">
-                {Array.from({ length: Math.ceil(plantCatalogue.length / 4) }).map((_, rowIndex) => (
-                    <React.Fragment key={rowIndex}>
-                        {plantCatalogue.slice(rowIndex * 4, rowIndex * 4 + 4).map((plant) => (
-                            <div key={plant.id} className="col-md-3">
-                                <div className="product-card card">
-                                    <img
-                                        src={plant.image}
-                                        alt={`Image of ${plant.title}`}
-                                        className="card-img-top"
-                                        loading="lazy"
-                                    />
-                                    <div className="card-body">
-                                        <h5 className="card-title">{plant.title}</h5>
-                                        <div className="star-rating">
-                                            {[...Array(5)].map((_, index) => (
-                                                <span
-                                                    key={index}
-                                                    className={`star ${index < plant.rating ? 'filled' : ''}`}
-                                                >
-                                                    &#9733;
-                                                </span>
-                                            ))}
-                                        </div>
-                                        <button className="btn btn-outline-primary">See More</button>
-                                    </div>
+                {plantCatalogue.map((plant) => (
+                    // <div class="row gx-0 gy-2">
+                    <div key={plant.id} className="col-md-3 d-flex justify-content-center">
+                        <div className="product-card card pt-3 pb-3" style={{ height: '90%' }}>
+                            <img
+                                src={plant.image}
+                                alt={`Image of ${plant.title}`}
+                                className="card-img-top"
+                                loading="lazy"
+                            />
+                            <div className="card-body">
+                                <h5 className="card-title">{plant.title}</h5>
+                                <div className="star-rating">
+                                    {[...Array(5)].map((_, index) => (
+                                        <span
+                                            key={index}
+                                            className={`star ${index < plant.rating ? 'filled' : ''}`}
+                                        >
+                                            &#9733;
+                                        </span>
+                                    ))}
                                 </div>
+                                <button className="btn btn-outline-primary">See More</button>
                             </div>
-                        ))}
-                    </React.Fragment>
+                        </div>
+                    </div>
+                    // </div>
                 ))}
             </div>
-        </section>
+        </section>  
     );
 };
 
