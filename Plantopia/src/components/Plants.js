@@ -3,14 +3,126 @@ import React, { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/pages/_plants.scss';
 
-// Plants component
+// Sample Data
+const popularPlants = [
+    { id: 1, image: './images/1.jpg', title: 'Fiddle Leaf Fig' },
+    { id: 2, image: './images/2.jpg', title: 'Snake Plant' },
+    { id: 3, image: './images/3.jpg', title: 'Peace Lily' },
+    { id: 4, image: './images/4.jpg', title: 'Monstera Deliciosa' },
+];
+
+// Carousel Item Component
+const CarouselItem = ({ image, title, isActive }) => (
+    <div className={`carousel-item ${isActive ? 'active' : ''}`}>
+        <div className="product-card card mx-auto">
+            <img
+                src={image}
+                alt={`Image of ${title}`}
+                className="card-img-top"
+                loading="lazy"
+            />
+            <div className="card-body">
+                <h5 className="card-title">{title}</h5>
+            </div>
+        </div>
+    </div>
+);
+
+// Weekly Others Component
+const WeeklyOthers = () => (
+    <div className="weekly_others">
+    <h2>Other Popular Plants</h2>
+    <div id="horizontalCarousel" className="carousel slide" data-bs-ride="carousel">
+        <div className="carousel-inner">
+            {popularPlants.map((plant, index) => (
+                <CarouselItem
+                    key={plant.id}
+                    image={plant.image}
+                    title={plant.title}
+                    isActive={index === 0}
+                />
+            ))}
+        </div>
+        <button
+            className="carousel-control-prev"
+            type="button"
+            data-bs-target="#horizontalCarousel"
+            data-bs-slide="prev"
+            aria-label="Previous popular plants"
+        >
+            <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+        </button>
+        <button
+            className="carousel-control-next"
+            type="button"
+            data-bs-target="#horizontalCarousel"
+            data-bs-slide="next"
+            aria-label="Next popular plants"
+        >
+            <span className="carousel-control-next-icon" aria-hidden="true"></span>
+        </button>
+    </div>
+</div>
+);
+
+// Catalogue Component
+const Catalogue = () => {
+    const plantCatalogue = [
+        { id: 1, image: './images/1.jpg', title: 'Modern Picture 1', rating: 5 },
+        { id: 2, image: './images/2.jpg', title: 'Modern Picture 2', rating: 4 },
+        { id: 3, image: './images/3.jpg', title: 'Modern Picture 3', rating: 3 },
+        { id: 4, image: './images/4.jpg', title: 'Modern Picture 4', rating: 4 },
+        { id: 5, image: './images/5.jpg', title: 'Modern Picture 5', rating: 4 },
+        { id: 6, image: './images/6.jpg', title: 'Modern Picture 6', rating: 4 },
+        { id: 7, image: './images/7.jpg', title: 'Modern Picture 7', rating: 4 },
+        { id: 8, image: './images/8.jpg', title: 'Modern Picture 8', rating: 4 },
+    ];
+
+    return (
+        <section className="catalogue mt-5">
+            <h2>Catalogue</h2>
+            <div className="row">
+                {Array.from({ length: Math.ceil(plantCatalogue.length / 4) }).map((_, rowIndex) => (
+                    <React.Fragment key={rowIndex}>
+                        {plantCatalogue.slice(rowIndex * 4, rowIndex * 4 + 4).map((plant) => (
+                            <div key={plant.id} className="col-md-3">
+                                <div className="product-card card">
+                                    <img
+                                        src={plant.image}
+                                        alt={`Image of ${plant.title}`}
+                                        className="card-img-top"
+                                        loading="lazy"
+                                    />
+                                    <div className="card-body">
+                                        <h5 className="card-title">{plant.title}</h5>
+                                        <div className="star-rating">
+                                            {[...Array(5)].map((_, index) => (
+                                                <span
+                                                    key={index}
+                                                    className={`star ${index < plant.rating ? 'filled' : ''}`}
+                                                >
+                                                    &#9733;
+                                                </span>
+                                            ))}
+                                        </div>
+                                        <button className="btn btn-outline-primary">See More</button>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </React.Fragment>
+                ))}
+            </div>
+        </section>
+    );
+};
+
+// Plants Component
 const Plants = () => {
-    // State and references
     const navigate = useNavigate();
     const searchInputRef = useRef(null);
     const [showInput, setShowInput] = useState(false);
 
-    // Handlers for navigation
     const handleLogoClick = (event) => {
         event.preventDefault();
         navigate('/');
@@ -29,12 +141,9 @@ const Plants = () => {
             <header className="overlay">
                 <nav className="navbar navbar-expand-lg bg-body-tertiary navbar-main">
                     <div className="container-fluid navbar-box d-flex">
-                        {/* Navbar Brand */}
                         <a className="navbar-brand" href="#" onClick={handleLogoClick}>
-                            <img src="/images/logo.png" alt="logo" />
+                            <img src="/images/logo.png" alt="Plantopia Logo" />
                         </a>
-
-                        {/* Navbar Toggle for Mobile View */}
                         <button
                             className="navbar-toggler"
                             type="button"
@@ -46,33 +155,21 @@ const Plants = () => {
                         >
                             <span className="navbar-toggler-icon"></span>
                         </button>
-
-                        {/* Navbar Links */}
                         <div className="collapse navbar-collapse nav-center" id="navbarSupportedContent">
                             <ul className="navbar-nav mb-2 mb-lg-0">
                                 <li className="nav-item">
-                                    <a className="nav-link active" href="#">
-                                        Plants
-                                    </a>
+                                    <a className="nav-link active" href="#plants">Plants</a>
                                 </li>
                                 <li className="nav-item">
-                                    <a className="nav-link active" href="#">
-                                        Community
-                                    </a>
+                                    <a className="nav-link active" href="#community">Community</a>
                                 </li>
                                 <li className="nav-item" onClick={handleShopClick}>
-                                    <a className="nav-link active" href="#">
-                                        Shop
-                                    </a>
+                                    <a className="nav-link active" href="#shop">Shop</a>
                                 </li>
                                 <li className="nav-item">
-                                    <a className="nav-link active" href="#">
-                                        About Us
-                                    </a>
+                                    <a className="nav-link active" href="#about">About Us</a>
                                 </li>
                             </ul>
-
-                            {/* Search and Login */}
                             <div className="nav-right">
                                 <form
                                     className="d-flex search-button"
@@ -91,11 +188,11 @@ const Plants = () => {
                                         type="button"
                                         onClick={handleSearchClick}
                                     >
-                                        <img src="/icons/search-normal.svg" alt="search" />
+                                        <img src="/icons/search-normal.svg" alt="Search" />
                                     </button>
                                 </form>
                                 <button onClick={handleLoginClick} className="login-button">
-                                    <img src="/icons/user.svg" alt="login" />
+                                    <img src="/icons/user.svg" alt="Login" />
                                 </button>
                             </div>
                         </div>
@@ -103,138 +200,74 @@ const Plants = () => {
                 </nav>
             </header>
 
-            {/* Title */}
+            {/* Main Section */}
             <main className="product-page">
                 <h1 className="title-text">
                     Find Your <br />
                     Perfect Plant
                     <img src="/images/plant_icon.png" alt="Plant Icon" className="plant-icon" />
                 </h1>
-
                 <section className="Weekly_frame">
                     <h2>Plant of the Week</h2>
                     <hr className="custom-hr" />
-
-                    {/* Plant Details */}
                     <div className="weekly_plant">
-                        {/* Weekly - Image */}
-                        <div>
-                            <div className="image_frame">
-                                <img src="/images/1.jpg" alt="Echinocereus Cactus" className="top_plant" />
-                                <img src="/images/crown.png" alt="Crown" className="crown_image" />
-                            </div>
+                        <div className="image_frame">
+                            <img src="/images/1.jpg" alt="Echinocereus Cactus" className="top_plant" />
+                            <img src="/images/crown.png" alt="Crown" className="crown_image" />
                         </div>
-
-                        {/* Weekly - Info */}
                         <div className="info_frame">
                             <h2>Echinocereus Cactus</h2>
-
                             <div className="tags">
                                 <span className="badge bg-success">Indoor</span>
                                 <span className="badge bg-success">Cactus</span>
                             </div>
                             <hr className="custom-hr" />
-                            <div className="features">
-                                <h4>Features</h4>
-                                <ul>
-                                    <li>Species: Echinocereus spp.</li>
-                                    <li>Size: Varies by species, 4-12 inches in height</li>
-                                    <li>Season: Spring or summer</li>
-                                    <li>Available in various pot sizes</li>
-                                    <li>Carefully packaged for safe delivery</li>
-                                </ul>
-                            </div>
-                            <div className="description mt-3">
-                                <h4>Description</h4>
-                                <p>
-                                    The Echinocereus Cactus is known for its beauty and resilience. Perfect for both indoor
-                                    and outdoor settings.
-                                </p>
-                            </div>
+                            <h4>Features</h4>
+                            <ul>
+                                <li>Species: Echinocereus spp.</li>
+                                <li>Size: Varies by species, 4-12 inches in height</li>
+                                <li>Season: Spring or summer</li>
+                                <li>Available in various pot sizes</li>
+                                <li>Carefully packaged for safe delivery</li>
+                            </ul>
+                            <h4>Description</h4>
+                            <p>The Echinocereus Cactus is known for its beauty and resilience. Perfect for indoor and outdoor settings.</p>
                         </div>
-
-                        {/* Weekly - Others Carousel */}
-                        <div className="weekly_others">
-                            <h2>Other Popular Plants</h2>
-                            
-                            <div id="horizontalCarousel" className="carousel slide" data-bs-ride="carousel">
-                                <div className="carousel-inner">
-                                    {['1.jpg', '2.jpg', '3.jpg', '4.jpg'].map((fileName, index) => (
-                                        <div
-                                            key={fileName}
-                                            className={`carousel-item ${index === 0 ? 'active' : ''}`}
-                                        >
-                                            <div className="product-card card mx-auto">
-                                                <img
-                                                    src={`./images/${fileName}`}
-                                                    alt={fileName}
-                                                    className="card-img-top"
-                                                />
-                                                <div className="card-body">
-                                                    <h5 className="card-title">{fileName}</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-                                <button
-                                    className="carousel-control-prev"
-                                    type="button"
-                                    data-bs-target="#horizontalCarousel"
-                                    data-bs-slide="prev"
-                                >
-                                    <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                                    <span className="visually-hidden">Previous</span>
-                                </button>
-                                <button
-                                    className="carousel-control-next"
-                                    type="button"
-                                    data-bs-target="#horizontalCarousel"
-                                    data-bs-slide="next"
-                                >
-                                    <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                                    <span className="visually-hidden">Next</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div> {/* end of weekly plant */}
-                </section> {/* end of weekly frame */}
-
-                {/* plant catalogue*/}
-                <section className="catalogue">
-
+                        <WeeklyOthers />
+                    </div>
+                    
                 </section>
-
-
                 
-            </main> {/* end of product page */}
-            {/* Footer Section */}
-        <footer className="footer py-5">
-          <div className="row text-center">
-            <div className="col-md-3 footer-logo">
-              <img src="./images/logo.png" alt="Plantopia Logo" />
-            </div>
-            <div className="col-md-3 footer-links">
-              <a href="#home">Home</a>
-              <a href="#gardner">Gardner</a>
-              <a href="#contact">Contact</a>
-              <a href="#privacy">Privacy</a>
-            </div>
-            <div className="col-md-3 footer-social">
-              <h3>Social</h3>
-              <a href="#facebook"><i className="fab fa-facebook"></i></a>
-              <a href="#linkedin"><i className="fab fa-linkedin"></i></a>
-              <a href="#instagram"><i className="fab fa-instagram"></i></a>
-            </div>
-            <div className="col-md-3 subscribe">
-              <h3>Subscribe For Updates</h3>
-              <input type="email" placeholder="Enter email..." className="form-control mb-2" />
-              <button className="btn button-subscribe">Subscribe</button>
-            </div>
-          </div>
-          <p className="footer-note text-center mt-4">garden.com © All rights reserved</p>
-        </footer>
-        </div>  // end of plants page
+                <Catalogue />
+            </main>
+
+            {/* Footer */}
+            <footer className="footer py-5">
+                <div className="row text-center">
+                    <div className="col-md-3 footer-logo">
+                        <img src="./images/logo.png" alt="Plantopia Logo" />
+                    </div>
+                    <div className="col-md-3 footer-links">
+                        <a href="#home">Home</a>
+                        <a href="#gardner">Gardner</a>
+                        <a href="#contact">Contact</a>
+                        <a href="#privacy">Privacy</a>
+                    </div>
+                    <div className="col-md-3 footer-social">
+                        <h3>Social</h3>
+                        <a href="#facebook"><i className="fab fa-facebook"></i></a>
+                        <a href="#linkedin"><i className="fab fa-linkedin"></i></a>
+                        <a href="#instagram"><i className="fab fa-instagram"></i></a>
+                    </div>
+                    <div className="col-md-3 subscribe">
+                        <h3>Subscribe For Updates</h3>
+                        <input type="email" placeholder="Enter email..." className="form-control mb-2" />
+                        <button className="btn button-subscribe">Subscribe</button>
+                    </div>
+                </div>
+                <p className="footer-note text-center mt-4">garden.com © All rights reserved</p>
+            </footer>
+        </div>
     );
 };
 
