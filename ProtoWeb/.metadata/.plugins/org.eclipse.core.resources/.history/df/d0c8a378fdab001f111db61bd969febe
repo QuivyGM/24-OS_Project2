@@ -1,0 +1,5 @@
+package JpaServices;
+
+public class ProductsService {
+
+}

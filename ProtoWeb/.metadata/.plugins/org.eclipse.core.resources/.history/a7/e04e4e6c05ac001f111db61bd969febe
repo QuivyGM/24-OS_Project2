@@ -1,0 +1,28 @@
+package JpaServices;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.example.protoweb.Tables.Products;
+
+import Repository.ProductsRepository;
+
+public class ProductsService {
+	@Autowired
+    private ProductsRepository jpaRepository;
+	
+	@Transactional(readOnly = true)
+	public List<Products> findAll() {
+		List<Products> acc = jpaRepository.findAll();
+		return acc;
+	}
+	
+	@Transactional
+	public String save(String name, int price, String desc) {
+		jpaRepository.save(new Products(name,price,desc));
+		return "Ok";
+	}
+
+}
