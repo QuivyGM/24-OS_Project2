@@ -12,6 +12,8 @@ const MainPage = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [data,setData] = useState([]);
 
+  const [showButton, setShowButton] = useState(false);
+
   const handleSearchClick = () => {
     setShowInput(true);
     if (searchInputRef.current) {
@@ -46,11 +48,17 @@ const MainPage = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > window.innerHeight);
+      if (window.scrollY > window.innerHeight) {
+        setShowButton(true); // show button
+      } else {
+        setShowButton(false); // hide button
+      }
     };
+
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll); 
   }, []);
+  
 
   // 백엔드에서 데이터 가져오기
   useEffect(() => {
@@ -138,7 +146,7 @@ const MainPage = () => {
                   <p>Order plants online with delivery and maintenance guidance.</p>
                 </li>
               </ul>
-              <button className="btn btn-success more-info-button mt-3">More Info</button>
+              <button className="btn btn-success more-info-button mt-3" onClick={handleAboutusClick}>More Info</button>
             </div>
           </div>
         </section>
@@ -268,14 +276,14 @@ const MainPage = () => {
             </div>
             <button className="btn btn-link drop-comment mt-3">Drop Comment</button>
           </div>
-          <div className="text-center top mt-3">
-              <button 
-                className="back-to-top" 
-                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              >
-                ↑
-              </button>
-          </div>
+          {/* top button */}
+          <button
+            className={`back-to-top ${showButton ? 'visible' : ''}`}
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          >
+            ↑
+          </button>
+
         </section>
         ))}
         {/* // ******************************** 코드 추가 부분 END **************************** */}
