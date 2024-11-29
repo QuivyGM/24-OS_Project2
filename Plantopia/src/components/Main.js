@@ -10,6 +10,7 @@ const MainPage = () => {
   
   const [showInput, setShowInput] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [data,setData] = useState([]);
 
   const handleSearchClick = () => {
     setShowInput(true);
@@ -49,6 +50,14 @@ const MainPage = () => {
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // 백엔드에서 데이터 가져오기
+  useEffect(() => {
+      fetch("http://localhost:8080/", {method : "GET"})
+      .then (res=>res.json())
+      .then (res=>setData(res))
+    
   }, []);
 
   return (
@@ -228,8 +237,10 @@ const MainPage = () => {
           </div>
         </section>
 
-
+       
         {/* User Comments Section */}
+        {/* // ******************************** 코드 추가 부분 START **************************** */}
+        {data.map((datas)=> (
         <section className="user-comments py-5">
           <h2 className="text-center mb-4">User Comments</h2>
           <div className="btn btn more-button-div">
@@ -239,19 +250,20 @@ const MainPage = () => {
               >
                 More...
             </button>
+        
           </div>
           <div className="comment-box p-4">
             <div className="comment-author mt-3 d-flex align-items-center">
               <img src="./images/4.jpg" alt="User" className="rounded-circle" />
               <div className="ms-3">
-                <p className="author-name">Danny Sena</p>
-                <p className="author-position">Co-founder of MyCompany</p>
+                <p className="author-name">username = {datas.username}</p>
+                <p className="author-position">membership = {datas.membership}</p>
               </div>
             </div>
             <div className=" star-info">
-              <div className="rating">4.2 ★★★★</div>
+              <div className="rating">rating = {datas.rating} ★★★★</div>
               <div className="comment-text mx-3">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum imperdiet ex ac eros sagittis.</p>
+                <p>description = {datas.description}</p>
               </div>
             </div>
             <button className="btn btn-link drop-comment mt-3">Drop Comment</button>
@@ -265,7 +277,8 @@ const MainPage = () => {
               </button>
           </div>
         </section>
-
+        ))}
+        {/* // ******************************** 코드 추가 부분 END **************************** */}
         {/* Footer Section */}
         <footer className="footer py-5">
           <div className="row logo-links">
