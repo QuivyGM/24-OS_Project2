@@ -244,17 +244,16 @@ html, body {
     }
   }
 
+}
+
+
+@media (max-width: 992px) {
+  .footer-links{
+    display: none !important;
+  }
   .footer-logo{
     width: 100% !important;
     text-align: center;
-  }
-  .footer-links{
-    display: flex;
-    flex-direction: column;
-    padding: 20px 0px;
-    a{
-      text-align: center;
-    }
   }
 }
 // --------media 끝------------------------------------- 
@@ -436,58 +435,8 @@ html, body {
   }
 
 // Our products
-  .product-item {
-    border-radius: 24px;
-    box-shadow: 0px 6.476px 6px 0px rgba(41, 41, 41, 0.08);
-    border: 0;
-    .card-title {
-      font-size: 1.1rem;
-      color: $primary-color;
-    }
-    .price {
-      color: $text-color;
-      font-weight: 500;
-    }
-    .card-img-top{
-      border-radius: 24px 24px 0px 0px;
-    }
-    .card-body{
-      .btn-outline-primary{
-        color: $light-color;
-        border: 1px solid $primary-color;
-        background-color: $primary-color;
-        &:hover {
-          background-color: $secondary-color;
-          box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
-          color: $light-color;
-        }
-      }
-    }
-  }
-  .more-button-div{
-    display: flex;
-    justify-content: end;
-    border: 0;
 
-    .more-button {
-      background-color: transparent;
-      color: $secondary-color;
-      font-size: 16px;
-      border: none;
-      cursor: pointer;
-      transition: background-color 0.3s ease, transform 0.2s ease;
-    
-      &:hover {
-        color: $primary-color;
-      }
-    
-      &:focus {
-        outline: none;
-        background-color: transparent;
-        color: $primary-color;
-      }
-    }
-  }
+
 //-------------------------- Our Products ---------------------------- 
 
 // user comments
@@ -564,7 +513,7 @@ html, body {
     .logo-links{
       display: flex;
       justify-content: space-between;
-      padding: 0px 80px;
+      padding: 0px 100px;
       cursor: pointer;
     }
     .footer-logo{
@@ -574,15 +523,15 @@ html, body {
         }
     }
     .footer-links{
+      width: 30%;
       display: flex;
-      justify-content: space-evenly;
+      justify-content: space-between;
       gap: 2rem;
       align-items: center;
       a {
         color: $light-color;
         display: block;
         margin-bottom: 0.5rem;
-        padding: 0;
         position: relative;
         text-decoration: none; // Remove default underline
         transition: transform 0.3s ease; // Smooth scaling effect

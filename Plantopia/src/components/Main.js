@@ -4,6 +4,9 @@ import React, { useRef, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/pages/_main.scss';
 
+import OurProducts from '../components/shop-carusel'; // Adjust the path if needed
+
+
 const MainPage = () => {
   const navigate = useNavigate();
   const searchInputRef = useRef(null);
@@ -52,6 +55,7 @@ const MainPage = () => {
       } else {
         setShowButton(false); // hide button
       }
+      setIsScrolled(window.scrollY > window.innerHeight);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -208,34 +212,7 @@ const MainPage = () => {
         </section>
 
         {/* Our Products Section */}
-        <section className="our-products py-5">
-          <div className="d-flex justify-content-between align-items-center mb-4">
-            <h2 className="text-center mb-0">Our Products</h2>
-          </div>
-          <div className="btn btn more-button-div">
-            <button 
-                className="more-button" 
-                onClick={handleShopClick} href='shop'
-              >
-                More...
-            </button>
-          </div>
-          <div className="row">
-            {[1, 2, 3, 4].map((item) => (
-              <div key={item} className="col-6 col-md-3 mb-4">
-                <div className="card product-item">
-                  <img src={`./images/${item}.jpg`} alt="Product" className="card-img-top" />
-                  <div className="card-body text-center">
-                    <h5 className="card-title">Modern Picture</h5>
-                    <p className="price">$15.99</p>
-                    <button className="btn btn-outline-primary">Add to Cart</button>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
+        <OurProducts handleShopClick={handleShopClick} />
 
         {/* User Comments Section */}
         <section className="user-comments py-5">
