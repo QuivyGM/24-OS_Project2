@@ -180,24 +180,44 @@
     }
 
     .related-products {
-      h2 {
-        color: $primary-color;
+      // Title and button container
+      .title-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         margin-bottom: 20px;
+    
+        h2 {
+          color: $primary-color;
+          margin: 0; // Prevent extra margins to align with the button
+        }
+    
+        .btn-outline-secondary {
+          font-size: 0.9rem;
+          padding: 5px 15px;
+          transition: all 0.3s ease;
+    
+          &:hover {
+            background-color: $secondary-color;
+            color: #fff;
+          }
+        }
       }
-  
+    
       .product-card {
         .card-img-top {
           border-radius: 5px;
         }
-  
+    
         .card-body {
           .card-title {
             font-size: 1rem;
           }
-  
+    
           .price {
             font-size: 1.2rem;
             color: $primary-color;
+    
             .original-price {
               text-decoration: line-through;
               font-size: 0.9rem;
@@ -207,6 +227,7 @@
         }
       }
     }
+    
   
     .payments {
       h2 {
