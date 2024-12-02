@@ -75,7 +75,7 @@ body {
         justify-content: space-between;
         height: 100%;
         width: 100%;
-        max-width: 240px;
+        max-width: 300px;
         margin: auto;
         border: 1px solid #ddd;
         padding: 10px;
@@ -112,8 +112,35 @@ body {
                 }
             }
 
+            .review-info {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-top: -10px;
+
+                .stars {
+                    display: flex;
+                    gap: 2px;
+
+                    .star {
+                        font-size: 1rem;
+                        color: #ccc; // Default unfilled star color
+
+                        &.filled {
+                            color: #ffd700; // Filled star color
+                        }
+                    }
+                }
+
+                .review-count {
+                    font-size: 0.9rem;
+                    color: #666;
+                    margin-left: 8px; // Spacing between stars and review count
+                }
+            }
+
             .btn {
-                margin-top: auto;
+                margin-top: -10px;
                 align-self: center;
             }
         }
@@ -136,6 +163,7 @@ body {
         }
     }
 }
+
 
 // Footer
 .footer {

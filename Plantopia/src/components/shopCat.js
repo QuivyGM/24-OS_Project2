@@ -4,47 +4,62 @@ import '../styles/pages/_shopCat.scss';
 
 // Sample Data for Product Catalogue
 const productCatalogue = [
-    { id: 1, image: './images/1.jpg', title: 'Modern Picture 1', price: '$15.00', originalPrice: '$25.00' },
-    { id: 2, image: './images/2.jpg', title: 'Modern Picture 2', price: '$20.00', originalPrice: '$30.00' },
-    { id: 3, image: './images/3.jpg', title: 'Modern Picture 3', price: '$18.00', originalPrice: '$28.00' },
-    { id: 4, image: './images/4.jpg', title: 'Modern Picture 4', price: '$22.00', originalPrice: '$32.00' },
-    { id: 5, image: './images/5.jpg', title: 'Modern Picture 5', price: '$16.00', originalPrice: '$26.00' },
-    { id: 6, image: './images/6.jpg', title: 'Modern Picture 6', price: '$14.00', originalPrice: '$24.00' },
-    { id: 7, image: './images/7.jpg', title: 'Modern Picture 7', price: '$19.00', originalPrice: '$29.00' },
-    { id: 8, image: './images/8.jpg', title: 'Modern Picture 8', price: '$21.00', originalPrice: '$31.00' },
+    { id: 1, image: './images/1.jpg', title: 'Modern Picture 1', price: '$15.00', originalPrice: '$25.00', reviews: 10, avgReviewScore: 4.5 },
+    { id: 2, image: './images/2.jpg', title: 'Modern Picture 2', price: '$20.00', originalPrice: '$20.00', reviews: 8, avgReviewScore: 4.0 },
+    { id: 3, image: './images/3.jpg', title: 'Modern Picture 3', price: '$18.00', originalPrice: '$28.00', reviews: 15, avgReviewScore: 4.8 },
+    { id: 4, image: './images/4.jpg', title: 'Modern Picture 4', price: '$22.00', originalPrice: '$32.00', reviews: 5, avgReviewScore: 3.9 },
+    { id: 5, image: './images/5.jpg', title: 'Modern Picture 5', price: '$16.00', originalPrice: '$26.00', reviews: 12, avgReviewScore: 4.2 },
+    { id: 6, image: './images/6.jpg', title: 'Modern Picture 6', price: '$14.00', originalPrice: '$24.00', reviews: 7, avgReviewScore: 3.8 },
+    { id: 7, image: './images/7.jpg', title: 'Modern Picture 7', price: '$19.00', originalPrice: '$29.00', reviews: 9, avgReviewScore: 4.1 },
+    { id: 8, image: './images/8.jpg', title: 'Modern Picture 8', price: '$21.00', originalPrice: '$31.00', reviews: 11, avgReviewScore: 4.6 },
 ];
 
 // Catalogue Component
 const Catalogue = () => (
     <section className="catalogue">
-        <h2>Product Catalogue</h2>
-        <div className="row">
-            {productCatalogue.map((product) => (
-                <div key={product.id} className="col-md-3 d-flex justify-content-center">
-                    <div className="product-card card">
-                        <img
-                            src={product.image}
-                            alt={`Image of ${product.title}`}
-                            className="card-img-top"
-                            loading="lazy"
-                        />
-                        <div className="card-body">
-                            <h5 className="card-title">{product.title}</h5>
-                            <p className="price">
-                                {product.price}{' '}
+    <h2>Product Catalogue</h2>
+    <div className="row">
+        {productCatalogue.map((product) => (
+            <div key={product.id} className="col-md-3">
+                <div className="product-card card">
+                    <img
+                        src={product.image}
+                        alt={`Image of ${product.title}`}
+                        className="card-img-top"
+                        loading="lazy"
+                    />
+                    <div className="card-body text-center">
+                        <h5 className="card-title">{product.title}</h5>
+                        <p className="price">
+                            {product.price}{' '}
+                            {product.price !== product.originalPrice && (
                                 <span className="original-price">{product.originalPrice}</span>
-                            </p>
-                            <button className="btn btn-outline-primary">Add to cart</button>
+                            )}
+                        </p>
+                        <div className="review-info">
+                            <div className="stars">
+                                {Array.from({ length: 5 }, (_, i) => (
+                                    <span
+                                        key={i}
+                                        className={`star ${i < Math.round(product.avgReviewScore) ? 'filled' : ''}`}
+                                    >
+                                        &#9733;
+                                    </span>
+                                ))}
+                            </div>
+                            <p className="review-count">({product.reviews})</p>
                         </div>
+                        <button className="btn btn-outline-primary">Add to cart</button>
                     </div>
                 </div>
-            ))}
-        </div>
-    </section>
+            </div>
+        ))}
+    </div>
+</section>
 );
 
 // Plants Component Repurposed for Shop Catalogue
-const ShopCatalogue = () => {
+const ShopCat = () => {
     const navigate = useNavigate();
     const searchInputRef = useRef(null);
     const [showInput, setShowInput] = useState(false);
@@ -161,4 +176,4 @@ const ShopCatalogue = () => {
     );
 };
 
-export default ShopCatalogue;
+export default ShopCat;

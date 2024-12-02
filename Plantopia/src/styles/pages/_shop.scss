@@ -9,256 +9,393 @@
   font-family: 'Poppins', sans-serif; // Set global font to Poppins
 }
 
-
 .overlay {
-    position: fixed; 
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 10;
-    background: $primary-color; 
-    padding: 0px 20px;
+  position: fixed; 
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+  background: $primary-color; 
+  padding: 0px 20px;
 
+  .navbar-main {
+    background-color: transparent !important;
 
+    .navbar-box {
+      .navbar-toggler {
+        border: 1.5px solid $light-color;
 
-    .navbar-main {
-        background-color: transparent !important;
-
-      .navbar-box {
-        .navbar-toggler {
-          border: 1.5px solid $light-color;
-
-          .navbar-toggler-icon {
-            width: 20px;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba(255, 255, 255, 0.8)' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
-          }
+        .navbar-toggler-icon {
+          width: 20px;
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba(255, 255, 255, 0.8)' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
         }
-        .navbar-brand {
-          img {
-            width: 100px;
-          }
+      }
+      .navbar-brand {
+        img {
+          width: 100px;
         }
       }
     }
+  }
 }
 
-.nav-center{
-    display: flex;
-    justify-content:flex-end;
-  }
-  .navbar-nav {
-    padding-right: 10px;
-    a {
-      color: $light-color !important; // Set link color
-      position: relative;
-      transition: color 0.3s ease; // Smooth color transition
-      margin: 0px 12px !important;
-      padding: 0;
-  
-      &::after {
-        content: "";
-        position: absolute;
-        left: 0;
-        bottom: -4px;
-        width: 0;
-        height: 2px;
-        background-color: $light-color; // Bottom line color
-        transition: width 0.3s ease; // Smooth line width transition
-      }
-  
-      &:hover {
-        color: $light-color; // Keep the link color on hover
-  
-        &::after {
-          width: 100%; // Extend the bottom line on hover
-        }
-      }
-    }
-  }
-  
-  .nav-right {
-    display: flex;
-    gap: 18px;
-  
-    button {
-      background-color: transparent !important;
-      border: 0;
-      position: relative;
-      cursor: pointer;
-      padding: 0px;
-      transition: color 0.3s ease;
-  
-      img {
-        width: 24px; // Icon size for buttons
-        transition: color 0.3s ease; // Smooth color transition
-      }
-  
-      &::after {
-        content: "";
-        position: absolute;
-        left: 0;
-        bottom: -8px;
-        width: 0;
-        height: 2px;
-        background-color: $light-color; // Bottom line color for button
-        transition: width 0.3s ease; // Smooth transition for line width
-      }
-  
-      &:hover {
-        &::after {
-          width: 100%; // Show full line on hover
-        }
-      }
-    }
-  }
-  
-  .search-button {
-    input {
-      background-color: transparent;
-      color: $light-color; 
+.nav-center {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.navbar-nav {
+  padding-right: 10px;
+  a {
+    color: $light-color !important; // Set link color
+    position: relative;
+    transition: color 0.3s ease; // Smooth color transition
+    margin: 0px 12px !important;
+    padding: 0;
+
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -4px;
       width: 0;
-      opacity: 0;
-      transition: width 0.5s ease, opacity 0.5s ease; // Ko'rinish va kenglik o'zgarishi uchun animatsiya
-  
-      &.show {
-        width: 150px; 
-        opacity: 1; 
-      }
-  
-      &.hide {
-        width: 0; 
-        opacity: 0;
-      }
-  
-      &::placeholder {
-        color: $dark-color;
+      height: 2px;
+      background-color: $light-color; // Bottom line color
+      transition: width 0.3s ease; // Smooth line width transition
+    }
+
+    &:hover {
+      color: $light-color; // Keep the link color on hover
+
+      &::after {
+        width: 100%; // Extend the bottom line on hover
       }
     }
   }
+}
+
+.nav-right {
+  display: flex;
+  gap: 18px;
+
+  button {
+    background-color: transparent !important;
+    border: 0;
+    position: relative;
+    cursor: pointer;
+    padding: 0px;
+    transition: color 0.3s ease;
+
+    img {
+      width: 24px; // Icon size for buttons
+      transition: color 0.3s ease; // Smooth color transition
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -8px;
+      width: 0;
+      height: 2px;
+      background-color: $light-color; // Bottom line color for button
+      transition: width 0.3s ease; // Smooth transition for line width
+    }
+
+    &:hover {
+      &::after {
+        width: 100%; // Show full line on hover
+      }
+    }
+  }
+}
+
+.search-button {
+  input {
+    background-color: transparent;
+    color: $light-color; 
+    width: 0;
+    opacity: 0;
+    transition: width 0.5s ease, opacity 0.5s ease; // Ko'rinish va kenglik o'zgarishi uchun animatsiya
+
+    &.show {
+      width: 150px; 
+      opacity: 1; 
+    }
+
+    &.hide {
+      width: 0; 
+      opacity: 0;
+    }
+
+    &::placeholder {
+      color: $dark-color;
+    }
+  }
+}
 
 .shop-page {
-    margin-top: 100px;
-    .product-detail {
-        .product-image {
-            width: 100%;
-            border-radius: 8px;
-        }
-
-        .product-info {
-            h2 {
-                font-size: 2rem;
-                color: $primary-color;
-            }
-
-            .subtitle {
-                font-size: 1.2rem;
-                color: $secondary-color;
-            }
-
-            .tags {
-                .badge {
-                    margin-right: 5px;
-                    font-size: 0.9rem;
-                }
-            }
-
-            .price {
-                font-size: 1.8rem;
-                color: $primary-color;
-                font-weight: bold;
-            }
-
-            .features,
-            .description {
-                margin-top: 20px;
-            }
-
-            button {
-                margin-top: 10px;
-            }
-        }
+  margin-top: 100px;
+  .product-detail {
+    .product-image {
+      width: 100%;
+      border-radius: 8px;
     }
 
-    .related-products {
-      // Title and button container
-      .title-container {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 20px;
-    
-        h2 {
-          color: $primary-color;
-          margin: 0; // Prevent extra margins to align with the button
-        }
-    
-        .btn-outline-secondary {
-          font-size: 0.9rem;
-          padding: 5px 15px;
-          transition: all 0.3s ease;
-    
-          &:hover {
-            background-color: $secondary-color;
-            color: #fff;
-          }
-        }
-      }
-    
-      .product-card {
-        .card-img-top {
-          border-radius: 5px;
-        }
-    
-        .card-body {
-          .card-title {
-            font-size: 1rem;
-          }
-    
-          .price {
-            font-size: 1.2rem;
-            color: $primary-color;
-    
-            .original-price {
-              text-decoration: line-through;
-              font-size: 0.9rem;
-              color: $secondary-color;
-            }
-          }
-        }
-      }
-    }
-    
-  
-    .payments {
+    .product-info {
       h2 {
+        font-size: 2rem;
         color: $primary-color;
-        margin-bottom: 20px;
       }
-  
-      .order-summary,
-      .payment-method {
-        border: 1px solid $secondary-color;
-        border-radius: 8px;
-        padding: 20px;
-        margin-bottom: 20px;
+
+      .subtitle {
+        font-size: 1.2rem;
+        color: $secondary-color;
       }
-  
-      .subtotal, .shipping, .total {
+
+      .tags {
+        .badge {
+          margin-right: 5px;
+          font-size: 0.9rem;
+        }
+      }
+
+      .price {
+        font-size: 1.8rem;
+        color: $primary-color;
         font-weight: bold;
-        color: $primary-color;
       }
-  
-      .total {
-        font-size: 1.5rem;
+
+      .features,
+      .description {
+        margin-top: 20px;
       }
-  
+
       button {
-        width: 100%;
-        background-color: $primary-color;
-        color: #fff;
-        &:hover {
-          background-color: lighten($primary-color, 10%);
+        margin-top: 10px;
+      }
+    }
+  }
+
+  .related-products {
+  // Title and Button Row
+  .title-container {
+    display: flex; // Flexbox for horizontal alignment
+    justify-content: space-between; // Space out the title and button
+    align-items: center; // Center vertically
+    margin-bottom: 20px; // Add spacing below the title row
+
+    h2 {
+      color: $primary-color;
+      font-size: 1.5rem;
+      margin: 0; // Remove default margin
+    }
+
+    button {
+      background-color: $secondary-color;
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 5px;
+      font-size: 1rem;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: lighten($secondary-color, 10%);
+      }
+    }
+  }
+
+  // Product Cards
+  .product-grid {
+    display: flex; // Enable grid-like layout for products
+    flex-wrap: wrap; // Allow wrapping for smaller screens
+    gap: 20px; // Add spacing between cards
+
+    .col-md-3 {
+      margin-bottom: 20px; // Add spacing below each card
+    }
+
+    .product-card {
+      .card-img-top {
+        border-radius: 5px;
+      }
+
+      .card-body {
+        .card-title {
+          font-size: 1rem;
+          font-weight: bold;
+        }
+
+        .price {
+          font-size: 1.2rem;
+          color: $primary-color;
+
+          .original-price {
+            text-decoration: line-through;
+            font-size: 0.9rem;
+            color: $secondary-color;
+          }
+        }
+
+        button {
+          background-color: $primary-color;
+          color: #fff;
+          border: none;
+          padding: 8px 16px;
+          border-radius: 5px;
+          font-size: 0.9rem;
+
+          &:hover {
+            background-color: darken($primary-color, 10%);
+          }
         }
       }
     }
   }
+}
+
+  
+  .row {
+    margin-top: 20px;
+  
+    .col-md-3 {
+      padding: 0 10px; // Adjust spacing between columns
+    }
+  
+    .product-card {
+      margin-bottom: 20px;
+  
+      .card-img-top {
+        border-radius: 5px;
+      }
+  
+      .card-body {
+        .card-title {
+          font-size: 1rem;
+          font-weight: bold;
+        }
+  
+        .price {
+          font-size: 1.2rem;
+          color: $primary-color;
+  
+          .original-price {
+            text-decoration: line-through;
+            font-size: 0.9rem;
+            color: $secondary-color;
+          }
+        }
+  
+        button {
+          background-color: $primary-color;
+          color: #fff;
+          border: none;
+          padding: 8px 16px;
+          border-radius: 5px;
+          font-size: 0.9rem;
+  
+          &:hover {
+            background-color: darken($primary-color, 10%);
+          }
+        }
+      }
+    }
+  }
+  
+
+  .payments {
+    h2 {
+      color: $primary-color;
+      margin-bottom: 20px;
+    }
+
+    .order-summary,
+    .payment-method {
+      border: 1px solid $secondary-color;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .subtotal, .shipping, .total {
+      font-weight: bold;
+      color: $primary-color;
+    }
+
+    .total {
+      font-size: 1.5rem;
+    }
+
+    button {
+      width: 100%;
+      background-color: $primary-color;
+      color: #fff;
+
+      &:hover {
+        background-color: lighten($primary-color, 10%);
+      }
+    }
+  }
+
+  // Footer
+  .footer {
+    background-color: $footer-color;
+    color: $light-color;
+    padding: 24px 0px !important;
+
+    .logo-links {
+      display: flex;
+      justify-content: space-between;
+      padding: 0px 80px;
+      cursor: pointer;
+    }
+
+    .footer-logo {
+      width: 20%;
+
+      img {
+        width: 150px;
+      }
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: space-evenly;
+      gap: 2rem;
+      align-items: center;
+
+      a {
+        color: $light-color;
+        display: block;
+        margin-bottom: 0.5rem;
+        padding: 0;
+        position: relative;
+        text-decoration: none; // Remove default underline
+        transition: transform 0.3s ease; // Smooth scaling effect
+
+        // Hover animation
+        &:hover {
+          transform: scale(1.12); // Slightly enlarge the link on hover
+        }
+
+        // Add an animated underline effect
+        &::after {
+          content: '';
+          position: absolute;
+          left: 0;
+          bottom: -2px;
+          width: 0; // Initially set to 0
+          height: 2px;
+          background-color: $light-color; // Set the underline color
+          transition: width 0.3s ease; // Smoothly expand the underline
+        }
+
+        // On hover, expand the underline
+        &:hover::after {
+          width: 100%; // Fully expand the underline
+        }
+      }
+    }
+  }
+}

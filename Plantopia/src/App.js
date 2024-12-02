@@ -7,6 +7,7 @@ import Login from './components/Login';
 import Plants from './components/Plants';
 import Aboutus from './components/Aboutus';
 import Community from './components/Community';
+import ShopCat from './components/ShopCat';
 import Shop from './components/Shop';
 
 const App = () => {
@@ -19,6 +20,7 @@ const App = () => {
         <Route path="/Shop" element={<Shop />} />
         <Route path="/Aboutus" element={<Aboutus />} />
         <Route path="/Community" element={<Community />} />
+        <Route path="/ShopCat" element={<ShopCat />} />
       </Routes>
     </Router>
   );
