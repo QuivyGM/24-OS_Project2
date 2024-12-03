@@ -15,78 +15,71 @@ const productCatalogue = [
 ];
 
 // Catalogue Component
-const Catalogue = () => (
-    <section className="catalogue">
-        <h2>Product Catalogue</h2>
-        <div className="row">
-            {productCatalogue.map((product) => (
-                <div key={product.id} className="col-md-3">
-                    <div className="product-card card">
-                        <img
-                            src={product.image}
-                            alt={`Image of ${product.title}`}
-                            className="card-img-top"
-                            loading="lazy"
-                        />
-                        <div className="card-body text-center">
-                            <h5 className="card-title">{product.title}</h5>
-                            <p className="price">
-                                {product.price}{' '}
-                                {product.price !== product.originalPrice && (
-                                    <span className="original-price">{product.originalPrice}</span>
-                                )}
-                            </p>
-                            <div className="review-info">
-                                <div className="stars">
+const Catalogue = () => {
+    const navigate = useNavigate();
+
+    return (
+        <section className="catalogue">
+            <h2>Product Catalogue</h2>
+            <div className="row">
+                {productCatalogue.map((product) => (
+                    <div key={product.id} className="col-md-3">
+                        <div className="product-card card">
+                            <img src={product.image} alt={`Image of ${product.title}`} className="card-img-top" />
+                            <div className="card-body">
+                                <h5 className="card-title">{product.title}</h5>
+                                <p className="price">
+                                    {product.price}{' '}
+                                    {product.price !== product.originalPrice && (
+                                        <span className="original-price">{product.originalPrice}</span>
+                                    )}
+                                </p>
+                                <div className="review-info">
                                     {Array.from({ length: 5 }, (_, i) => (
-                                        <span
-                                            key={i}
-                                            className={`star ${i < Math.round(product.avgReviewScore) ? 'filled' : ''}`}
-                                        >
+                                        <span key={i} className={`star ${i < Math.round(product.avgReviewScore) ? 'filled' : ''}`}>
                                             &#9733;
                                         </span>
                                     ))}
+                                    <span className="review-count">({product.reviews})</span>
                                 </div>
-                                <p className="review-count">({product.reviews})</p>
+                                <button
+                                    className="btn btn-success"
+                                    onClick={() => navigate(`/post/${product.id}`)} // Navigate to Post page
+                                    style={{ cursor: 'pointer' }}
+                                >
+                                    See More
+                                </button>
+                                <button className="btn btn-outline-secondary ms-2">Add to cart</button>
                             </div>
-                            <button className="btn btn-outline-primary">Add to cart</button>
                         </div>
                     </div>
-                </div>
-            ))}
-        </div>
-    </section>
-);
+                ))}
+            </div>
+        </section>
+    );
+};
 
-// Plants Component Repurposed for Shop Catalogue
+// ShopCat Component
 const ShopCat = () => {
     const navigate = useNavigate();
     const searchInputRef = useRef(null);
     const [showInput, setShowInput] = useState(false);
 
-    // Function to handle logo click and navigate to the main page
     const handleLogoClick = (event) => {
         event.preventDefault();
         navigate('/');
     };
 
-    // Function to handle login button click and navigate to the login page
     const handleLoginClick = () => {
         navigate('/login');
     };
 
-    // Function to handle shop button click and navigate to the shop page
-    const handleShopClick = () => {
-        navigate('/shop');
-    };
-
-    // Function to show the search input when the search button is clicked
     const handleSearchClick = () => {
         setShowInput(true);
         if (searchInputRef.current) {
             searchInputRef.current.focus();
         }
-    }
+    };
 
     return (
         <div className="shop-page">
@@ -96,7 +89,7 @@ const ShopCat = () => {
                     <div className="container-fluid navbar-box d-flex">
                         {/* Navbar brand/logo with click handler */}
                         <a className="navbar-brand" href="logo" onClick={handleLogoClick}>
-                            <img src='./images/logo.png' alt='logo' />
+                            <img src="./images/logo.png" alt="logo" />
                         </a>
 
                         {/* Navbar toggle button for mobile view */}
@@ -109,26 +102,26 @@ const ShopCat = () => {
                             <ul className="navbar-nav mb-2 mb-lg-0">
                                 <li className="nav-item"><a className="nav-link active" href="Plants">Plants</a></li>
                                 <li className="nav-item"><a className="nav-link active" href="Community">Community</a></li>
-                                <li onClick={handleShopClick} className="nav-item"><a className="nav-link active" href="Shop">Shop</a></li>
+                                <li className="nav-item"><a className="nav-link active" href="Shop">Shop</a></li>
                                 <li className="nav-item"><a className="nav-link active" href="Aboutus">About Us</a></li>
                             </ul>
 
                             {/* Right nav (search and login) */}
                             <div className="nav-right">
                                 <form className="d-flex search-button" role="search" onSubmit={(e) => e.preventDefault()}>
-                                    <input 
-                                        ref={searchInputRef} 
+                                    <input
+                                        ref={searchInputRef}
                                         className={`form-control me-2 ${showInput ? 'show' : 'hide'}`}
-                                        type="search" 
-                                        placeholder="Search" 
-                                        aria-label="Search" 
+                                        type="search"
+                                        placeholder="Search"
+                                        aria-label="Search"
                                     />
                                     <button className="btn btn-outline-success" type="button" onClick={handleSearchClick}>
-                                        <img src='./icons/search-normal.svg' alt='search' />
+                                        <img src="./icons/search-normal.svg" alt="search" />
                                     </button>
                                 </form>
                                 <button onClick={handleLoginClick} className="login-button">
-                                    <img src='./icons/user.svg' alt='login' />
+                                    <img src="./icons/user.svg" alt="login" />
                                 </button>
                             </div>
                         </div>
@@ -173,7 +166,6 @@ const ShopCat = () => {
             </footer>
         </div>
     );
-    
 };
 
 export default ShopCat;

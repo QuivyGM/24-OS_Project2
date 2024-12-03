@@ -27,6 +27,9 @@ const Community = () => {
       console.log('Search:', searchInputRef.current.value);
     }
   };
+  const handlePostClick = (postId) => {
+    navigate(`/post/${postId}`); // Navigate to the post page with postId
+};
 
   // Pagination navigation
   const handlePreviousPage = () => {
@@ -173,19 +176,25 @@ const Community = () => {
         {/* Post List */}
         <div className="post-list">
           {currentPosts.map((post) => (
-            <div className="post-card card" key={post.id}>
-              <div className="card-body">
+            <div
+            className="post-card card"
+            key={post.id}
+            onClick={() => handlePostClick(post.id)} // Navigate on click
+            style={{ cursor: 'pointer' }} // Add pointer cursor for better UX
+        >
+            <div className="card-body">
                 <div className="post-header">
-                  <span className="post-author">{post.author}</span>
-                  <span className="post-time">{post.time}</span>
+                    <span className="post-author">{post.author}</span>
+                    <span className="post-time">{post.time}</span>
                 </div>
                 <h3 className="post-title">{post.title}</h3>
                 <p className="post-content">{post.content}</p>
                 <div className="post-footer">
-                  <span>{post.answers} answers</span>
+                    <span>{post.answers} answers</span>
                 </div>
-              </div>
             </div>
+        </div>
+        
           ))}
         </div>
 

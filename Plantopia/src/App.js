@@ -9,6 +9,7 @@ import Aboutus from './components/Aboutus';
 import Community from './components/Community';
 import ShopCat from './components/ShopCat';
 import Shop from './components/Shop';
+import Post from './components/Post';
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
         <Route path="/Aboutus" element={<Aboutus />} />
         <Route path="/Community" element={<Community />} />
         <Route path="/ShopCat" element={<ShopCat />} />
+        <Route path="/post/:id" element={<Post />} />
       </Routes>
     </Router>
   );

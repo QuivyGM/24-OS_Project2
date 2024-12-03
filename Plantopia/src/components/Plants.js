@@ -67,6 +67,7 @@ const WeeklyOthers = () => (
 
 // Catalogue Component
 const Catalogue = () => {
+    const navigate = useNavigate();
     const plantCatalogue = [
         { id: 1, image: './images/1.jpg', title: 'Modern Picture 1', rating: 5 },
         { id: 2, image: './images/2.jpg', title: 'Modern Picture 2', rating: 4 },
@@ -94,6 +95,10 @@ const Catalogue = () => {
         { id: 34, image: './images/8.jpg', title: 'Modern Picture 8', rating: 4 },
     ];
 
+    const handleSeeMoreClick = (plantId) => {
+        navigate(`/post/${plantId}`); // Navigate to Post.js with plantId as a parameter
+    };
+
     return (
         <section className="catalogue">
             <h2>Catalogue</h2>
@@ -120,7 +125,12 @@ const Catalogue = () => {
                                         </span>
                                     ))}
                                 </div>
-                                <button className="btn btn-outline-primary">See More</button>
+                                <button
+                                    className="btn btn-outline-primary"
+                                    onClick={() => handleSeeMoreClick(plant.id)}
+                                >
+                                    See More
+                                </button>
                             </div>
                         </div>
                     </div>

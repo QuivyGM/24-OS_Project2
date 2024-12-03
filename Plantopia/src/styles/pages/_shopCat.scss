@@ -55,93 +55,93 @@ body {
     }
 
     .row {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px; // Space between cards
-        margin-left: 0;
-        margin-right: 0;
+        margin-top: 20px;
 
         .col-md-3 {
-            padding-left: 5px;
-            padding-right: 5px;
-            flex: 0 0 calc(25% - 10px); // Four cards per row with spacing
-            max-width: calc(25% - 10px);
-        }
-    }
-
-    .product-card {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        height: 100%;
-        width: 100%;
-        max-width: 300px;
-        margin: auto;
-        border: 1px solid #ddd;
-        padding: 10px;
-        border-radius: 5px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-
-        .card-img-top {
-            height: 200px;
-            object-fit: cover;
-            border-radius: 5px;
+            padding: 0 10px; // Adjust spacing between columns
         }
 
-        .card-body {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+        .product-card {
+            margin-bottom: 20px;
+            border: 1px solid $secondary-color;
+            border-radius: 8px;
+            overflow: hidden;
 
-            .card-title {
-                font-size: 1rem;
-                font-weight: bold;
-                margin-bottom: 10px;
+            .card-img-top {
+                border-radius: 8px 8px 0 0; // Round top corners
+                object-fit: cover; // Ensure image fits nicely
             }
 
-            .price {
-                font-size: 1.2rem;
-                color: $primary-color;
+            .card-body {
+                padding: 16px;
 
-                .original-price {
-                    font-size: 0.9rem;
-                    text-decoration: line-through;
-                    color: $secondary-color;
-                    margin-left: 5px;
+                .card-title {
+                    font-size: 1rem;
+                    font-weight: bold;
+                    margin-bottom: 10px;
+                    color: $primary-color;
                 }
-            }
 
-            .review-info {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                margin-top: -10px;
+                .price {
+                    font-size: 1.2rem;
+                    color: $primary-color;
+                    font-weight: bold;
+                    margin-bottom: 0;
 
-                .stars {
-                    display: flex;
-                    gap: 2px;
-
-                    .star {
-                        font-size: 1rem;
-                        color: #ccc; // Default unfilled star color
-
-                        &.filled {
-                            color: #ffd700; // Filled star color
-                        }
+                    .original-price {
+                        text-decoration: line-through;
+                        font-size: 0.9rem;
+                        color: $secondary-color;
+                        margin-left: 5px;
                     }
                 }
 
-                .review-count {
-                    font-size: 0.9rem;
-                    color: #666;
-                    margin-left: 8px; // Spacing between stars and review count
-                }
-            }
+                .review-info {
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem; // Space between stars and review count
+                    margin: 0; // Remove spacing from surrounding elements
 
-            .btn {
-                margin-top: -10px;
-                align-self: center;
+                    .star {
+                        color: #ddd; // Default unfilled star color
+                        font-size: 1.2rem; // Adjust star size
+
+                        &.filled {
+                            color: #ffc107; // Gold color for filled stars
+                        }
+                    }
+
+                    .review-count {
+                        font-size: 0.9rem; // Slightly smaller text for review count
+                        color: #555; // Muted color for the review text
+                    }
+                }
+
+                button {
+                    margin-top: 10px;
+                    background-color: $primary-color;
+                    color: #fff;
+                    border: none;
+                    padding: 8px 16px;
+                    border-radius: 5px;
+                    font-size: 0.9rem;
+                    transition: background-color 0.3s ease;
+
+                    &:hover {
+                        background-color: darken($primary-color, 10%);
+                    }
+
+                    &.btn-outline-secondary {
+                        color: $secondary-color;
+                        background: none;
+                        border: 1px solid $secondary-color;
+
+                        &:hover {
+                            background-color: lighten($secondary-color, 10%);
+                            color: #fff;
+                        }
+                    }
+                }
             }
         }
     }
@@ -163,7 +163,6 @@ body {
         }
     }
 }
-
 
 // Footer
 .footer {
