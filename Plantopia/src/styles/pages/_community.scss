@@ -207,58 +207,58 @@ body {
     }
 
     //  Footer
-  .footer {
-    background-color: $footer-color;
-    color: $light-color;
-    padding: 24px 0px !important;
-    .logo-links{
-      display: flex;
-      justify-content: space-between;
-      padding: 0px 80px;
-      cursor: pointer;
-    }
-    .footer-logo{
-      width: 20%;
-        img{
-          width: 150px;
-        }
-    }
-    .footer-links{
-      display: flex;
-      justify-content: space-evenly;
-      gap: 2rem;
-      align-items: center;
-      a {
+    .footer {
+        background-color: $footer-color;
         color: $light-color;
-        display: block;
-        margin-bottom: 0.5rem;
-        padding: 0;
-        position: relative;
-        text-decoration: none; // Remove default underline
-        transition: transform 0.3s ease; // Smooth scaling effect
-      
-        // Hover animation
-        &:hover {
-          transform: scale(1.12); // Slightly enlarge the link on hover
+        padding: 24px 0px !important;
+        .logo-links{
+          display: flex;
+          justify-content: space-between;
+          padding: 0px 80px;
+          cursor: pointer;
         }
-      
-        // Add an animated underline effect
-        &::after {
-          content: '';
-          position: absolute;
-          left: 0;
-          bottom: -2px;
-          width: 0; // Initially set to 0
-          height: 2px;
-          background-color: $light-color; // Set the underline color
-          transition: width 0.3s ease; // Smoothly expand the underline
+        .footer-logo{
+          width: 20%;
+            img{
+              width: 150px;
+            }
         }
-      
-        // On hover, expand the underline
-        &:hover::after {
-          width: 100%; // Fully expand the underline
+        .footer-links{
+          display: flex;
+          justify-content: space-evenly;
+          gap: 2rem;
+          align-items: center;
+          a {
+            color: $light-color;
+            display: block;
+            margin-bottom: 0.5rem;
+            padding: 0;
+            position: relative;
+            text-decoration: none; // Remove default underline
+            transition: transform 0.3s ease; // Smooth scaling effect
+          
+            // Hover animation
+            &:hover {
+              transform: scale(1.12); // Slightly enlarge the link on hover
+            }
+          
+            // Add an animated underline effect
+            &::after {
+              content: '';
+              position: absolute;
+              left: 0;
+              bottom: -2px;
+              width: 0; // Initially set to 0
+              height: 2px;
+              background-color: $light-color; // Set the underline color
+              transition: width 0.3s ease; // Smoothly expand the underline
+            }
+          
+            // On hover, expand the underline
+            &:hover::after {
+              width: 100%; // Fully expand the underline
+            }
+          }
         }
       }
-    }
-  }
 }

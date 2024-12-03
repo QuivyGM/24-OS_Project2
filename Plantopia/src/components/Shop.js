@@ -206,7 +206,7 @@ const Shop = () => {
           </div>
         </div>
         <p className="footer-note text-center mt-4">Plantopia © All rights reserved</p>
-      </footer>
+    </footer>
     </div>
   );
 };

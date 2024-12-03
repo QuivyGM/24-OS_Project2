@@ -5,8 +5,10 @@ import '../styles/pages/_community.scss';
 
 const Community = () => {
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState('show-your-plant'); // Default active tab
   const searchInputRef = useRef(null);
+  const [showInput, setShowInput] = useState(false);
+
+  const [activeTab, setActiveTab] = useState('show-your-plant'); // Default active tab
   const [currentPage, setCurrentPage] = useState(1); // Track the current page
   const postsPerPage = 10; // Define how many posts per page
   const totalPosts = importedPosts.length; // Total number of posts
@@ -39,13 +41,15 @@ const Community = () => {
 
   const handleLogoClick = (event) => {
     event.preventDefault();
-    navigate('/main');
+    navigate('/');
   };
 
+  // Function to handle login button click and navigate to the login page
   const handleLoginClick = () => {
     navigate('/login');
   };
 
+  // Function to handle shop button click and navigate to the shop page
   const handleShopClick = () => {
     navigate('/shop');
   };
@@ -62,43 +66,56 @@ const Community = () => {
     navigate('/aboutus');
   };
 
+  // Function to show the search input when the search button is clicked
+  const handleSearchClick = () => {
+    setShowInput(true);
+    if (searchInputRef.current) {
+      searchInputRef.current.focus();
+    }
+  };
+
   return (
     <div className="community-page container">
-      {/* Navbar */}
+      {/* Header Section */}
       <div className="overlay">
         <nav className="navbar navbar-expand-lg bg-body-tertiary navbar-main">
           <div className="container-fluid navbar-box d-flex">
-            <a className="navbar-brand" href="#" onClick={() => navigate('/')}>
-              <img src="./images/logo.png" alt="logo" />
+            {/* Navbar brand/logo with click handler */}
+            <a className="navbar-brand" href="logo" onClick={handleLogoClick}>
+              <img src='./images/logo.png' alt='logo' />
             </a>
+
+            {/* Navbar toggle button for mobile view */}
+            <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span className="navbar-toggler-icon"></span>
+            </button>
+
+            {/* Navbar links and right-side buttons */}
             <div className="collapse navbar-collapse nav-center" id="navbarSupportedContent">
               <ul className="navbar-nav mb-2 mb-lg-0">
-                <li className="nav-item">
-                  <a className="nav-link active" href="#plants">Plants</a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link active" href="#community">Community</a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link active" href="#shop">Shop</a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link active" href="#aboutus">About Us</a>
-                </li>
+                <li className="nav-item"><a className="nav-link active" href="Plants">Plants</a></li>
+                <li className="nav-item"><a className="nav-link active" href="Community">Community</a></li>
+                <li onClick={handleShopClick} className="nav-item"><a className="nav-link active" href="Shop">Shop</a></li>
+                <li className="nav-item"><a className="nav-link active" href="Aboutus">About Us</a></li>
               </ul>
+
+              {/* Right nav (search and login) */}
               <div className="nav-right">
                 <form className="d-flex search-button" role="search" onSubmit={(e) => e.preventDefault()}>
-                  <input
-                    ref={searchInputRef}
-                    className="form-control"
-                    type="search"
-                    placeholder="Search"
-                    aria-label="Search"
+                  <input 
+                    ref={searchInputRef} 
+                    className={`form-control me-2 ${showInput ? 'show' : 'hide'}`}
+                    type="search" 
+                    placeholder="Search" 
+                    aria-label="Search" 
                   />
-                  <button className="btn btn-outline-success" type="button" onClick={handleSearch}>
-                    <img src="./icons/search-normal.svg" alt="search" />
+                  <button className="btn btn-outline-success" type="button" onClick={handleSearchClick}>
+                    <img src='./icons/search-normal.svg' alt='search' />
                   </button>
                 </form>
+                <button onClick={handleLoginClick} className="login-button">
+                  <img src='./icons/user.svg' alt='login' />
+                </button>
               </div>
             </div>
           </div>
@@ -107,14 +124,11 @@ const Community = () => {
 
       {/* Forum Features */}
       <div className="forum-container">
-
-      <h1 className="title-text">
-                    Find Your <br />
-                    Perfect Plant
-                    <img src="/images/together.png" alt="Plant Icon" className="plant-icon" />
-                </h1>
-
-
+        <h1 className="title-text">
+          Find Your <br />
+          Perfect Plant
+          <img src="/images/together.png" alt="Plant Icon" className="plant-icon" />
+        </h1>
         {/* Ask Question Button */}
         <div className="ask-question-container">
           <button className="btn btn-success ask-question-button">Ask Question</button>
@@ -134,17 +148,13 @@ const Community = () => {
           </div>
 
           <button
-            className={`btn ${
-              activeTab === 'show-your-plant' ? 'btn-success' : 'btn-outline-success'
-            }`}
+            className={`btn ${activeTab === 'show-your-plant' ? 'btn-success' : 'btn-outline-success'}`}
             onClick={() => handleTabClick('show-your-plant')}
           >
             Show Your Plant
           </button>
           <button
-            className={`btn ${
-              activeTab === 'q-and-a' ? 'btn-success' : 'btn-outline-success'
-            }`}
+            className={`btn ${activeTab === 'q-and-a' ? 'btn-success' : 'btn-outline-success'}`}
             onClick={() => handleTabClick('q-and-a')}
           >
             Q & A
@@ -199,23 +209,23 @@ const Community = () => {
             &gt;
           </button>
         </div>
-
-        {/* Footer Section */}
-        <footer className="footer py-5">
-          <div className="row logo-links">
-            <div className="col-md-3 footer-logo">
-              <img src="./images/logo.png" alt="Plantopia Logo" onClick={handleLogoClick}/>
-            </div>
-            <div className="col-md-3 footer-links">
-              <a className="nav-link active" onClick={handlePlantsClick} href='plants'>Plants</a>
-              <a className="nav-link active" onClick={handleCommunityClick} href='community'>Community</a>
-              <a className="nav-link active" onClick={handleShopClick} href='shop'>Shop</a>
-              <a className="nav-link active" onClick={handleAboutusClick} href='aboutus'>About Us</a>
-            </div>
-          </div>
-          <p className="footer-note text-center mt-4">Plantopia © All rights reserved</p>
-        </footer>
       </div>
+
+      {/* Footer Section */}
+      <footer className="footer py-5">
+        <div className="row logo-links">
+          <div className="col-md-3 footer-logo">
+            <img src="./images/logo.png" alt="Plantopia Logo" onClick={handleLogoClick}/>
+          </div>
+          <div className="col-md-3 footer-links">
+            <a className="nav-link active" onClick={handlePlantsClick} href='plants'>Plants</a>
+            <a className="nav-link active" onClick={handleCommunityClick} href='community'>Community</a>
+            <a className="nav-link active" onClick={handleShopClick} href='shop'>Shop</a>
+            <a className="nav-link active" onClick={handleAboutusClick} href='aboutus'>About Us</a>
+          </div>
+        </div>
+        <p className="footer-note text-center mt-4">Plantopia © All rights reserved</p>
+      </footer>
     </div>
   );
 };
