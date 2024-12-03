@@ -1,0 +1,77 @@
+@import '../variables/colors';
+
+/* 컨테이너 이름, 컨텐츠 개수 위한 컨테이너 */
+.mp-ms-title-container {
+    position: relative;
+    width: 300px;
+    left: 424px;
+
+    justify-content: flex-start;
+    display: flex;
+    gap: 10px;
+}
+
+/* 컨테이너 이름 */
+.mp-ms-title  {
+    color: $text-color;
+    text-align: left;
+    font-family: Poppins;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+/* 컨텐츠 개수 */
+.mp-ms-count {
+    color: $secondary-color;
+    text-align: right;
+    font-family: Poppins;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+/* 내용 넣을 컨테이너 */
+.mp-ms-container {
+    position: absolute;
+    width: 775px;
+    height: 300px;
+    left: 424px;
+    flex-shrink: 0;
+
+    border-radius: 6px;
+    border: 1px solid #8C8C8C;
+
+    color: $text-color;
+    text-align: left;
+    font-family: Poppins;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    padding: 15px 15px;
+    line-height: 1.5; // 줄 간격
+    word-wrap: break-word; // 줄바꿈 
+
+    max-height: 250px; // 최대 높이 (스크롤이 필요한 경우)
+    overflow-y: auto; // 스크롤 활성화
+
+
+    /* 스크롤바 스타일 */
+    &::-webkit-scrollbar {
+        width: 8px;
+    }
+    &::-webkit-scrollbar-track {
+        background-color: #f0f0f0;
+    }
+    &::-webkit-scrollbar-thumb {
+        background-color: #8C8C8C;
+        border-radius: 4px;
+    }
+    &::-webkit-scrollbar-thumb:hover {
+        background-color: #555;
+    }
+}

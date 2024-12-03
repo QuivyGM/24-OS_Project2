@@ -9,6 +9,9 @@ import Aboutus from './components/Aboutus';
 import Community from './components/Community';
 import Shop from './components/Shop';
 import VirtualGarden from './components/VirtualGarden';
+import MyPostsAndComments from './components/MyPostsAndComments';
+import MyShopping from './components/MyShopping';
+import MyAccount from './components/MyAccount';
 
 const App = () => {
   return (
@@ -21,6 +24,9 @@ const App = () => {
         <Route path="/Aboutus" element={<Aboutus />} />
         <Route path="/Community" element={<Community />} />
         <Route path="/VirtualGarden" element={<VirtualGarden />} />
+        <Route path="/MyPostsAndComments" element={<MyPostsAndComments />} />
+        <Route path="/MyShopping" element={<MyShopping />} />
+        <Route path="/MyAccount" element={<MyAccount />} />
       </Routes>
     </Router>
   );

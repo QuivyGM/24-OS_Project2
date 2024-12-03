@@ -1,0 +1,107 @@
+@import '../variables/colors';
+
+/* 상단 회색 라인 */
+.topline {
+    position: relative;
+    width: 1279px;
+    height: 1px;
+    top: 279px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #8C8C8C;
+
+    /* 상단 회색 라인 위 녹색 텍스트 */
+    .green-text {
+        position: absolute;
+        top: -30px;
+        right: 24px;
+    
+        color: $secondary-color;
+        font-family: Poppins;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+    }
+}
+
+/* 사이드바 컨테이너 */
+.sb-container {
+    position: absolute;
+    height: 500px;
+    width: 300px;
+    top: 24px;
+
+    border-radius: 6px;
+    border: 1px solid;
+    border-color: #8C8C8C;
+
+    /* 사이드바 유저 이미지 */
+    .sb-user-img {
+        position: absolute;
+        width: 150px;
+        height: 150px;
+        top: 65px;
+        left: 75px;
+        object-fit: cover;
+
+        border-radius: 100px;
+        border: 1px solid;
+        border-color: #8C8C8C;
+    }
+
+    /* 사이드바 유저 이름 */
+    .sb-user-name {
+        position: absolute;
+        height: 30px;
+        top: 227px;
+        left: 50%;
+        transform: translateX(-50%);
+
+        color: $text-color;
+        text-align: center;
+        font-family: Poppins;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        white-space: nowrap; /* 줄바꿈 방지 */
+    }
+
+    /* 사이드바 내부 라인 */
+    .sb-line {
+        position: absolute;
+        width: 260px;
+        height: 1px;
+        top: 269px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #8C8C8C
+    }
+
+    /* 사이드바 내부 메뉴 텍스트 */
+    .sb-text {
+        position: absolute;
+        left: 24px;
+
+        color: #8C8C8C;
+        font-family: Poppins;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        text-decoration: none;
+        cursor: pointer;
+        transition: color 0.3s ease, font-weight 0.2s ease;
+
+        &:hover {
+            color: $primary-color;
+            font-weight: 600;
+        }
+
+        &:active {
+            color: $light-green-color;
+            font-weight: 600;
+        }
+    }
+}

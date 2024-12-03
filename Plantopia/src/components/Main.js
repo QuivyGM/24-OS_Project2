@@ -26,7 +26,7 @@ const MainPage = () => {
   };
 
   const handleLoginClick = () => {
-    navigate('/virtualgarden');
+    navigate('/VirtualGarden');
     // navigate('/login');
   };
 
