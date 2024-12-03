@@ -27,6 +27,7 @@ const MainPage = () => {
 
   const handleLoginClick = () => {
     navigate('/virtualgarden');
+    // navigate('/login');
   };
 
   const handleShopClick = () => {
