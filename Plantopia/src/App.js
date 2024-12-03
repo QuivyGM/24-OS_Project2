@@ -8,6 +8,7 @@ import Plants from './components/Plants';
 import Aboutus from './components/Aboutus';
 import Community from './components/Community';
 import Shop from './components/Shop';
+import VirtualGarden from './components/VirtualGarden';
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
         <Route path="/Shop" element={<Shop />} />
         <Route path="/Aboutus" element={<Aboutus />} />
         <Route path="/Community" element={<Community />} />
+        <Route path="/VirtualGarden" element={<VirtualGarden />} />
       </Routes>
     </Router>
   );

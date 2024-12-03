@@ -26,7 +26,7 @@ const MainPage = () => {
   };
 
   const handleLoginClick = () => {
-    navigate('/login');
+    navigate('/virtualgarden');
   };
 
   const handleShopClick = () => {
@@ -44,6 +44,10 @@ const MainPage = () => {
   const handleAboutusClick = () => {
     navigate('/aboutus');
   };
+
+  const handleMyPageClick = () => {
+    navigate('/mypage');
+  }
 
   useEffect(() => {
     const handleScroll = () => {
