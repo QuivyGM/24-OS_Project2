@@ -1,6 +1,6 @@
 // src/components/Shop.js
 
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/pages/_shop.scss';
 
@@ -8,6 +8,46 @@ const Shop = () => {
     const navigate = useNavigate();
     const searchInputRef = useRef(null);
     const [showInput, setShowInput] = useState(false);
+    const [data, setData] = useState({
+      counts : "",
+      main : {
+        features : [],
+        title : "",
+      },
+      plantlists : [
+        {
+          plantimg : "",
+          rating : "",
+          title : "",
+        },
+        {
+          plantimg : "",
+          rating : "",
+          title : "",
+        },{
+          plantimg : "",
+          rating : "",
+          title : "",
+        },{
+          plantimg : "",
+          rating : "",
+          title : "",
+        },{
+          plantimg : "",
+          rating : "",
+          title : "",
+        },
+      ]
+    })
+
+    useEffect(() => {
+      fetch('http://localhost:8080/Shop')
+        .then((res) => res.json())
+        .then((res) => {
+          setData(res);
+        });
+    },);
+
 
 // Function to handle logo click and navigate to the main page
 const handleLogoClick = (event) => {
@@ -101,7 +141,7 @@ return (
           <div className="features mt-4">
             <h4>Features</h4>
             <ul>
-              <li>Species: Echinocereus spp.</li>
+              <li>{data.main.features}.</li>
               <li>Size: Varies by species, 4-12 inches in height</li>
               <li>Season: Spring or summer</li>
               <li>Available in various pot sizes</li>
@@ -119,13 +159,13 @@ return (
       <div className="related-products mt-5">
         <h2>Related Products</h2>
         <div className="row">
-          {[1, 2, 3, 4].map((item) => (
+          {[0, 1, 2, 3].map((item) => (
             <div key={item} className="col-md-3">
               <div className="product-card card">
-                <img src={`./images/${item}.jpg`} alt="Product" className="card-img-top" />
+                <img src={data.plantlists[item].plantimg} alt="Product" className="card-img-top" />
                 <div className="card-body">
-                  <h5 className="card-title">Modern Picture</h5>
-                  <p className="price">$15.00 <span className="original-price">$25.00</span></p>
+                  <h5 className="card-title">{data.plantlists[item].title}</h5>
+                  <p className="price">${data.plantlists[item].price} <span className="original-price">${data.plantlists[item].price+2000}</span></p>
                   <button className="btn btn-outline-primary">Add to cart</button>
                 </div>
               </div>

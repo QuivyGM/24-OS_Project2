@@ -1,7 +1,9 @@
 // Import necessary modules and components
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/pages/_plants.scss';
+
+
 
 // Sample Data
 const popularPlants = [
@@ -11,22 +13,32 @@ const popularPlants = [
     { id: 4, image: './images/4.jpg', title: 'Monstera Deliciosa' },
 ];
 
-// Carousel Item Component
-const CarouselItem = ({ image, title, isActive }) => (
-    <div className={`carousel-item ${isActive ? 'active' : ''}`}>
-        <div className="product-card card mx-auto">
-            <img
-                src={image}
-                alt={`Image of ${title}`}
-                className="card-img-top"
-                loading="lazy"
-            />
-            <div className="card-body">
-                <h5 className="card-title">{title}</h5>
+
+// Carousel Item Component 나중에 수정하기!
+const CarouselItem = ({ image, title, isActive }) => {
+    const [data, setData] = useState({
+        counts: "",
+        main: {
+            features: [],
+            title: "",
+        },
+    });
+    return(
+        <div className={`carousel-item ${isActive ? 'active' : ''}`}>
+            <div className="product-card card mx-auto">
+                <img
+                    src={image}
+                    alt={`Image of ${title}`}
+                    className="card-img-top"
+                    loading="lazy"
+                />
+                <div className="card-body">
+                    <h5 className="card-title">{title}</h5>
+                </div>
             </div>
         </div>
-    </div>
-);
+    );
+};
 
 // Weekly Others Component
 const WeeklyOthers = () => (
@@ -67,11 +79,76 @@ const WeeklyOthers = () => (
 
 // Catalogue Component
 const Catalogue = () => {
+    
+    const [data,setData] = useState({
+        counts : "",
+        main : {
+            features : [],
+            title : "",
+        },
+        plantlists : [
+            {
+                plantimg : "",
+                rating : "",
+                title : "",
+            }
+            ,
+            {
+                plantimg : "",
+                rating : "",
+                title : "",
+            },
+            {
+                plantimg : "",
+                rating : "",
+                title : "",
+            },
+            {
+                plantimg : "",
+                rating : "",
+                title : "",
+            },
+            {
+                plantimg : "",
+                rating : "",
+                title : "",
+            },
+            {
+                plantimg : "",
+                rating : "",
+                title : "",
+            },
+            {
+                plantimg : "",
+                rating : "",
+                title : "",
+            },
+            {
+                plantimg : "",
+                rating : "",
+                title : "",
+            },
+            {
+                plantimg : "",
+                rating : "",
+                title : "",
+            },
+        ],
+    })
+
+    useEffect(() => {
+        fetch('http://localhost:8080/Plants')
+          .then((res) => res.json())
+          .then((res) => {
+            setData(res);
+          });
+      },);
+    const tmp = "hello";
     const plantCatalogue = [
-        { id: 1, image: './images/1.jpg', title: 'Modern Picture 1', rating: 5 },
-        { id: 2, image: './images/2.jpg', title: 'Modern Picture 2', rating: 4 },
-        { id: 3, image: './images/3.jpg', title: 'Modern Picture 3', rating: 3 },
-        { id: 4, image: './images/4.jpg', title: 'Modern Picture 4', rating: 4 },
+        { id: 1, image: data.plantlists[0].plantimg, title: data.plantlists[0].title, rating: Number(data.plantlists[0].rating)},
+        { id: 2, image: data.plantlists[1].plantimg, title: data.plantlists[1].title, rating: data.plantlists[1].rating},
+        { id: 3, image: data.plantlists[2].plantimg, title: data.plantlists[2].title, rating: data.plantlists[2].rating},
+        { id: 4, image: data.plantlists[3].plantimg, title: data.plantlists[3].title, rating: data.plantlists[3].rating},
         { id: 5, image: './images/5.jpg', title: 'Modern Picture 5', rating: 4 },
         { id: 6, image: './images/6.jpg', title: 'Modern Picture 6', rating: 4 },
         { id: 7, image: './images/7.jpg', title: 'Modern Picture 7', rating: 4 },
@@ -136,7 +213,21 @@ const Plants = () => {
     const navigate = useNavigate();
     const searchInputRef = useRef(null);
     const [showInput, setShowInput] = useState(false);
+    const [data, setData] = useState({
+        counts: "",
+        main: {
+            features: [],
+            title: "",
+        },
+    });
 
+    useEffect(() => {
+        fetch('http://localhost:8080/Plants')
+          .then((res) => res.json())
+          .then((res) => {
+            setData(res);
+          });
+      },);
     const handleLogoClick = (event) => {
         event.preventDefault();
         navigate('/');
@@ -230,7 +321,7 @@ const Plants = () => {
                             <img src="/images/crown.png" alt="Crown" className="crown_image" />
                         </div>
                         <div className="info_frame">
-                            <h2>Echinocereus Cactus</h2>
+                            <h2>{data.main.title}</h2>
                             <div className="tags">
                                 <span className="badge bg-success">Indoor</span>
                                 <span className="badge bg-success">Cactus</span>
@@ -238,7 +329,7 @@ const Plants = () => {
                             <hr className="custom-hr" />
                             <h4>Features</h4>
                             <ul>
-                                <li>Species: Echinocereus spp.</li>
+                                <li>{data.main.features}</li>
                                 <li>Size: Varies by species, 4-12 inches in height</li>
                                 <li>Season: Spring or summer</li>
                                 <li>Available in various pot sizes</li>
