@@ -69,6 +69,10 @@ const Community = () => {
     navigate('/aboutus');
   };
 
+  const handleUploadClick = () => {
+    navigate('/upload');
+  };
+
   // Function to show the search input when the search button is clicked
   const handleSearchClick = () => {
     setShowInput(true);
@@ -134,7 +138,9 @@ const Community = () => {
         </h1>
         {/* Ask Question Button */}
         <div className="ask-question-container">
-          <button className="btn btn-success ask-question-button">Ask Question</button>
+        <button onClick={handleUploadClick} className="btn btn-outline-secondary">
+              Posts
+            </button>
         </div>
 
         {/* Forum Header */}
