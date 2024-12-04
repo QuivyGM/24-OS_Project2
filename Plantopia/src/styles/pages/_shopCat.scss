@@ -1,0 +1,209 @@
+@import '../variables/colors';
+
+// Global Styles
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    line-height: 1.5;
+}
+
+// Product Page
+.product-page {
+    max-width: 1700px;
+    margin: 110px auto;
+    padding: 0 20px;
+
+    h1 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: $primary-color;
+        margin: 0;
+        font-size: 4em;
+
+        .shop-icon {
+            width: 4em;
+            height: auto;
+            margin-left: 10px;
+        }
+    }
+
+    .custom-hr {
+        border: none;
+        border-top: 10px solid $primary-color;
+        margin: 20px 0;
+        width: 100%;
+    }
+}
+
+// Catalogue Section
+.catalogue {
+    margin-top: 20px;
+
+    h2 {
+        font-size: 2rem;
+        color: $primary-color;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .row {
+        margin-top: 20px;
+
+        .col-md-3 {
+            padding: 0 10px; // Adjust spacing between columns
+        }
+
+        .product-card {
+            margin-bottom: 20px;
+            border: 1px solid $secondary-color;
+            border-radius: 8px;
+            overflow: hidden;
+
+            .card-img-top {
+                border-radius: 8px 8px 0 0; // Round top corners
+                object-fit: cover; // Ensure image fits nicely
+            }
+
+            .card-body {
+                padding: 16px;
+
+                .card-title {
+                    font-size: 1rem;
+                    font-weight: bold;
+                    margin-bottom: 10px;
+                    color: $primary-color;
+                }
+
+                .price {
+                    font-size: 1.2rem;
+                    color: $primary-color;
+                    font-weight: bold;
+                    margin-bottom: 0;
+
+                    .original-price {
+                        text-decoration: line-through;
+                        font-size: 0.9rem;
+                        color: $secondary-color;
+                        margin-left: 5px;
+                    }
+                }
+
+                .review-info {
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem; // Space between stars and review count
+                    margin: 0; // Remove spacing from surrounding elements
+
+                    .star {
+                        color: #ddd; // Default unfilled star color
+                        font-size: 1.2rem; // Adjust star size
+
+                        &.filled {
+                            color: #ffc107; // Gold color for filled stars
+                        }
+                    }
+
+                    .review-count {
+                        font-size: 0.9rem; // Slightly smaller text for review count
+                        color: #555; // Muted color for the review text
+                    }
+                }
+
+                button {
+                    margin-top: 10px;
+                    background-color: $primary-color;
+                    color: #fff;
+                    border: none;
+                    padding: 8px 16px;
+                    border-radius: 5px;
+                    font-size: 0.9rem;
+                    transition: background-color 0.3s ease;
+
+                    &:hover {
+                        background-color: darken($primary-color, 10%);
+                    }
+
+                    &.btn-outline-secondary {
+                        color: $secondary-color;
+                        background: none;
+                        border: 1px solid $secondary-color;
+
+                        &:hover {
+                            background-color: lighten($secondary-color, 10%);
+                            color: #fff;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // Responsive Adjustments
+    @media (max-width: 768px) {
+        .product-card {
+            max-width: 200px;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .product-card {
+            max-width: 100%; // Full width for smaller screens
+        }
+
+        .row {
+            gap: 5px; // Minimized gap for smaller screens
+        }
+    }
+}
+
+// Footer
+.footer {
+    background-color: $footer-color;
+    color: $light-color;
+
+    .footer-logo img {
+        width: 150px;
+    }
+
+    .footer-links,
+    .footer-social,
+    .subscribe {
+        a {
+            color: $light-color;
+            display: block;
+            margin-bottom: 0.5rem;
+
+            &:hover {
+                color: $secondary-color;
+            }
+        }
+
+        .button-subscribe {
+            color: $light-color;
+            border: 1px solid $light-color;
+
+            &:hover {
+                background-color: $light-color;
+                color: $secondary-color;
+            }
+        }
+    }
+
+    .subscribe .form-control {
+        max-width: 80%;
+        margin: auto;
+    }
+
+    .footer-links {
+        display: flex;
+        gap: 2rem;
+    }
+}
