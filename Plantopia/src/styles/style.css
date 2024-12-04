@@ -485,7 +485,8 @@ section {
   margin: auto;
 }
 .login-container .login-left .plant-image {
-  width: 400px;
+  padding-left: 40px;
+  width: 300px;
   margin-bottom: 20px;
   margin-right: 200px;
 }

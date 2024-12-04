@@ -37,36 +37,39 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    width: 40px; /* Tugmalar kengligi */
-    height: 40px; /* Tugmalar balandligi */
-    background-color: rgba(0, 0, 0, 0.6); /* Yarim shaffof qora fon */
-    border-radius: 50%; /* Tugmani dumaloq qilish */
+    width: 30px; 
+    height: 30px; 
+    background-color: $primary-color;
+    opacity: 0.8 !important;
+    border-radius: 50%; 
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 10; /* Tugmalar boshqa elementlardan yuqorida ko'rinadi */
+    z-index: 10;
     cursor: pointer;
-    transition: transform 0.3s ease, background-color 0.3s ease; /* Smooth hover animatsiya */
+    transition: transform 0.3s ease, background-color 0.3s ease; /* Smooth animation */
   }
   
+  
   .carousel-control-prev {
-    left: -50px; /* Chapga chetroqqa surish */
+    left: -40px; 
   }
   
   .carousel-control-next {
-    right: -50px; /* O'ngga chetroqqa surish */
+    right: -40px; 
   }
   
   .carousel-control-prev:hover,
   .carousel-control-next:hover {
-    transform: translateY(-50%) scale(1.2); /* Hover paytida tugmani kattalashtirish */
-    background-color: rgba(0, 0, 0, 0.8); /* Hover paytida fonni qoraytirish */
+    transform: translateY(-50%) scale(1.2); 
+    opacity: 1 !important;
+    box-shadow: $box-shadow-primary;
   }
   
   .carousel-control-prev-icon,
   .carousel-control-next-icon {
-    font-size: 18px; /* Ikonka o'lchami */
-    color: #fff; /* Ikonkalar rangi */
+    font-size: 18px; 
+    color: white;
     width: 14px;
     height: 14px;
   }
