@@ -17,7 +17,7 @@ const CarouselItem = ({ image, title, isActive }) => (
         <div className="product-card card mx-auto">
             <img
                 src={image}
-                alt={`Image of ${title}`}
+                alt={title}
                 className="card-img-top"
                 loading="lazy"
             />
@@ -109,7 +109,7 @@ const Catalogue = () => {
                         <div className="product-card card pt-3 pb-3" style={{ height: '90%' }}>
                             <img
                                 src={plant.image}
-                                alt={`Image of ${plant.title}`}
+                                alt={plant.title}
                                 className="card-img-top"
                                 loading="lazy"
                             />

@@ -7,9 +7,7 @@ const Aboutus = () => {
   const searchInputRef = useRef(null);
   const [showInput, setShowInput] = useState(false);
 
-  const handleLogoClick = () => navigate('/');
   const handleLoginClick = () => navigate('/login');
-  const handleShopClick = () => navigate('/shop');
   const handleSearchClick = () => {
     setShowInput(true);
     if (searchInputRef.current) searchInputRef.current.focus();
@@ -36,7 +34,7 @@ const Aboutus = () => {
                 <ul className="navbar-nav mb-2 mb-lg-0">
                   <li className="nav-item"><Link to="/plants" className="nav-link active">Plants</Link></li>
                   <li className="nav-item"><Link to="/community" className="nav-link active">Community</Link></li>
-                  <li className="nav-item" onClick={handleShopClick}><a className="nav-link active">Shop</a></li>
+                  <li className="nav-item"><Link to="/shop" className="nav-link active">Shop</Link></li>
                   <li className="nav-item"><Link to="/aboutus" className="nav-link active">About Us</Link></li>
                 </ul>
 

@@ -22,11 +22,6 @@ const Community = () => {
     setActiveTab(tab); // Set the clicked tab as active
   };
 
-  const handleSearch = () => {
-    if (searchInputRef.current) {
-      console.log('Search:', searchInputRef.current.value);
-    }
-  };
   const handlePostClick = (postId) => {
     navigate(`/post/${postId}`); // Navigate to the post page with postId
 };
