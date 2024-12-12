@@ -8,7 +8,10 @@ import Signup from './components/Signup';
 import Plants from './components/Plants';
 import Aboutus from './components/Aboutus';
 import Community from './components/Community';
+import ShopCat from './components/ShopCat';
+import Upload from './components/Upload';
 import Shop from './components/Shop';
+import Post from './components/Post';
 
 const App = () => {
   return (
@@ -21,6 +24,9 @@ const App = () => {
         <Route path="/Shop" element={<Shop />} />
         <Route path="/Aboutus" element={<Aboutus />} />
         <Route path="/Community" element={<Community />} />
+        <Route path="/ShopCat" element={<ShopCat />} />
+        <Route path="/Upload" element={<Upload />} />
+        <Route path="/post/:id" element={<Post />} />
       </Routes>
     </Router>
   );
