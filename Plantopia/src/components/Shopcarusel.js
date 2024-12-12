@@ -1,7 +1,7 @@
 import React from "react";
-import "../styles/pages/_shop-carusel.scss";
+import "../styles/pages/_shopcarusel.scss";
 
-const OurProducts = ({ handleShopClick }) => {
+const Shopcarusel = ({ handleShopClick }) => {
   const products = [1, 2, 3, 4, 5, 6, 7]; // Example products array
 
   return (
@@ -73,4 +73,4 @@ const OurProducts = ({ handleShopClick }) => {
   );
 };
 
-export default OurProducts;
+export default Shopcarusel;

@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import Footer from './Footer';
 import '../styles/pages/_aboutus.scss';
 
 const Aboutus = () => {
@@ -113,34 +114,8 @@ const Aboutus = () => {
         <div className="service-page container"></div>
       </div>
 
-      {/* Footer Outside Page Container */}
-      <footer className="footer py-5">
-        <div className="container-fluid">
-          <div className="row text-center">
-            <div className="col-md-3 footer-logo">
-              <img src="./images/logo.png" alt="Plantopia Logo" />
-            </div>
-            <div className="col-md-3 footer-links">
-              <Link to="/">Home</Link>
-              <Link to="/gardner">Gardner</Link>
-              <Link to="/contact">Contact</Link>
-              <Link to="/privacy">Privacy</Link>
-            </div>
-            <div className="col-md-3 footer-social">
-              <h3>Social</h3>
-              <a href="#facebook"><i className="fab fa-facebook"></i></a>
-              <a href="#linkedin"><i className="fab fa-linkedin"></i></a>
-              <a href="#instagram"><i className="fab fa-instagram"></i></a>
-            </div>
-            <div className="col-md-3 subscribe">
-              <h3>Subscribe For Updates</h3>
-              <input type="email" placeholder="Enter email..." className="form-control mb-2" />
-              <button className="btn button-subscribe">Subscribe</button>
-            </div>
-          </div>
-          <p className="footer-note text-center mt-4">garden.com © All rights reserved</p>
-        </div>
-      </footer>
+      {/* Footer Section */}
+      <Footer />
     </>
   );
 };

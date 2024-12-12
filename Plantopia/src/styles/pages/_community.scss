@@ -16,28 +16,36 @@ body {
 
 // Community Page Styles
 .community-page {
-    max-width: 1700px;
-    margin: 80px auto;
-    padding: 0 20px;
-
-    h1 {
-        display: flex;
-        justify-content: center;
-        align-items: center;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    padding-top: 60px;
+    .search-animation {
+        font-size: 3rem;
+        font-weight: bold;
         color: $primary-color;
-        margin: 0;
-        font-size: 4em;
+        text-align: center;
+        white-space: nowrap; // Matnni qator tashlamasdan ushlab turish
+        overflow: hidden;
+        margin-bottom: 40px;
 
-        .plant-icon {
-            width: 4em;
-            height: auto;
-            margin-left: 10px;
+        .cursor {
+            display: inline-block;
+            width: 1px;
+            background-color: $primary-color;
+            animation: blink 0.8s step-end infinite;
+            margin-left: 5px;
+        }
+    }
+      // Cursorning miltillovchi effektini yaratish
+    @keyframes blink {
+        50% {
+            opacity: 0;
         }
     }
 
     .forum-container {
-        padding: 20px;
-
+        padding: 40px 60px;
         // Ask Question Button
         .ask-question-container {
             display: flex;
@@ -72,60 +80,67 @@ body {
 
             .sort-dropdown {
                 .form-select {
-                    width: 150px;
+                    width: 90px;
                     padding: 8px;
                     font-size: 14px;
                     border-radius: 5px;
-                    border: 1px solid $dark-color;
+                    border: 0;
                     background-color: #fff;
-                    color: $dark-color;
-
+                    color: $primary-color;
+                    cursor: pointer;
                     &:focus {
-                        border-color: $primary-color;
+                        border-color: 1px solid $primary-color !important;
                         outline: none;
+                        color: $primary-color;
+                        box-shadow: 0 0 6px $primary-color;
+                        
                     }
                 }
             }
 
             .btn {
-                font-size: 14px;
-                padding: 8px 16px;
+                font-size: 24px;
+                padding: 4px 16px;
                 border-radius: 5px;
-
-                &.btn-success {
-                    background-color: $success-color;
+                border: 0;
+                color: $primary-color;
+                &:hover{
+                    background-color: $primary-color;
                     color: #fff;
-
-                    &:hover {
-                        background-color: darken($success-color, 10%);
-                    }
-                }
-
-                &.btn-outline-success {
-                    border: 1px solid $success-color;
-                    color: $success-color;
-                    background-color: #fff;
-
-                    &:hover {
-                        background-color: $success-color;
-                        color: #fff;
-                    }
                 }
             }
 
             .search-bar {
                 flex-grow: 1;
+            
                 input {
                     width: 100%;
-                    padding: 10px;
+                    padding: 8px 20px;
                     font-size: 14px;
-                    border-radius: 5px;
-                    border: 1px solid $dark-color;
+                    border-radius: 24px;
+                    border: 1px solid $primary-color;
+                    color: $primary-color; 
+                    background-color: #fff; 
+                    transition: all 0.3s ease;
 
-                    &:focus {
-                        border-color: $primary-color;
+                    &:hover {
+                        border-color: $success-color;
+                        box-shadow: 0 0 2px $primary-color;
                         outline: none;
+                        transform: scale(1.01); 
                     }
+                
+                    &::placeholder {
+                        color: $secondary-color;
+                    }
+            
+                    &:focus {
+                        border-color: $success-color;
+                        box-shadow: 0 0 2px $primary-color;
+                        outline: none;
+                        transform: scale(1.01); 
+                    }
+        
                 }
             }
         }
@@ -137,7 +152,7 @@ body {
             .post-card {
                 border: 1px solid $light-color;
                 border-radius: 10px;
-                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
                 background-color: #fff;
                 margin-bottom: 15px;
                 transition: transform 0.2s, box-shadow 0.2s;
@@ -188,77 +203,25 @@ body {
 
             span {
                 font-size: 14px;
-                color: $dark-color;
+                color: $secondary-color;
             }
 
             button {
-                border: 1px solid $dark-color;
+
                 background-color: #fff;
                 padding: 5px 10px;
                 border-radius: 5px;
                 font-size: 14px;
+                color: $primary-color;
+                box-shadow: 0 0 4px $primary-color;
                 cursor: pointer;
 
                 &:hover {
-                    background-color: $light-color;
+                    background-color: $primary-color;
+                    color: #fff;
+                    box-shadow: 0 0 0px $primary-color;
                 }
             }
         }
     }
-
-    //  Footer
-    .footer {
-        background-color: $footer-color;
-        color: $light-color;
-        padding: 24px 0px !important;
-        .logo-links{
-          display: flex;
-          justify-content: space-between;
-          padding: 0px 80px;
-          cursor: pointer;
-        }
-        .footer-logo{
-          width: 20%;
-            img{
-              width: 150px;
-            }
-        }
-        .footer-links{
-          display: flex;
-          justify-content: space-evenly;
-          gap: 2rem;
-          align-items: center;
-          a {
-            color: $light-color;
-            display: block;
-            margin-bottom: 0.5rem;
-            padding: 0;
-            position: relative;
-            text-decoration: none; // Remove default underline
-            transition: transform 0.3s ease; // Smooth scaling effect
-          
-            // Hover animation
-            &:hover {
-              transform: scale(1.12); // Slightly enlarge the link on hover
-            }
-          
-            // Add an animated underline effect
-            &::after {
-              content: '';
-              position: absolute;
-              left: 0;
-              bottom: -2px;
-              width: 0; // Initially set to 0
-              height: 2px;
-              background-color: $light-color; // Set the underline color
-              transition: width 0.3s ease; // Smoothly expand the underline
-            }
-          
-            // On hover, expand the underline
-            &:hover::after {
-              width: 100%; // Fully expand the underline
-            }
-          }
-        }
-      }
 }

@@ -12,6 +12,7 @@ import ShopCat from './components/ShopCat';
 import Upload from './components/Upload';
 import Shop from './components/Shop';
 import Post from './components/Post';
+import Footer from './components/Footer';
 
 const App = () => {
   return (
@@ -26,7 +27,8 @@ const App = () => {
         <Route path="/Community" element={<Community />} />
         <Route path="/ShopCat" element={<ShopCat />} />
         <Route path="/Upload" element={<Upload />} />
-        <Route path="/post/:id" element={<Post />} />
+        <Route path="/Post" element={<Post />} />
+        <Route path="/Footer" element={<Footer />} />
       </Routes>
     </Router>
   );
