@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { posts as importedPosts } from './data/posts'; // Import posts from external file
 import '../../styles/pages/_posts.scss';
 import Footer from '../Footer';
@@ -13,50 +13,31 @@ const Post = () => {
 
     const handlePostSubmit = () => {
         if (title.trim() && content.trim()) {
-            // Create the data in the new format
             const newPost = {
-                title: title,
-                body: content,
-                user_id: 1 // Temporary user ID
+                title: title, // Set title
+                body: content, // Use 'body' instead of 'content'
+                tags: "#C++", // Example static tag (replace dynamically if needed)
+                user_id: 1 // Static user ID (can be replaced dynamically)
             };
-
+    
             console.log('New Post Submitted:', newPost); // Log the new post structure
-
-            // Send the data to the backend API
-            fetch('http://localhost:8080/api/Posts', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(newPost), // Send data in the required format
-            })
-                .then((res) => {
-                    if (!res.ok) {
-                        throw new Error(`Error: ${res.status}`);
-                    }
-                    return res.json();
-                })
-                .then((data) => {
-                    console.log('Response from Backend:', data);
-                    alert(`Post submitted successfully!\n\n` +
-                          `Title: ${newPost.title}\n` +
-                          `Body: ${newPost.body}\n` +
-                          `User ID: ${newPost.user_id}`
-                    );
-
-                    // Update frontend state with the new post for display
-                    setPosts([...posts, { id: data.id || posts.length + 1, ...newPost }]);
-                })
-                .catch((error) => {
-                    console.error('Error submitting post:', error);
-                    alert('Failed to submit the post. Please try again.');
-                });
-
-            // Reset input fields
-            setTitle('');
-            setContent('');
+            setPosts([...posts, newPost]); // Add the new post to the list
+            setTitle(''); // Reset title input
+            setContent(''); // Reset content input
+    
+            // Alert with formatted data
+            alert(
+                `Post submitted successfully!\n\n` +
+                `Title: ${newPost.title}\n` +
+                `Body: ${newPost.body}\n` +
+                `Tags: ${newPost.tags}\n` +
+                `User ID: ${newPost.user_id}`
+            );
         } else {
             alert('Please enter both a title and content.');
         }
     };
+    
 
     const handleBackClick = () => {
         navigate(-1); // Navigate to the previous page
