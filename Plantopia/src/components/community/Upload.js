@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import { posts as importedPosts } from './data/posts'; // Import posts from external file
 import '../../styles/pages/_posts.scss';
 import Footer from '../Footer';
@@ -8,6 +9,7 @@ const Post = () => {
     const [posts, setPosts] = useState(importedPosts); // State to manage posts
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
+    const navigate = useNavigate(); // Initialize navigate function
 
     const handlePostSubmit = () => {
         if (title.trim() && content.trim()) {
@@ -25,36 +27,55 @@ const Post = () => {
             setPosts([...posts, newPost]); // Add the new post to the list
             setTitle(''); // Reset title input
             setContent(''); // Reset content input
-            alert('Post submitted successfully!');
+
+            // Display formatted new post in alert
+            alert(
+                `Post submitted successfully!\n\n` +
+                `ID: ${newPost.id}\n` +
+                `Author: ${newPost.author}\n` +
+                `Upload Time: ${new Date(newPost.uploadTime).toLocaleString()}\n` +
+                `Title: ${newPost.title}\n` +
+                `Content: ${newPost.content}\n` +
+                `Likes: ${newPost.likes}\n` +
+                `Answers: ${newPost.answers}`
+            );
         } else {
             alert('Please enter both a title and content.');
         }
+    };
+
+    const handleBackClick = () => {
+        navigate(-1); // Navigate to the previous page
     };
 
     return (
         <div className="page container">
             <Navbar />
 
-            {/* Input Form for New Post */}
-            <div className="new-post-form mt-4">
-                <h3>Create a New Post</h3>
-                <input
-                    type="text"
-                    placeholder="Enter title"
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                    className="form-control mb-2"
-                />
-                <textarea
-                    placeholder="Enter content"
-                    value={content}
-                    onChange={(e) => setContent(e.target.value)}
-                    className="form-control mb-2"
-                    rows="4"
-                ></textarea>
-                <button className="btn btn-primary" onClick={handlePostSubmit}>
-                    Submit Post
-                </button>
+            <div className="post container">
+                <button className="back-button" onClick={handleBackClick}>← Back</button>
+
+                {/* Input Form for New Post */}
+                <div className="new-post-form mt-4">
+                    <h3>Create a New Post</h3>
+                    <input
+                        type="text"
+                        placeholder="Enter title"
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
+                        className="form-control mb-2"
+                    />
+                    <textarea
+                        placeholder="Enter content"
+                        value={content}
+                        onChange={(e) => setContent(e.target.value)}
+                        className="form-control mb-2"
+                        rows="4"
+                    ></textarea>
+                    <button className="btn btn-primary" onClick={handlePostSubmit}>
+                        Submit Post
+                    </button>
+                </div>
             </div>
 
             <Footer />

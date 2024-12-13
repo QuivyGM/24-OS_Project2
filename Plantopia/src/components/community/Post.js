@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { posts as importedPosts } from './data/posts'; // Import posts from external file
 import { comments as importedComments } from './data/comments'; // Import comments from external file
@@ -10,8 +10,32 @@ const Post = () => {
     const { postId } = useParams(); // Retrieve the number (ID) from the URL
     const navigate = useNavigate(); // Initialize navigate function
 
+    const [comments, setComments] = useState(importedComments); // Local state to manage comments
+    const [newComment, setNewComment] = useState(''); // State to store new comment text
+
     const handleBackClick = () => {
         navigate(-1); // Navigate to the previous page
+    };
+
+    const handleCommentSubmit = (parentID) => {
+        if (newComment.trim()) {
+            const newCommentObject = {
+                id: comments.length > 0 ? comments[comments.length - 1].id + 1 : 1, // Increment ID
+                parentID: parentID, // Link comment to the current post ID
+                textBody: newComment, // User input
+                time: new Date().toISOString(), // Current time
+                author: 'GuestUser', // Temporary author
+                likes: 0 // Default likes
+            };
+
+            setComments([...comments, newCommentObject]); // Add to local state
+            setNewComment(''); // Reset input field
+
+            // Show the formatted new comment in an alert
+            alert(`New Comment Submitted:\n${JSON.stringify(newCommentObject, null, 2)}`);
+        } else {
+            alert('Please write a comment before submitting.');
+        }
     };
 
     const getTimeDifference = (uploadTime) => {
@@ -35,7 +59,7 @@ const Post = () => {
           const years = Math.floor(diffInSeconds / 31536000);
           return `${years} years ago`;
         }
-      }
+      };
 
     return (
         <div className="page container">
@@ -48,7 +72,7 @@ const Post = () => {
                 {importedPosts.map((post) => {
                     if (post.id === parseInt(postId)) {
                         // Dynamically filter comments for the current post
-                        const filteredComments = importedComments.filter(
+                        const filteredComments = comments.filter(
                             (comment) => comment.parentID === post.id
                         );
 
@@ -71,6 +95,24 @@ const Post = () => {
                                     <strong>{post.likes}</strong> likes
                                 </span>
 
+                                {/* Write Comment Section */}
+                                <div className="write-comment mt-4">
+                                    <h3>Write a Comment</h3>
+                                    <textarea
+                                        placeholder="Write your comment here..."
+                                        value={newComment}
+                                        onChange={(e) => setNewComment(e.target.value)}
+                                        className="form-control mb-2"
+                                        rows="3"
+                                    ></textarea>
+                                    <button
+                                        className="btn btn-primary"
+                                        onClick={() => handleCommentSubmit(post.id)}
+                                    >
+                                        Submit Comment
+                                    </button>
+                                </div>
+
                                 {/* Comments Section */}
                                 <div className="comments-section mt-4">
                                     <h3>Comments</h3>
@@ -83,7 +125,7 @@ const Post = () => {
                                                             <strong>{comment.author}:</strong> {comment.textBody}
                                                         </p>
                                                         <span>
-                                                            {getTimeDifference(post.uploadTime)}
+                                                            {getTimeDifference(comment.time)}
                                                         </span>
                                                     </div>
                                                 </div>
