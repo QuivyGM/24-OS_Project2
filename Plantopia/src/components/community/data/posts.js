@@ -5,6 +5,7 @@ export const posts = [
     uploadTime: '2024-01-18T12:00:00',
     title: 'A flower, also known as a bloom or blossom?',
     content: 'Flowers consist of a combination of vegetative organs – sepals that enclose and protect the developing flower...',
+    likes: 63,
     answers: 3,
   },
   {
@@ -13,6 +14,7 @@ export const posts = [
     uploadTime: '2024-01-18T12:00:00',
     title: 'How to care for succulents?',
     content: 'Succulents are easy to care for, but they do have some specific needs...',
+    likes: 71,
     answers: 10,
   },
   {
@@ -21,6 +23,7 @@ export const posts = [
     uploadTime: '2024-12-13T05:00:00',
     title: 'Best indoor plants for low light?',
     content: 'Some of the best indoor plants for low light conditions include...',
+    likes: 67,
     answers: 1,
   },
   {
@@ -29,6 +32,7 @@ export const posts = [
     uploadTime: '2024-07-16T12:00:00',
     title: 'How often should I water my cactus?',
     content: 'Cacti are drought-tolerant plants and do not need frequent watering...',
+    likes: 31,
     answers: 10,
   },
   {
@@ -37,6 +41,7 @@ export const posts = [
     uploadTime: '2024-07-16T12:00:00',
     title: 'What is photosynthesis?',
     content: 'Photosynthesis is the process by which green plants and some other organisms...',
+    likes: 76,
     answers: 3,
   },
   {
@@ -45,6 +50,7 @@ export const posts = [
     uploadTime: '2024-12-13T04:00:00',
     title: 'How to propagate plants?',
     content: 'Plant propagation can be done through various methods such as cuttings...',
+    likes: 55,
     answers: 1,
   },
   {
@@ -53,6 +59,7 @@ export const posts = [
     uploadTime: '2024-03-18T12:00:00',
     title: 'What are the benefits of having houseplants?',
     content: 'Houseplants can improve air quality, reduce stress, and enhance mood...',
+    likes: 44,
     answers: 1,
   },
   {
@@ -61,6 +68,7 @@ export const posts = [
     uploadTime: '2024-12-13T11:00:00',
     title: 'How to deal with plant pests?',
     content: 'Common plant pests include aphids, spider mites, and mealybugs...',
+    likes: 89,
     answers: 5,
   },
   {
@@ -69,6 +77,7 @@ export const posts = [
     uploadTime: '2024-09-14T12:00:00',
     title: 'What is the best soil for indoor plants?',
     content: 'The best soil for indoor plants is well-draining and rich in organic matter...',
+    likes: 48,
     answers: 6,
   },
   {
@@ -77,6 +86,7 @@ export const posts = [
     uploadTime: '2024-05-17T12:00:00',
     title: 'How to prune houseplants?',
     content: 'Pruning houseplants helps to maintain their shape and promote healthy growth...',
+    likes: 54,
     answers: 4,
   },
   {
@@ -85,6 +95,7 @@ export const posts = [
     uploadTime: '2024-02-17T12:00:00',
     title: 'What are the different types of plant fertilizers?',
     content: 'Plant fertilizers can be organic or synthetic and come in various forms...',
+    likes: 36,
     answers: 5,
   },
   {
@@ -93,6 +104,7 @@ export const posts = [
     uploadTime: '2024-09-14T12:00:00',
     title: 'How to grow herbs indoors?',
     content: 'Growing herbs indoors requires adequate light, proper watering, and good soil...',
+    likes: 58,
     answers: 4,
   },
   {
@@ -101,6 +113,7 @@ export const posts = [
     uploadTime: '2024-12-12T21:00:00',
     title: 'What are the best flowering plants for beginners?',
     content: 'Some of the best flowering plants for beginners include...',
+    likes: 41,
     answers: 1,
   },
   {
@@ -109,6 +122,7 @@ export const posts = [
     uploadTime: '2024-12-13T11:04:00',
     title: 'How to create a vertical garden?',
     content: 'Creating a vertical garden involves using wall-mounted planters or trellises...',
+    likes: 78,
     answers: 2,
   },
   {
@@ -117,6 +131,7 @@ export const posts = [
     uploadTime: '2024-12-12T23:00:00',
     title: 'What are the benefits of composting?',
     content: 'Composting helps to recycle organic waste and enrich the soil...',
+    likes: 59,
     answers: 1,
   },
   {
@@ -125,6 +140,7 @@ export const posts = [
     uploadTime: '2024-12-13T11:09:00',
     title: 'How to grow plants from seeds?',
     content: 'Growing plants from seeds requires proper planting depth, watering, and light...',
+    likes: 47,
     answers: 1,
   },
   {
@@ -133,6 +149,7 @@ export const posts = [
     uploadTime: '2024-12-12T20:00:00',
     title: 'What are the best plants for air purification?',
     content: 'Some of the best plants for air purification include...',
+    likes: 88,
     answers: 2,
   },
   {
@@ -141,6 +158,7 @@ export const posts = [
     uploadTime: '2024-12-12T19:00:00',
     title: 'How to care for orchids?',
     content: 'Orchids require specific care including proper light, watering, and humidity...',
+    likes: 52,
     answers: 4,
   },
   {
@@ -149,6 +167,7 @@ export const posts = [
     uploadTime: '2024-12-13T11:57:00',
     title: 'What is plant dormancy?',
     content: 'Plant dormancy is a period of inactivity that helps plants survive adverse conditions...',
+    likes: 84,
     answers: 5,
   },
   {
@@ -157,79 +176,7 @@ export const posts = [
     uploadTime: '2024-12-13T11:42:00',
     title: 'How to grow roses?',
     content: 'Growing roses requires proper planting, watering, and pruning techniques...',
-    answers: 2,
-  },
-  {
-    id: 21,
-    author: 'PlantParent',
-    uploadTime: '2024-11-26T12:00:00',
-    title: 'What are the best plants for a balcony garden?',
-    content: 'Some of the best plants for a balcony garden include...',
-    answers: 10,
-  },
-  {
-    id: 22,
-    author: 'BotanyExpert',
-    uploadTime: '2024-12-12T22:00:00',
-    title: 'How to create a terrarium?',
-    content: 'Creating a terrarium involves using a glass container, soil, and small plants...',
-    answers: 9,
-  },
-  {
-    id: 23,
-    author: 'GardenGuru',
-    uploadTime: '2024-12-12T12:00:00',
-    title: 'What are the best plants for a beginner gardener?',
-    content: 'Some of the best plants for a beginner gardener include...',
-    answers: 2,
-  },
-  {
-    id: 24,
-    author: 'Woowangi',
-    uploadTime: '2024-11-27T12:00:00',
-    title: 'How to care for ferns?',
-    content: 'Ferns require specific care including proper light, watering, and humidity...',
-    answers: 3,
-  },
-  {
-    id: 25,
-    author: 'GardenGuru',
-    uploadTime: '2024-12-13T11:57:00',
-    title: 'What are the best plants for a shady garden?',
-    content: 'Some of the best plants for a shady garden include...',
-    answers: 4,
-  },
-  {
-    id: 26,
-    author: 'Woowangi',
-    uploadTime: '2024-11-18T12:00:00',
-    title: 'How to grow vegetables in containers?',
-    content: 'Growing vegetables in containers requires proper soil, watering, and light...',
-    answers: 3,
-  },
-  {
-    id: 27,
-    author: 'GreenThumb',
-    uploadTime: '2024-12-13T11:28:00',
-    title: 'What are the best plants for attracting pollinators?',
-    content: 'Some of the best plants for attracting pollinators include...',
-    answers: 3,
-  },
-  {
-    id: 28,
-    author: 'Woowangi',
-    uploadTime: '2024-11-21T12:00:00',
-    title: 'How to care for bonsai trees?',
-    content: 'Caring for bonsai trees requires proper pruning, watering, and light...',
-    answers: 2,
-  },
-  {
-    id: 29,
-    author: 'Woowangi',
-    uploadTime: '2024-09-14T12:00:00',
-    title: 'What are the best plants for a small garden?',
-    content: 'Some of the best plants for a small garden include...',
+    likes: 32,
     answers: 2,
   },
 ];
-  
