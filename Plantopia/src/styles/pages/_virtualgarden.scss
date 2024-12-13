@@ -1,0 +1,290 @@
+@import '../variables/colors';
+
+/* 전체 회색 컨테이너 */
+.vg-container {
+    position: relative;
+    width: 935px;
+    height: 920px;
+    top: 24px;
+    left: 344px;
+    flex-shrink: 0;
+
+    border-radius: 6px;
+    background: #F0F1EE;
+
+    /* 내부 흰색 컨테이너 (정원 화면) */
+    .vg-inner-container {
+        position: absolute;
+        width: 855px;
+        height: 600px;
+        top: 40px;
+        left: 40px;
+        flex-shrink: 0;
+    
+        border-radius: 6px;
+        background: #FFFFFF;
+
+        /* guide 버튼 */
+        .vg-guide-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+
+            display: inline-flex;
+            padding: 4px 10px;
+            justify-content: center;
+        
+            border-radius: 50px;
+            background: $secondary-color;
+
+            color: #FFFFFF;
+            font-family: Poppins;
+            font-size: 16px;
+            cursor: pointer;
+            transition: color 0.3s ease, transform 0.2s ease;
+
+            &:hover {
+                background: $light-green-color;
+            }
+    
+            &:active {
+                background: $light-green-color;
+                transform: scale(0.98);
+            }
+        }
+
+        /* 선택된 식물 사진 */
+        .vg-selected-plant {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            top: 212px;
+            flex-shrink: 0;
+        }
+
+        /* 화분 사진 */
+        .vg-pot {
+            position: absolute;
+            width: 120px;
+            height: 123.42px;
+            top: 304px;
+            flex-shrink: 0;
+        }
+
+        /* 식물 이름 텍스트 */
+        .vg-plant-name {
+            position: absolute;
+            width: 120px;
+            top: 446px;
+
+            color: $text-color;
+            text-align: center;
+            font-family: Poppins;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 28px; /* 175% */
+            cursor: pointer;
+        }
+
+        /* 심은 날짜 텍스트 */
+        .vg-plant-date {
+            position: absolute;
+            width: 120px;
+            top: 474px;
+
+            color: $text-color;
+            text-align: center;
+            font-family: Poppins;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 28px; /* 175% */
+        }
+
+        /* 물주기 남은 시간과 원 위한 컨테이너 */
+        .vg-r-c-container {
+            position: absolute;
+            width: 120px;
+            top: 502px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        /* 물주기 남은 시간 텍스트 */
+        vg-remaining-time {
+            color: $text-color;
+            text-align: center;
+            font-family: Poppins;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 28px; /* 175% */
+        }
+
+        /* 물주기 남은 시간 앞의 파란 원 */
+        .vg-circle {
+            width: 8px;
+            height: 8px;
+            background-color: #99E1F1;
+            border-radius: 50%;
+        }
+
+        /* water 버튼 위한 컨테이너 */
+        .vg-water-container {
+            position: absolute;
+            width: 120px;
+            top: 535px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* water 버튼 */
+        .vg-water-button {
+            display: inline-flex;
+            padding: 4px 10px;
+            justify-content: center;
+
+            border-radius: 50px;
+            background: $primary-color;
+            border: none;
+            outline: none;
+
+            color: #FFFFFF;
+            font-family: Poppins;
+            font-size: 16px;
+            cursor: pointer;
+            transition: color 0.3s ease, transform 0.2s ease;
+
+            &:hover {
+                background: $light-green-color;
+            }
+    
+            &:active {
+                background: $light-green-color;
+                transform: scale(0.98);
+            }
+        }
+    }
+    /* Pick Your Plant 텍스트 */
+    .vg-pyp-text {
+        position: absolute;
+        top: 646px;
+        left: 40px;
+
+        color: $text-color;
+        font-family: Poppins;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 28px; /* 140% */
+    }
+
+    /* 식물 고르는 공간 배경 */
+    .vg-pyp-background {
+        position: absolute;
+        width: 855px;
+        height: 200px;
+        top: 680px;
+        left: 40px;
+    
+        border-radius: 6px;
+        background: #FFFFFF;
+    
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+    }
+
+    /* 슬라이더 컨테이너 */
+    .vg-pyp-slider {
+        position: absolute;
+        top: 730px;
+        left: 138px;
+        display: flex;
+        transition: transform 0.5s ease;
+    }
+
+    /* 고를 수 있는 식물 이미지 */
+    .vg-pyp-plant-img {
+        width: 100px;
+        height: 100px;
+        margin-right: 40px;
+        flex-shrink: 0;
+        object-fit: cover;
+        cursor: pointer;
+    }
+
+    /* 왼쪽 네비게이션 원 */
+    .vg-left-nav-circle {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        top: 755px;
+        left: 60px;
+
+        border-radius: 50%;
+        border: 1px solid;
+        border-color: #8C8C8C;
+        cursor: pointer;
+        transition: color 0.3s ease, transform 0.2s ease;
+
+        &:hover {
+            background: $light-color;
+        }
+
+        &:active {
+            background: $light-color;
+            transform: scale(0.95);
+        }
+    }
+
+    /* 왼쪽 네비게이션 아이콘 */
+    .vg-left-nav-icon {
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    /* 오른쪽 네비게이션 원 */
+    .vg-right-nav-circle {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        right: 60px;
+        top: 755px;
+
+        border-radius: 50%;
+        border: 1px solid;
+        border-color: #8C8C8C;
+        cursor: pointer;
+        transition: color 0.3s ease, transform 0.2s ease;
+
+        &:hover {
+            background: $light-color;
+        }
+
+        &:active {
+            background: $light-color;
+            transform: scale(0.95);
+        }
+    }
+
+    /* 오른쪽 네비게이션 아이콘 */
+    .vg-right-nav-icon {
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+}

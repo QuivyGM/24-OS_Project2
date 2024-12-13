@@ -2,6 +2,8 @@
 
 import React, { useRef, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Shopcarusel from './shop/Shopcarusel';
+import Footer from './Footer';
 import '../styles/pages/_main.scss';
 
 const MainPage = () => {
@@ -26,7 +28,8 @@ const MainPage = () => {
   };
 
   const handleLoginClick = () => {
-    navigate('/login');
+    navigate('/VirtualGarden');
+    // navigate('/login');
   };
 
   const handleShopClick = () => {
@@ -45,6 +48,10 @@ const MainPage = () => {
     navigate('/aboutus');
   };
 
+  const handleMyPageClick = () => {
+    navigate('/mypage');
+  }
+
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > window.innerHeight) {
@@ -52,6 +59,7 @@ const MainPage = () => {
       } else {
         setShowButton(false); // hide button
       }
+      setIsScrolled(window.scrollY > window.innerHeight);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -207,35 +215,8 @@ const MainPage = () => {
           </div>
         </section>
 
-        {/* Our Products Section */}
-        <section className="our-products py-5">
-          <div className="d-flex justify-content-between align-items-center mb-4">
-            <h2 className="text-center mb-0">Our Products</h2>
-          </div>
-          <div className="btn btn more-button-div">
-            <button 
-                className="more-button" 
-                onClick={handleShopClick} href='shop'
-              >
-                More...
-            </button>
-          </div>
-          <div className="row">
-            {[1, 2, 3, 4].map((item) => (
-              <div key={item} className="col-6 col-md-3 mb-4">
-                <div className="card product-item">
-                  <img src={`./images/${item}.jpg`} alt="Product" className="card-img-top" />
-                  <div className="card-body text-center">
-                    <h5 className="card-title">Modern Picture</h5>
-                    <p className="price">$15.99</p>
-                    <button className="btn btn-outline-primary">Add to Cart</button>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
+        {/* Shop Carusel Section */}
+        <Shopcarusel handleShopClick={handleShopClick} />
 
         {/* User Comments Section */}
         <section className="user-comments py-5">
@@ -271,24 +252,10 @@ const MainPage = () => {
           >
             ↑
           </button>
-
         </section>
 
         {/* Footer Section */}
-        <footer className="footer py-5">
-          <div className="row logo-links">
-            <div className="col-md-3 footer-logo">
-              <img src="./images/logo.png" alt="Plantopia Logo" onClick={handleLogoClick}/>
-            </div>
-            <div className="col-md-3 footer-links">
-              <a className="nav-link active" onClick={handlePlantsClick} href='plants'>Plants</a>
-              <a className="nav-link active" onClick={handleCommunityClick} href='community'>Community</a>
-              <a className="nav-link active" onClick={handleShopClick} href='shop'>Shop</a>
-              <a className="nav-link active" onClick={handleAboutusClick} href='aboutus'>About Us</a>
-            </div>
-          </div>
-          <p className="footer-note text-center mt-4">Plantopia © All rights reserved</p>
-        </footer>
+        <Footer />
 
       </div>
     </div>

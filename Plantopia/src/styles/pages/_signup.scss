@@ -1,0 +1,112 @@
+@import '../variables/colors';
+
+.signup-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+
+    .signup-left {
+        .plant-image {
+            width: 300px;
+            margin-bottom: 20px;
+        }
+
+        .logo-text {
+            font-size: 2.5rem;
+            color: $primary-color;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    }
+
+    .signup-right {
+        max-width: 400px;
+        padding: 20px;
+
+        .back-button {
+            background: none;
+            border: none;
+            color: $primary-color;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-bottom: 30px;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        p {
+            color: $text-secondary-color;
+            font-size: 0.9rem;
+            margin-bottom: 30px;
+        }
+
+        .signup-form {
+            display: flex;
+            flex-direction: column;
+
+            label {
+                font-size: 0.9rem;
+                margin-bottom: 8px;
+            }
+
+            input[type="text"],
+            input[type="email"],
+            input[type="password"] {
+                padding: 10px;
+                margin-bottom: 20px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                font-size: 1rem;
+            }
+
+            .signup-button {
+                background-color: $primary-color;
+                color: white;
+                padding: 10px;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+
+                &:hover {
+                    background-color: darken($primary-color, 10%);
+                }
+            }
+        }
+
+        .login-link {
+            margin-top: 20px;
+            font-size: 0.9rem;
+
+            a {
+                color: $primary-color;
+                text-decoration: none;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+}
+
+// Media query for mobile responsiveness
+@media (max-width: 768px) {
+    .signup-left {
+        display: none; // Hide the left section on small screens
+    }
+
+    .signup-right {
+        padding: 20px;
+        width: 100%;
+        max-width: 100%; // Allow full width for mobile
+    }
+}

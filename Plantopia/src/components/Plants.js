@@ -2,6 +2,7 @@
 import React, { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/pages/_plants.scss';
+import Footer from './Footer';
 
 // Sample Data
 const popularPlants = [
@@ -17,7 +18,7 @@ const CarouselItem = ({ image, title, isActive }) => (
         <div className="product-card card mx-auto">
             <img
                 src={image}
-                alt={`Image of ${title}`}
+                alt={title}
                 className="card-img-top"
                 loading="lazy"
             />
@@ -109,7 +110,7 @@ const Catalogue = () => {
                         <div className="product-card card pt-3 pb-3" style={{ height: '90%' }}>
                             <img
                                 src={plant.image}
-                                alt={`Image of ${plant.title}`}
+                                alt={plant.title}
                                 className="card-img-top"
                                 loading="lazy"
                             />
@@ -262,31 +263,7 @@ const Plants = () => {
             </main>
 
             {/* Footer */}
-            <footer className="footer py-5">
-                <div className="row text-center">
-                    <div className="col-md-3 footer-logo">
-                        <img src="./images/logo.png" alt="Plantopia Logo" />
-                    </div>
-                    <div className="col-md-3 footer-links">
-                        <a href="#home">Home</a>
-                        <a href="#gardner">Gardner</a>
-                        <a href="#contact">Contact</a>
-                        <a href="#privacy">Privacy</a>
-                    </div>
-                    <div className="col-md-3 footer-social">
-                        <h3>Social</h3>
-                        <a href="#facebook"><i className="fab fa-facebook"></i></a>
-                        <a href="#linkedin"><i className="fab fa-linkedin"></i></a>
-                        <a href="#instagram"><i className="fab fa-instagram"></i></a>
-                    </div>
-                    <div className="col-md-3 subscribe">
-                        <h3>Subscribe For Updates</h3>
-                        <input type="email" placeholder="Enter email..." className="form-control mb-2" />
-                        <button className="btn button-subscribe">Subscribe</button>
-                    </div>
-                </div>
-                <p className="footer-note text-center mt-4">garden.com © All rights reserved</p>
-            </footer>
+            <Footer />
         </div>
     );
 };
