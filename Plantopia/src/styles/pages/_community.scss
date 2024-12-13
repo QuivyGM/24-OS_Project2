@@ -1,0 +1,227 @@
+@import '../variables/colors';
+
+// Global Styles
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    line-height: 1.5;
+}
+
+// Community Page Styles
+.community-page {
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    padding-top: 60px;
+    .search-animation {
+        font-size: 3rem;
+        font-weight: bold;
+        color: $primary-color;
+        text-align: center;
+        white-space: nowrap; // Matnni qator tashlamasdan ushlab turish
+        overflow: hidden;
+        margin-bottom: 40px;
+
+        .cursor {
+            display: inline-block;
+            width: 1px;
+            background-color: $primary-color;
+            animation: blink 0.8s step-end infinite;
+            margin-left: 5px;
+        }
+    }
+      // Cursorning miltillovchi effektini yaratish
+    @keyframes blink {
+        50% {
+            opacity: 0;
+        }
+    }
+
+    .forum-container {
+        padding: 40px 60px;
+        // Ask Question Button
+        .ask-question-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 15px;
+
+            .ask-question-button {
+                background-color: $success-color;
+                color: #fff;
+                padding: 10px 20px;
+                border-radius: 5px;
+                font-size: 14px;
+                font-weight: bold;
+                border: none;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+
+                &:hover {
+                    background-color: darken($success-color, 10%);
+                }
+            }
+        }
+
+        // Forum Header
+        .forum-header {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            margin-bottom: 20px;
+
+            .sort-dropdown {
+                .form-select {
+                    width: 90px;
+                    padding: 8px;
+                    font-size: 14px;
+                    border-radius: 5px;
+                    border: 0;
+                    background-color: #fff;
+                    color: $primary-color;
+                    cursor: pointer;
+                    &:focus {
+                        border-color: 1px solid $primary-color !important;
+                        outline: none;
+                        color: $primary-color;
+                        box-shadow: 0 0 6px $primary-color;
+                        
+                    }
+                }
+            }
+
+            .btn {
+                font-size: 24px;
+                padding: 4px 16px;
+                border-radius: 5px;
+                border: 0;
+                color: $primary-color;
+                &:hover{
+                    background-color: $primary-color;
+                    color: #fff;
+                }
+            }
+
+            .search-bar {
+                flex-grow: 1;
+            
+                input {
+                    width: 100%;
+                    padding: 8px 20px;
+                    font-size: 14px;
+                    border-radius: 24px;
+                    border: 1px solid $primary-color;
+                    color: $primary-color; 
+                    background-color: #fff; 
+                    transition: all 0.3s ease;
+
+                    &:hover {
+                        border-color: $success-color;
+                        box-shadow: 0 0 2px $primary-color;
+                        outline: none;
+                        transform: scale(1.01); 
+                    }
+                
+                    &::placeholder {
+                        color: $secondary-color;
+                    }
+            
+                    &:focus {
+                        border-color: $success-color;
+                        box-shadow: 0 0 2px $primary-color;
+                        outline: none;
+                        transform: scale(1.01); 
+                    }
+        
+                }
+            }
+        }
+
+        // Post List
+        .post-list {
+            margin-top: 20px;
+
+            .post-card {
+                border: 1px solid $light-color;
+                border-radius: 10px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+                background-color: #fff;
+                margin-bottom: 15px;
+                transition: transform 0.2s, box-shadow 0.2s;
+
+                &:hover {
+                    transform: translateY(-3px);
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+                }
+
+                .card-body {
+                    padding: 15px;
+
+                    .post-header {
+                        display: flex;
+                        justify-content: space-between;
+                        font-size: 14px;
+                        color: $secondary-color;
+                    }
+
+                    .post-title {
+                        font-size: 18px;
+                        font-weight: bold;
+                        margin: 10px 0;
+                        color: $primary-color;
+                    }
+
+                    .post-content {
+                        font-size: 14px;
+                        color: $dark-color;
+                        margin-bottom: 10px;
+                    }
+
+                    .post-footer {
+                        font-size: 14px;
+                        color: $success-color;
+                        font-weight: bold;
+                    }
+                }
+            }
+        }
+
+        // Pagination
+        .pagination {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+
+            span {
+                font-size: 14px;
+                color: $secondary-color;
+            }
+
+            button {
+
+                background-color: #fff;
+                padding: 5px 10px;
+                border-radius: 5px;
+                font-size: 14px;
+                color: $primary-color;
+                box-shadow: 0 0 4px $primary-color;
+                cursor: pointer;
+
+                &:hover {
+                    background-color: $primary-color;
+                    color: #fff;
+                    box-shadow: 0 0 0px $primary-color;
+                }
+            }
+        }
+    }
+}
