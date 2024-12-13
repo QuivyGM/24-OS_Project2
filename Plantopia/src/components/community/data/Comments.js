@@ -158,5 +158,5 @@ export const comments = [
         time: "2024-09-21T10:01:30Z",
         author: "User20",
         likes: 80
-    }
+    },
 ];
