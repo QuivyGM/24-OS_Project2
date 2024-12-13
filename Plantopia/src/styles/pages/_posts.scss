@@ -1,0 +1,64 @@
+@import '../variables/colors';
+
+// Global Styles
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%; // Ensure full height for body and html
+    line-height: 1.5;
+}
+
+.card-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; // Ensure the page fills the full viewport height
+
+    .card {
+        padding: 40px 60px;
+        flex: 1; // Allow this to expand and push the footer down
+
+        .post-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+
+            .username {
+                font-size: 1rem;
+                font-weight: 500;
+                color: #333;
+            }
+
+            .upload-time {
+                font-size: 0.9rem;
+                color: #aaa;
+                white-space: nowrap;
+            }
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            margin: 10px 0;
+            border-radius: 8px;
+        }
+
+        p {
+            margin: 10px 0;
+        }
+    }
+}
+
+footer {
+    background-color: #f8f9fa;
+    text-align: center;
+    padding: 15px 0;
+    width: 100%;
+}
