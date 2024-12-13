@@ -361,6 +361,10 @@ public class ListController {
 			else
 				tres.put("contents", pt.getBody());
 			tres.put("answernum", pt.getCommentsCount());
+			Timestamp ttm = pt.getCreated_at();
+			SimpleDateFormat tForm = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss");
+			String ttms = tForm.format(ttm);
+			tres.put("time", ttms);
 			lres.add(tres);
 		}
 		res.put("postlists", lres);
