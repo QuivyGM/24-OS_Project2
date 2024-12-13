@@ -1,8 +1,10 @@
 import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/pages/_navbar.scss";
+import { useAuth } from './AuthContext';
 
 const Navbar = () => {
+  const { isLoggedIn } = useAuth();
   const navigate = useNavigate();
   const searchInputRef = useRef(null);
   const [showInput, setShowInput] = useState(false);
@@ -17,6 +19,14 @@ const Navbar = () => {
   const handleNavigation = (path) => {
     navigate(path);
   };
+
+  const handleMyPageClick = () => {
+    if (!isLoggedIn) {
+        navigate('/Login'); // Redirect to login page
+    } else {
+        navigate('/mypage'); // Navigate to My Page
+    }
+};
 
   return (
     <div className="overlay">
@@ -83,7 +93,7 @@ const Navbar = () => {
                   <img src="./icons/search-normal.svg" alt="search" />
                 </button>
               </form>
-              <button className="login-button"onClick={() => handleNavigation("/login")}>
+              <button className="login-button"onClick={handleMyPageClick}>
                 <img src="./icons/user.svg" alt="login" />
               </button>
             </div>
