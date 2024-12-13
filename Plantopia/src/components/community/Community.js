@@ -154,7 +154,6 @@ const Community = () => {
             >
               <option value="recent">Recent</option>
               <option value="likes">Likes</option>
-              <option value="rising">Rising</option>
             </select>
           </div>
 
