@@ -2,16 +2,27 @@
 
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
 import MainPage from './components/Main';
-import Login from './components/Login';
-import Signup from './components/Signup';
+
 import Plants from './components/Plants';
+
+import Community from './components/community/Community';
+import Upload from './components/community/Upload';
+import Post from './components/community/Post';
+
+import Shop from './components/shop/Shop';
+import ShopCat from './components/shop/ShopCat';
+
 import Aboutus from './components/Aboutus';
-import Community from './components/Community';
-import ShopCat from './components/ShopCat';
-import Upload from './components/Upload';
-import Shop from './components/Shop';
-import Post from './components/Post';
+
+import Login from './components/account/Login';
+import Signup from './components/account/Signup';
+import MyAccount from './components/account/MyAccount';
+import VirtualGarden from './components/account/VirtualGarden';
+import MyPostsAndComments from './components/account/MyPostsAndComments';
+import MyShopping from './components/account/MyShopping';
+
 import Footer from './components/Footer';
 import Navbar from './components/Navbar';
 
@@ -26,9 +37,13 @@ const App = () => {
         <Route path="/Shop" element={<Shop />} />
         <Route path="/Aboutus" element={<Aboutus />} />
         <Route path="/Community" element={<Community />} />
+        <Route path="/VirtualGarden" element={<VirtualGarden />} />
+        <Route path="/MyPostsAndComments" element={<MyPostsAndComments />} />
+        <Route path="/MyShopping" element={<MyShopping />} />
+        <Route path="/MyAccount" element={<MyAccount />} />
         <Route path="/ShopCat" element={<ShopCat />} />
         <Route path="/Upload" element={<Upload />} />
-        <Route path="/Post" element={<Post />} />
+        <Route path="/post/:postId" element={<Post />} />
         <Route path="/Footer" element={<Footer />} />
         <Route path="/Navbar" element={<Navbar />} />
       </Routes>

@@ -1,0 +1,182 @@
+@import '../variables/colors';
+
+/* 정렬 위한 컨테이너 */
+.ma-container {
+    position: relative;
+    width: 935px;
+    height: 766px;
+    top: 24px;
+    left: 344px;
+    flex-shrink: 0;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+/* 유저 이미지 */
+.ma-user-img {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    top: 41px;
+    left: 50%;
+    transform: translateX(-50%);
+    object-fit: cover;
+
+    border: 1px solid;
+    border-color: #8C8C8C;
+    border-radius: 100px;
+}
+
+/* 사진 추가 버튼 원 */
+.ma-pic-circle {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    top: 158px;
+    left: 503px;
+    flex-shrink: 0;
+    background-color: #FFFFFF;
+    border-radius: 50%;
+    border: 1px solid #8C8C8C;
+    cursor: pointer;
+    transition: color 0.3s ease, transform 0.2s ease;
+
+    &:hover {
+        background: $light-color;
+        transform: scale(1.03);
+    }
+
+    &:active {
+        background: $light-color;
+        transform: scale(0.97);
+    }
+
+    /* 사진 추가 버튼 아이콘 */
+    .ma-pic-icon {
+        position: absolute;
+        width: 24px;
+        height: 24px;
+        top: 8px;
+        left: 8px;
+        flex-shrink: 0;
+    }
+}
+
+/* delete your picture, account 텍스트 */
+.ma-delete-text {
+    position: absolute;
+    top: 205px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    color: #8C8C8C;
+    font-family: Poppins;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    cursor: pointer;
+    transition: font-weight 0.2s ease;
+
+    &:hover {
+        font-weight: 600;
+    }
+
+    &:active {
+        font-weight: 600;
+    }
+}
+
+/* 이메일, 닉네임, 비밀번호 컨테이너 */
+.ma-content-container {
+    position: absolute;
+    width: 260px;
+    height: 31px;
+    left: 50%;
+    transform: translateX(-50%);
+    flex-shrink: 0;
+
+    border-radius: 6px;
+    border: 1px solid #8C8C8C;
+
+    font-size: 14px;
+    font-family: Poppins;
+    padding-left: 6px;
+
+    display: flex;
+    align-items: center;
+    
+
+    /* 내부 input 스타일 */
+    input {
+        width: 100%;
+        height: 100%;
+        border: none;
+        outline: none;
+        border-radius: 6px;
+        box-sizing: border-box;
+
+        font-size: 14px;
+        font-family: Poppins;
+    }
+}
+
+/* 이메일, 닉네임, 비밀번호 텍스트 */
+.ma-menu-text {
+    position: absolute;
+    left: 338px;
+
+    color: #8C8C8C;
+    font-family: Poppins;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+/* Enter Your Full Password To Change It 텍스트 */
+.ma-green-text {
+    position: absolute;
+    top: 465px;
+    left: 338px;
+
+    color: $secondary-color;
+    font-family: Poppins;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+/* save 버튼 */
+.ma-save-button{
+    position: absolute;
+    width: 260px;
+    height: 31px;
+    top: 623px;
+    left: 50%;
+    transform: translateX(-50%);
+    flex-shrink: 0;
+
+    border-radius: 6px;
+    background: $primary-color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: #FFFFFF;
+    font-family: Poppins;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    cursor: pointer;
+    transition: color 0.3s ease;
+
+    &:hover {
+        background: $light-green-color;
+    }
+
+    &:active {
+        background: $light-green-color;
+    }
+}

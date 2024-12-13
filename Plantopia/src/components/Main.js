@@ -2,7 +2,7 @@
 
 import React, { useRef, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Shopcarusel from './Shopcarusel';
+import Shopcarusel from './shop/Shopcarusel';
 import Footer from './Footer';
 import '../styles/pages/_main.scss';
 
@@ -28,7 +28,8 @@ const MainPage = () => {
   };
 
   const handleLoginClick = () => {
-    navigate('/login');
+    navigate('/VirtualGarden');
+    // navigate('/login');
   };
 
   const handleShopClick = () => {
@@ -46,6 +47,10 @@ const MainPage = () => {
   const handleAboutusClick = () => {
     navigate('/aboutus');
   };
+
+  const handleMyPageClick = () => {
+    navigate('/mypage');
+  }
 
   useEffect(() => {
     const handleScroll = () => {
