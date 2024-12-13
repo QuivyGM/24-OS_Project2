@@ -1,7 +1,7 @@
 // src/pages/Login.js
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../styles/pages/_login.scss';
+import '../../styles/pages/_login.scss';
 
 const Login = () => {
     const navigate = useNavigate();

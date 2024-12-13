@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../styles/pages/_mpac-ms.scss';
+import '../../styles/pages/_mpac-ms.scss';
 import Layout_seo from './Layout_seo.js';
 
 const MyShopping = () => {

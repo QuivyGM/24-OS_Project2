@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../styles/pages/_virtualgarden.scss';
+import '../../styles/pages/_virtualgarden.scss';
 import Layout_seo from './Layout_seo.js';
 
 const VirtualGarden = () => {

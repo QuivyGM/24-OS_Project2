@@ -1,7 +1,7 @@
 // src/pages/Signup.js
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../styles/pages/_signup.scss';
+import '../../styles/pages/_signup.scss';
 
 const Signup = () => {
     const navigate = useNavigate();

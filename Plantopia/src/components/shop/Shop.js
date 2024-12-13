@@ -2,7 +2,7 @@
 
 import React, { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../styles/pages/_shop.scss';
+import '../../styles/pages/_shop.scss';
 
 const productCatalogue = [
   { id: 1, image: './images/1.jpg', title: 'Modern Picture 111', price: '$15.00', originalPrice: '$25.00', reviews: 10, avgReviewScore: 4.5 },

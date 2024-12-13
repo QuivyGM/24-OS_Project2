@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../styles/pages/_layout_seo.scss';
+import '../../styles/pages/_layout_seo.scss';
 
 const Layout_seo = () => {
     return (

@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../styles/pages/_shopCat.scss';
+import '../../styles/pages/_shopCat.scss';
 
 // Sample Data for Product Catalogue
 const productCatalogue = [

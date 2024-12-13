@@ -2,7 +2,7 @@
 
 import React, { useRef, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Shopcarusel from './Shopcarusel';
+import Shopcarusel from './shop/Shopcarusel';
 import Footer from './Footer';
 import '../styles/pages/_main.scss';
 

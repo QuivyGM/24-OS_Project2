@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../styles/pages/_myaccount.scss';
+import '../../styles/pages/_myaccount.scss';
 import Layout_seo from './Layout_seo.js';
 
 const MyAccount = () => {

@@ -1,8 +1,8 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { posts as importedPosts } from '../data/posts'; // Import posts from external file
-import '../styles/pages/_community.scss';
-import Footer from './Footer';
+import { posts as importedPosts } from './data/posts'; // Import posts from external file
+import '../../styles/pages/_community.scss';
+import Footer from '../Footer';
 
 const Community = () => {
   const navigate = useNavigate();
@@ -125,34 +125,37 @@ const Community = () => {
       </h1>
 
         {/* Forum Header */}
-        <div className="forum-header">
-          <div className="sort-dropdown">
-            <select
-              className="form-select"
-              onChange={(e) => console.log(`Selected: ${e.target.value}`)}
+          <div className="forum-header">
+            <div className="sort-dropdown">
+              <select
+                className="form-select"
+                onChange={(e) => console.log(`Selected: ${e.target.value}`)}
+              >
+                <option value="recent">Recent</option>
+                <option value="likes">Likes</option>
+                <option value="rising">Rising</option>
+              </select>
+            </div>
+
+            <div className="search-bar">
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Search"
+                aria-label="Search"
+              />
+            </div>
+
+            <button 
+              className="btn btn-outline-secondary"
+              onClick={() => navigate('/upload')}
             >
-              <option value="recent">Recent</option>
-              <option value="likes">Likes</option>
-              <option value="rising">Rising</option>
-            </select>
+                +
+            </button>
+
           </div>
 
-          <div className="search-bar">
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Search"
-              aria-label="Search"
-            />
-          </div>
-
-          <button className="btn btn-outline-secondary">
-              +
-          </button>
-
-        </div>
-
-        {/* Post List */}
+          {/* Post List */}
         <div className="post-list">
           {currentPosts.map((post) => (
             <div
