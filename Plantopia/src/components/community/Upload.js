@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { posts as importedPosts } from './data/posts'; // Import posts from external file
 import '../../styles/pages/_posts.scss';
 import Footer from '../Footer';
@@ -13,32 +13,46 @@ const Post = () => {
 
     const handlePostSubmit = () => {
         if (title.trim() && content.trim()) {
+            // Create the data in the new format
             const newPost = {
-                id: posts.length > 0 ? posts[posts.length - 1].id + 1 : 1, // Increment ID
-                author: 'GuestUser', // Temporary nickname
-                uploadTime: new Date().toISOString(), // Current time
                 title: title,
-                content: content,
-                likes: 0, // Reset to 0
-                answers: 0 // Reset to 0
+                body: content,
+                user_id: 1 // Temporary user ID
             };
 
             console.log('New Post Submitted:', newPost); // Log the new post structure
-            setPosts([...posts, newPost]); // Add the new post to the list
-            setTitle(''); // Reset title input
-            setContent(''); // Reset content input
 
-            // Display formatted new post in alert
-            alert(
-                `Post submitted successfully!\n\n` +
-                `ID: ${newPost.id}\n` +
-                `Author: ${newPost.author}\n` +
-                `Upload Time: ${new Date(newPost.uploadTime).toLocaleString()}\n` +
-                `Title: ${newPost.title}\n` +
-                `Content: ${newPost.content}\n` +
-                `Likes: ${newPost.likes}\n` +
-                `Answers: ${newPost.answers}`
-            );
+            // Send the data to the backend API
+            fetch('http://localhost:8080/api/Posts', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(newPost), // Send data in the required format
+            })
+                .then((res) => {
+                    if (!res.ok) {
+                        throw new Error(`Error: ${res.status}`);
+                    }
+                    return res.json();
+                })
+                .then((data) => {
+                    console.log('Response from Backend:', data);
+                    alert(`Post submitted successfully!\n\n` +
+                          `Title: ${newPost.title}\n` +
+                          `Body: ${newPost.body}\n` +
+                          `User ID: ${newPost.user_id}`
+                    );
+
+                    // Update frontend state with the new post for display
+                    setPosts([...posts, { id: data.id || posts.length + 1, ...newPost }]);
+                })
+                .catch((error) => {
+                    console.error('Error submitting post:', error);
+                    alert('Failed to submit the post. Please try again.');
+                });
+
+            // Reset input fields
+            setTitle('');
+            setContent('');
         } else {
             alert('Please enter both a title and content.');
         }
