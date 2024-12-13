@@ -25,7 +25,7 @@ const Catalogue = () => {
                 {productCatalogue.map((product) => (
                     <div key={product.id} className="col-md-3">
                         <div className="product-card card">
-                            <img src={product.image} alt={`Image of ${product.title}`} className="card-img-top" />
+                            <img src={product.image} alt={product.title} className="card-img-top" />
                             <div className="card-body">
                                 <h5 className="card-title">{product.title}</h5>
                                 <p className="price">

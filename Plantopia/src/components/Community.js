@@ -1,14 +1,14 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { posts as importedPosts } from '../data/posts'; // Import posts from external file
 import '../styles/pages/_community.scss';
+import Footer from './Footer';
 
 const Community = () => {
   const navigate = useNavigate();
   const searchInputRef = useRef(null);
   const [showInput, setShowInput] = useState(false);
 
-  const [activeTab, setActiveTab] = useState('show-your-plant'); // Default active tab
   const [currentPage, setCurrentPage] = useState(1); // Track the current page
   const postsPerPage = 10; // Define how many posts per page
   const totalPosts = importedPosts.length; // Total number of posts
@@ -18,15 +18,6 @@ const Community = () => {
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = importedPosts.slice(indexOfFirstPost, indexOfLastPost);
 
-  const handleTabClick = (tab) => {
-    setActiveTab(tab); // Set the clicked tab as active
-  };
-
-  const handleSearch = () => {
-    if (searchInputRef.current) {
-      console.log('Search:', searchInputRef.current.value);
-    }
-  };
   const handlePostClick = (postId) => {
     navigate(`/post/${postId}`); // Navigate to the post page with postId
 };
@@ -52,27 +43,6 @@ const Community = () => {
     navigate('/login');
   };
 
-  // Function to handle shop button click and navigate to the shop page
-  const handleShopClick = () => {
-    navigate('/shop');
-  };
-
-  const handlePlantsClick = () => {
-    navigate('/plants');
-  };
-
-  const handleCommunityClick = () => {
-    navigate('/community');
-  };
-
-  const handleAboutusClick = () => {
-    navigate('/aboutus');
-  };
-
-  const handleUploadClick = () => {
-    navigate('/upload');
-  };
-
   // Function to show the search input when the search button is clicked
   const handleSearchClick = () => {
     setShowInput(true);
@@ -80,6 +50,24 @@ const Community = () => {
       searchInputRef.current.focus();
     }
   };
+
+  // Text Animation
+  const text = "Find Your Perfect Plant"; 
+  const [displayedText, setDisplayedText] = useState("");
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setDisplayedText((prev) => prev + text[currentIndex]);
+      setCurrentIndex((prev) => prev + 1);
+    }, 50); 
+
+    if (currentIndex === text.length) {
+      clearInterval(interval); 
+    }
+
+    return () => clearInterval(interval);
+  }, [currentIndex, text]);
 
   return (
     <div className="community-page container">
@@ -102,7 +90,7 @@ const Community = () => {
               <ul className="navbar-nav mb-2 mb-lg-0">
                 <li className="nav-item"><a className="nav-link active" href="Plants">Plants</a></li>
                 <li className="nav-item"><a className="nav-link active" href="Community">Community</a></li>
-                <li onClick={handleShopClick} className="nav-item"><a className="nav-link active" href="Shop">Shop</a></li>
+                <li className="nav-item"><a className="nav-link active" href="Shop">Shop</a></li>
                 <li className="nav-item"><a className="nav-link active" href="Aboutus">About Us</a></li>
               </ul>
 
@@ -131,17 +119,10 @@ const Community = () => {
 
       {/* Forum Features */}
       <div className="forum-container">
-        <h1 className="title-text">
-          Find Your <br />
-          Perfect Plant
-          <img src="/images/together.png" alt="Plant Icon" className="plant-icon" />
-        </h1>
-        {/* Ask Question Button */}
-        <div className="ask-question-container">
-        <button onClick={handleUploadClick} className="btn btn-outline-secondary">
-              Posts
-            </button>
-        </div>
+      <h1 className="search-animation">
+        {displayedText}
+        <span className="cursor"></span> {/* Qidiruv indikator */}
+      </h1>
 
         {/* Forum Header */}
         <div className="forum-header">
@@ -156,19 +137,6 @@ const Community = () => {
             </select>
           </div>
 
-          <button
-            className={`btn ${activeTab === 'show-your-plant' ? 'btn-success' : 'btn-outline-success'}`}
-            onClick={() => handleTabClick('show-your-plant')}
-          >
-            Show Your Plant
-          </button>
-          <button
-            className={`btn ${activeTab === 'q-and-a' ? 'btn-success' : 'btn-outline-success'}`}
-            onClick={() => handleTabClick('q-and-a')}
-          >
-            Q & A
-          </button>
-
           <div className="search-bar">
             <input
               type="text"
@@ -177,6 +145,11 @@ const Community = () => {
               aria-label="Search"
             />
           </div>
+
+          <button className="btn btn-outline-secondary">
+              +
+          </button>
+
         </div>
 
         {/* Post List */}
@@ -227,20 +200,7 @@ const Community = () => {
       </div>
 
       {/* Footer Section */}
-      <footer className="footer py-5">
-        <div className="row logo-links">
-          <div className="col-md-3 footer-logo">
-            <img src="./images/logo.png" alt="Plantopia Logo" onClick={handleLogoClick}/>
-          </div>
-          <div className="col-md-3 footer-links">
-            <a className="nav-link active" onClick={handlePlantsClick} href='plants'>Plants</a>
-            <a className="nav-link active" onClick={handleCommunityClick} href='community'>Community</a>
-            <a className="nav-link active" onClick={handleShopClick} href='shop'>Shop</a>
-            <a className="nav-link active" onClick={handleAboutusClick} href='aboutus'>About Us</a>
-          </div>
-        </div>
-        <p className="footer-note text-center mt-4">Plantopia © All rights reserved</p>
-      </footer>
+      <Footer />
     </div>
   );
 };
