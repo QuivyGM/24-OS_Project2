@@ -69,6 +69,27 @@ const Community = () => {
     return () => clearInterval(interval);
   }, [currentIndex, text]);
 
+
+  // Search functionality
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const handleInputChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  const handleSearch = () => {
+    alert(`Search Term: ${searchTerm}`);  //search input - 검색 입력값
+    setSearchTerm('');
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleSearch();
+    }
+  };
+
+
+
   return (
     <div className="community-page container">
       {/* Header Section */}
@@ -125,37 +146,38 @@ const Community = () => {
       </h1>
 
         {/* Forum Header */}
-          <div className="forum-header">
-            <div className="sort-dropdown">
-              <select
-                className="form-select"
-                onChange={(e) => console.log(`Selected: ${e.target.value}`)}
-              >
-                <option value="recent">Recent</option>
-                <option value="likes">Likes</option>
-                <option value="rising">Rising</option>
-              </select>
-            </div>
-
-            <div className="search-bar">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Search"
-                aria-label="Search"
-              />
-            </div>
-
-            <button 
-              className="btn btn-outline-secondary"
-              onClick={() => navigate('/upload')}
+        <div className="forum-header">
+          <div className="sort-dropdown">
+            <select
+              className="form-select"
+              onChange={(e) => console.log(`Selected: ${e.target.value}`)}
             >
-                +
-            </button>
-
+              <option value="recent">Recent</option>
+              <option value="likes">Likes</option>
+            </select>
           </div>
 
-          {/* Post List */}
+          <div className="search-bar">
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Search"
+              aria-label="Search"
+              value={searchTerm}
+              onChange={handleInputChange}
+              onKeyPress={handleKeyPress}
+            />
+          </div>
+
+          <button 
+            className="btn btn-outline-secondary"
+            onClick={() => navigate('/upload')}
+          >
+            +
+          </button>
+        </div>
+
+        {/* Post List */}
         <div className="post-list">
           {currentPosts.map((post) => (
             <div

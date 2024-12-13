@@ -42,7 +42,7 @@ const App = () => {
         <Route path="/MyAccount" element={<MyAccount />} />
         <Route path="/ShopCat" element={<ShopCat />} />
         <Route path="/Upload" element={<Upload />} />
-        <Route path="/Post" element={<Post />} />
+        <Route path="/post/:postId" element={<Post />} />
         <Route path="/Footer" element={<Footer />} />
       </Routes>
     </Router>
