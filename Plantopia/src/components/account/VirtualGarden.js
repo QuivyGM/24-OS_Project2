@@ -88,6 +88,15 @@ const VirtualGarden = () => {
         });
     };
 
+    //--------------------------------------------
+    const handleWaterClick = (index) => {
+        setPlants((prevPlants) => {
+            const updatedPlants = [...prevPlants];
+            updatedPlants[index].time = new Date().toLocaleTimeString(); // Update time to current time
+            return updatedPlants;
+        });
+    };
+
 // ---------- ---------- ---------- ---------- ----------
 
     const [showGuide, setShowGuide] = useState(false); // guide 버튼 모달창 상태?
@@ -199,7 +208,13 @@ const VirtualGarden = () => {
                                     className="vg-water-container"
                                     style={{ left: item.potLeft }}
                                 >
-                                    <button className="vg-water-button">Water</button>
+                                    <button
+                                        className="vg-water-button"
+                                        onClick={() => handleWaterClick(index)} // Pass plant index
+                                    >
+                                        Water
+                                    </button>
+
                                 </div>
                             </React.Fragment>
                         ))}
