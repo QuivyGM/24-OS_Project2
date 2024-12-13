@@ -10,10 +10,6 @@ const Login = () => {
         navigate('/'); // Navigate to the main page
     };
 
-    const handleSignupClick = () => {
-        navigate('/Signup'); // Navigate to the signup page
-    };
-
     return (
         <div className="login-container container">
             <div className="row align-items-center justify-content-center">
@@ -40,7 +36,7 @@ const Login = () => {
                         <button type="submit" className="login-button">Register Account</button>
                     </form>
                     <p className="signup-link">
-                        Don’t have an account? <a onClick={handleSignupClick} href="/Signup">Sign up here</a>
+                        Don’t have an account? <a href="/signup">Sign up here</a>
                     </p>
                 </div>
             </div>

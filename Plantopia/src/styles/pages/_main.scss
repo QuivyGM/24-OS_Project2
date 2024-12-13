@@ -83,28 +83,29 @@ html, body {
 .navbar-nav {
   padding-right: 10px;
   a {
-    color: $light-color;
-    display: block;
-    margin-bottom: 0.5rem;
-    padding: 0;
+    color: $light-color !important;
     position: relative;
-    text-decoration: none; // Remove default underline
-    transition: transform 0.4s ease !important; // Smooth scaling effect
-    // Add an animated underline effect
+    transition: color 0.3s ease;
+    margin: 0px 12px !important;
+    padding: 0;
+
     &::after {
-      content: '';
+      content: "";
       position: absolute;
       left: 0;
-      bottom: -2px;
-      width: 0; // Initially set to 0
+      bottom: -4px;
+      width: 0;
       height: 2px;
-      background-color: $light-color; // Set the underline color
-      transition: width 0.3s ease !important; // Smoothly expand the underline
+      background-color: $light-color;
+      transition: width 0.3s ease;
     }
-  
-    // On hover, expand the underline
-    &:hover::after {
-      width: 100%; // Fully expand the underline
+
+    &:hover {
+      color: $light-color;
+
+      &::after {
+        width: 100%;
+      }
     }
   }
 }
@@ -148,7 +149,7 @@ html, body {
 .search-button {
   input {
     background-color: transparent;
-    color: $light-color !important;
+    color: $light-color;
     width: 0;
     opacity: 0;
     transition: width 0.5s ease, opacity 0.5s ease;
@@ -159,12 +160,7 @@ html, body {
     }
 
     &::placeholder {
-      color: $light-color !important;
-    }
-    &:focus {
-      background-color: transparent;
-      border-color: $success-color;
-      box-shadow: 0 0 2px $primary-color;
+      color: $dark-color;
     }
   }
 }
@@ -249,19 +245,14 @@ html, body {
     }
   }
 
-}
 
-
-@media (max-width: 992px) {
   .footer-links{
-    display: none !important;
-  }
-  .footer-logo{
-    width: 100% !important;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0px;
   }
 }
-// --------media 끝------------------------------------- 
+// ---------------------------------------------
 
 @keyframes slideIn {
   from {
@@ -377,18 +368,18 @@ html, body {
     border: none; /* Remove default border */
     border-radius: 8px; /* Rounded corners */
     border: 0;
-
   }
   
-  .accordion-button:focus {
-    outline: none; /* Removes the blue focus outline */
-    box-shadow: none; /* Removes any shadow effects on focus */
+  .accordion-button:not(.collapsed) {
+    box-shadow: none; /* Remove default shadow */
+    border: 0;
   }
-
+  
   .accordion-body {
     padding: 1rem; /* Add padding to accordion content */
     border: 0;
   }
+  
   // end accordion 
 
   .provide-content{
@@ -439,13 +430,34 @@ html, body {
     margin-bottom: 2rem;
   }
 
-// Our products
+  .product-item {
+    border-radius: 24px;
+    box-shadow: 0px 6.476px 6px 0px rgba(41, 41, 41, 0.08);
+    border: 0;
+    .card-title {
+      font-size: 1.1rem;
+      color: $primary-color;
+    }
+    .price {
+      color: $secondary-color;
+    }
+    .card-img-top{
+      border-radius: 24px 24px 0px 0px;
+    }
+    .card-body{
+      .btn-outline-primary{
+        color: $primary-color;
+        border: 1px solid $primary-color;
 
+        &:hover {
+          background-color: $primary-color;
+          box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+          color: $light-color;
+        }
+      }
+    }
+  }
 
-//-------------------------- Our Products ---------------------------- 
-
-// user comments
-.user-comments{
   .comment-box {
     background-color: #f8f8f8;
     border-radius: 8px;
@@ -473,43 +485,42 @@ html, body {
     }
   }
 
-  .back-to-top {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 50px;
-    height: 50px;
-    background-color: #28a745;
-    color: white;
-    font-size: 24px;
-    border: none;
-    border-radius: 50%;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(20px); 
-    transition: opacity 0.5s ease, transform 0.5s ease, visibility 0.5s ease;
-  
-    &:hover {
-      background-color: #218838;
-      transform: scale(1.1);
+  .footer {
+    background-color: $footer-color;
+    color: $light-color;
+    .footer-logo img {
+      width: 150px;
     }
-  
-    &.visible {
-      visibility: visible;
-      opacity: 1; 
-      transform: translateY(0);
+    .footer-links,
+    .footer-social,
+    .subscribe {
+      a {
+        color: $light-color;
+        display: block;
+        margin-bottom: 0.5rem;
+        &:hover {
+          color: $secondary-color;
+        }
+      }
+      .button-subscribe{
+        color: $light-color;
+        border: 1px solid $light-color;
+
+        &:hover{
+          background-color: $light-color;
+          color: $secondary-color;
+        }
+      }
+    }
+    .subscribe .form-control {
+      max-width: 80%;
+      margin: auto;
+    }
+    .footer-links{
+      display: flex;
+      gap: 2rem;
     }
   }
-  
-}
-// ----------- user comments end ------------------------
-
 }
 
 section{
