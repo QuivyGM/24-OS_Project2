@@ -24,6 +24,7 @@ import MyPostsAndComments from './components/account/MyPostsAndComments';
 import MyShopping from './components/account/MyShopping';
 
 import Footer from './components/Footer';
+import Navbar from './components/Navbar';
 
 const App = () => {
   return (
@@ -44,6 +45,7 @@ const App = () => {
         <Route path="/Upload" element={<Upload />} />
         <Route path="/post/:postId" element={<Post />} />
         <Route path="/Footer" element={<Footer />} />
+        <Route path="/Navbar" element={<Navbar />} />
       </Routes>
     </Router>
   );
