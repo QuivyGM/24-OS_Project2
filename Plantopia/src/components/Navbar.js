@@ -93,7 +93,7 @@ const Navbar = () => {
                   <img src="./icons/search-normal.svg" alt="search" />
                 </button>
               </form>
-              <button className="login-button"onClick={() => handleNavigation("/login")}>
+              <button className="login-button"onClick={handleMyPageClick}>
                 <img src="./icons/user.svg" alt="login" />
               </button>
             </div>

@@ -30,9 +30,13 @@ const MainPage = () => {
   };
 
   const handleLoginClick = () => {
-    navigate('/VirtualGarden');
-    // navigate('/login');
-  };
+    if (!isLoggedIn) {
+        navigate('/Login'); // Redirect to login page
+    } else {
+        navigate('/mypage'); // Navigate to My Page
+    }
+};
+
 
   const handleShopClick = () => {
     navigate('/shop');
@@ -49,15 +53,6 @@ const MainPage = () => {
   const handleAboutusClick = () => {
     navigate('/aboutus');
   };
-
-
-  const handleMyPageClick = () => {
-    if (!isLoggedIn) {
-        navigate('/Login'); // Redirect to login page
-    } else {
-        navigate('/mypage'); // Navigate to My Page
-    }
-};
 
   useEffect(() => {
     const handleScroll = () => {

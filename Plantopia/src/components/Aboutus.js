@@ -14,7 +14,7 @@ const Aboutus = () => {
     setShowInput(true);
     if (searchInputRef.current) searchInputRef.current.focus();
   };
-
+  
   return (
     <>
       {/* Page Container */}
