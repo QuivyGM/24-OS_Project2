@@ -1,8 +1,9 @@
 // Import necessary modules and components
-import React, { useRef, useState } from 'react';
+import React, { } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/pages/_plants.scss';
-
+import Footer from './Footer';
+import Navbar from './Navbar';
 // Sample Data
 const popularPlants = [
     { id: 1, image: './images/1.jpg', title: 'Fiddle Leaf Fig' },
@@ -17,7 +18,7 @@ const CarouselItem = ({ image, title, isActive }) => (
         <div className="product-card card mx-auto">
             <img
                 src={image}
-                alt={`Image of ${title}`}
+                alt={title}
                 className="card-img-top"
                 loading="lazy"
             />
@@ -67,6 +68,7 @@ const WeeklyOthers = () => (
 
 // Catalogue Component
 const Catalogue = () => {
+    const navigate = useNavigate();
     const plantCatalogue = [
         { id: 1, image: './images/1.jpg', title: 'Modern Picture 1', rating: 5 },
         { id: 2, image: './images/2.jpg', title: 'Modern Picture 2', rating: 4 },
@@ -94,6 +96,10 @@ const Catalogue = () => {
         { id: 34, image: './images/8.jpg', title: 'Modern Picture 8', rating: 4 },
     ];
 
+    const handleSeeMoreClick = (plantId) => {
+        navigate(`/post/${plantId}`); // Navigate to Post.js with plantId as a parameter
+    };
+
     return (
         <section className="catalogue">
             <h2>Catalogue</h2>
@@ -104,7 +110,7 @@ const Catalogue = () => {
                         <div className="product-card card pt-3 pb-3" style={{ height: '90%' }}>
                             <img
                                 src={plant.image}
-                                alt={`Image of ${plant.title}`}
+                                alt={plant.title}
                                 className="card-img-top"
                                 loading="lazy"
                             />
@@ -120,7 +126,12 @@ const Catalogue = () => {
                                         </span>
                                     ))}
                                 </div>
-                                <button className="btn btn-outline-primary">See More</button>
+                                <button
+                                    className="btn btn-outline-primary"
+                                    onClick={() => handleSeeMoreClick(plant.id)}
+                                >
+                                    See More
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -133,86 +144,12 @@ const Catalogue = () => {
 
 // Plants Component
 const Plants = () => {
-    const navigate = useNavigate();
-    const searchInputRef = useRef(null);
-    const [showInput, setShowInput] = useState(false);
-
-    const handleLogoClick = (event) => {
-        event.preventDefault();
-        navigate('/');
-    };
-
-    const handleLoginClick = () => navigate('/login');
-    const handleShopClick = () => navigate('/shop');
-    const handleSearchClick = () => {
-        setShowInput(true);
-        if (searchInputRef.current) searchInputRef.current.focus();
-    };
 
     return (
         <div className="plants-page">
             {/* Header Section */}
-            <header className="overlay">
-                <nav className="navbar navbar-expand-lg bg-body-tertiary navbar-main">
-                    <div className="container-fluid navbar-box d-flex">
-                        <a className="navbar-brand" href="#" onClick={handleLogoClick}>
-                            <img src="/images/logo.png" alt="Plantopia Logo" />
-                        </a>
-                        <button
-                            className="navbar-toggler"
-                            type="button"
-                            data-bs-toggle="collapse"
-                            data-bs-target="#navbarSupportedContent"
-                            aria-controls="navbarSupportedContent"
-                            aria-expanded="false"
-                            aria-label="Toggle navigation"
-                        >
-                            <span className="navbar-toggler-icon"></span>
-                        </button>
-                        <div className="collapse navbar-collapse nav-center" id="navbarSupportedContent">
-                            <ul className="navbar-nav mb-2 mb-lg-0">
-                                <li className="nav-item">
-                                    <a className="nav-link active" href="#plants">Plants</a>
-                                </li>
-                                <li className="nav-item">
-                                    <a className="nav-link active" href="#community">Community</a>
-                                </li>
-                                <li className="nav-item" onClick={handleShopClick}>
-                                    <a className="nav-link active" href="#shop">Shop</a>
-                                </li>
-                                <li className="nav-item">
-                                    <a className="nav-link active" href="#about">About Us</a>
-                                </li>
-                            </ul>
-                            <div className="nav-right">
-                                <form
-                                    className="d-flex search-button"
-                                    role="search"
-                                    onSubmit={(e) => e.preventDefault()}
-                                >
-                                    <input
-                                        ref={searchInputRef}
-                                        className={`form-control me-2 ${showInput ? 'show' : 'hide'}`}
-                                        type="search"
-                                        placeholder="Search"
-                                        aria-label="Search"
-                                    />
-                                    <button
-                                        className="btn btn-outline-success"
-                                        type="button"
-                                        onClick={handleSearchClick}
-                                    >
-                                        <img src="/icons/search-normal.svg" alt="Search" />
-                                    </button>
-                                </form>
-                                <button onClick={handleLoginClick} className="login-button">
-                                    <img src="/icons/user.svg" alt="Login" />
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </nav>
-            </header>
+            <Navbar />
+
 
             {/* Main Section */}
             <main className="product-page">
@@ -256,31 +193,7 @@ const Plants = () => {
             </main>
 
             {/* Footer */}
-            <footer className="footer py-5">
-                <div className="row text-center">
-                    <div className="col-md-3 footer-logo">
-                        <img src="./images/logo.png" alt="Plantopia Logo" />
-                    </div>
-                    <div className="col-md-3 footer-links">
-                        <a href="#home">Home</a>
-                        <a href="#gardner">Gardner</a>
-                        <a href="#contact">Contact</a>
-                        <a href="#privacy">Privacy</a>
-                    </div>
-                    <div className="col-md-3 footer-social">
-                        <h3>Social</h3>
-                        <a href="#facebook"><i className="fab fa-facebook"></i></a>
-                        <a href="#linkedin"><i className="fab fa-linkedin"></i></a>
-                        <a href="#instagram"><i className="fab fa-instagram"></i></a>
-                    </div>
-                    <div className="col-md-3 subscribe">
-                        <h3>Subscribe For Updates</h3>
-                        <input type="email" placeholder="Enter email..." className="form-control mb-2" />
-                        <button className="btn button-subscribe">Subscribe</button>
-                    </div>
-                </div>
-                <p className="footer-note text-center mt-4">garden.com © All rights reserved</p>
-            </footer>
+            <Footer />
         </div>
     );
 };

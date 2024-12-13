@@ -2,10 +2,9 @@
 
 import React, { useRef, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Shopcarusel from './shop/Shopcarusel';
+import Footer from './Footer';
 import '../styles/pages/_main.scss';
-
-import OurProducts from '../components/shop-carusel'; // Adjust the path if needed
-
 
 const MainPage = () => {
   const navigate = useNavigate();
@@ -29,7 +28,8 @@ const MainPage = () => {
   };
 
   const handleLoginClick = () => {
-    navigate('/login');
+    navigate('/VirtualGarden');
+    // navigate('/login');
   };
 
   const handleShopClick = () => {
@@ -47,6 +47,10 @@ const MainPage = () => {
   const handleAboutusClick = () => {
     navigate('/aboutus');
   };
+
+  const handleMyPageClick = () => {
+    navigate('/mypage');
+  }
 
   useEffect(() => {
     const handleScroll = () => {
@@ -211,8 +215,8 @@ const MainPage = () => {
           </div>
         </section>
 
-        {/* Our Products Section */}
-        <OurProducts handleShopClick={handleShopClick} />
+        {/* Shop Carusel Section */}
+        <Shopcarusel handleShopClick={handleShopClick} />
 
         {/* User Comments Section */}
         <section className="user-comments py-5">
@@ -248,24 +252,10 @@ const MainPage = () => {
           >
             ↑
           </button>
-
         </section>
 
         {/* Footer Section */}
-        <footer className="footer py-5">
-          <div className="row logo-links">
-            <div className="col-md-3 footer-logo">
-              <img src="./images/logo.png" alt="Plantopia Logo" onClick={handleLogoClick}/>
-            </div>
-            <div className="col-md-3 footer-links">
-              <a className="nav-link active" onClick={handlePlantsClick} href='plants'>Plants</a>
-              <a className="nav-link active" onClick={handleCommunityClick} href='community'>Community</a>
-              <a className="nav-link active" onClick={handleShopClick} href='shop'>Shop</a>
-              <a className="nav-link active" onClick={handleAboutusClick} href='aboutus'>About Us</a>
-            </div>
-          </div>
-          <p className="footer-note text-center mt-4">Plantopia © All rights reserved</p>
-        </footer>
+        <Footer />
 
       </div>
     </div>
