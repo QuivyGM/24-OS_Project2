@@ -5,7 +5,7 @@
     position: relative;
     width: 1279px;
     height: 1px;
-    top: 279px;
+    top: 120px;
     left: 50%;
     transform: translateX(-50%);
     background-color: #8C8C8C;
@@ -13,12 +13,12 @@
     /* 상단 회색 라인 위 녹색 텍스트 */
     .green-text {
         position: absolute;
-        top: -30px;
+        top: -45px;
         right: 24px;
     
         color: $secondary-color;
         font-family: Poppins;
-        font-size: 20px;
+        font-size: 28px;
         font-style: normal;
         font-weight: 600;
         line-height: normal;
@@ -104,4 +104,14 @@
             font-weight: 600;
         }
     }
+}
+
+/* 하단 200px 여백 */
+.seo_gap {
+    position: relative;
+    width: 935px;
+    height: 200px;
+    left: 344px;
+    flex-shrink: 0;
+    background-color: rgba(0, 0, 0, 0);
 }

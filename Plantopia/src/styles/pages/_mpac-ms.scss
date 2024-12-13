@@ -1,5 +1,15 @@
 @import '../variables/colors';
 
+.mp-ms-big-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.mp-ms-content-container {
+    flex: 1;
+}
+
 /* 컨테이너 이름, 컨텐츠 개수 위한 컨테이너 */
 .mp-ms-title-container {
     position: relative;
