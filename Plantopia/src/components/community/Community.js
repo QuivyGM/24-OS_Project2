@@ -88,6 +88,29 @@ const Community = () => {
     }
   };
 
+  // time calculate
+  const getTimeDifference = (uploadTime) => {
+    const uploadDate = new Date(uploadTime);
+    const currentDate = new Date();
+    const diffInSeconds = Math.floor((currentDate - uploadDate) / 1000);
+
+    if (diffInSeconds < 3600) { // Less than 1 hour
+      const minutes = Math.floor(diffInSeconds / 60);
+      return `${minutes} minutes ago`;
+    } else if (diffInSeconds < 86400) { // Less than 1 day
+      const hours = Math.floor(diffInSeconds / 3600);
+      return `${hours} hours ago`;
+    } else if (diffInSeconds < 2592000) { // Less than 1 month
+      const days = Math.floor(diffInSeconds / 86400);
+      return `${days} days ago`;
+    } else if (diffInSeconds < 31536000) { // Less than 1 year
+      const months = Math.floor(diffInSeconds / 2592000);
+      return `${months} months ago`;
+    } else { // More than 1 year
+      const years = Math.floor(diffInSeconds / 31536000);
+      return `${years} years ago`;
+    }
+  }
 
 
   return (
@@ -189,7 +212,7 @@ const Community = () => {
             <div className="card-body">
                 <div className="post-header">
                     <span className="post-author">{post.author}</span>
-                    <span className="post-time">{post.time}</span>
+                    <span className="post-time">{getTimeDifference(post.uploadTime)}</span>
                 </div>
                 <h3 className="post-title">{post.title}</h3>
                 <p className="post-content">{post.content}</p>

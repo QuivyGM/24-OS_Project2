@@ -1,4 +1,5 @@
 import React from 'react';
+import { posts as importedPosts } from './data/posts'; // Import posts from external file
 import { useParams, useNavigate } from 'react-router-dom';
 
 const Post = () => {
