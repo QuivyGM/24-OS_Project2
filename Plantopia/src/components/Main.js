@@ -5,8 +5,10 @@ import { useNavigate } from 'react-router-dom';
 import Shopcarusel from './shop/Shopcarusel';
 import Footer from './Footer';
 import '../styles/pages/_main.scss';
+import { useAuth } from './AuthContext';
 
 const MainPage = () => {
+  const { isLoggedIn } = useAuth();
   const navigate = useNavigate();
   const searchInputRef = useRef(null);
   
@@ -48,9 +50,14 @@ const MainPage = () => {
     navigate('/aboutus');
   };
 
+
   const handleMyPageClick = () => {
-    navigate('/mypage');
-  }
+    if (!isLoggedIn) {
+        navigate('/Login'); // Redirect to login page
+    } else {
+        navigate('/mypage'); // Navigate to My Page
+    }
+};
 
   useEffect(() => {
     const handleScroll = () => {

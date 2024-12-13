@@ -5,8 +5,7 @@ import { useAuth } from './AuthContext';
 const ProtectedRoute = ({ children }) => {
     const { isLoggedIn } = useAuth();
 
-    if (!isLoggedIn) {
-        alert('Access Denied! Please log in to access this page.');
+    if (isLoggedIn) {
         return <Navigate to="/Login" replace />;
     }
 
