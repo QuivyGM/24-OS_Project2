@@ -4,10 +4,14 @@ import { posts as importedPosts } from './data/posts'; // Import posts from exte
 import '../../styles/pages/_community.scss';
 import Footer from '../Footer';
 import Navbar from '../Navbar';
+import { useAuth } from '../AuthContext';
+
+
 
 
 const Community = () => {
-  
+  const { isLoggedIn } = useAuth(); // Get the login state
+
   //for linking
   const navigate = useNavigate();
   const searchInputRef = useRef(null);
@@ -26,7 +30,7 @@ const Community = () => {
   //for pcard click
   const handlePostClick = (postId) => {
     navigate(`/post/${postId}`); // Navigate to the post page with postId
-};
+  };  
 
   // Pagination navigation
   const handlePreviousPage = () => {
@@ -38,25 +42,6 @@ const Community = () => {
       setCurrentPage((prev) => prev + 1);
     }
   };
-
-  
-  // const handleLogoClick = (event) => {
-  //   event.preventDefault();
-  //   navigate('/');
-  // };
-
-  // // Function to handle login button click and navigate to the login page
-  // const handleLoginClick = () => {
-  //   navigate('/login');
-  // };
-
-  // // Function to show the search input when the search button is clicked
-  // const handleSearchClick = () => {
-  //   setShowInput(true);
-  //   if (searchInputRef.current) {
-  //     searchInputRef.current.focus();
-  //   }
-  // };
 
   // Text Animation
   const text = "Find Your Perfect Plant"; 
@@ -94,6 +79,16 @@ const Community = () => {
       handleSearch();
     }
   };
+
+  const handleUploadClick = () => {
+    if (!isLoggedIn) {
+      alert('You must be logged in to upload a post.');
+      navigate('/Login');
+    } else {
+      navigate('/upload');
+    }
+  };    
+  
 
   // time calculate
   const getTimeDifference = (uploadTime) => {
@@ -158,7 +153,7 @@ const Community = () => {
 
           <button 
             className="btn btn-outline-secondary"
-            onClick={() => navigate('/upload')}
+            onClick={handleUploadClick}
           >
             +
           </button>

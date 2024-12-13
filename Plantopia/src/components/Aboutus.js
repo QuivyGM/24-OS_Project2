@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import Footer from './Footer';
+import Navbar from './Navbar';
 import '../styles/pages/_aboutus.scss';
 
 const Aboutus = () => {
@@ -19,47 +20,7 @@ const Aboutus = () => {
       {/* Page Container */}
       <div className="aboutus-page container">
         {/* Header Section */}
-        <div className="overlay">
-          <nav className="navbar navbar-expand-lg bg-body-tertiary navbar-main">
-            <div className="container-fluid navbar-box d-flex">
-              {/* Navbar Brand */}
-              <Link to="/" className="navbar-brand">
-                <img src="./images/logo.png" alt="logo" />
-              </Link>
-
-              <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
-                <span className="navbar-toggler-icon"></span>
-              </button>
-
-              <div className="collapse navbar-collapse nav-center" id="navbarSupportedContent">
-                <ul className="navbar-nav mb-2 mb-lg-0">
-                  <li className="nav-item"><Link to="/plants" className="nav-link active">Plants</Link></li>
-                  <li className="nav-item"><Link to="/community" className="nav-link active">Community</Link></li>
-                  <li className="nav-item"><Link to="/shop" className="nav-link active">Shop</Link></li>
-                  <li className="nav-item"><Link to="/aboutus" className="nav-link active">About Us</Link></li>
-                </ul>
-
-                <div className="nav-right">
-                  <form className="d-flex search-button" role="search" onSubmit={(e) => e.preventDefault()}>
-                    <input 
-                      ref={searchInputRef} 
-                      className={`form-control me-2 ${showInput ? 'show' : 'hide'}`}
-                      type="search" 
-                      placeholder="Search" 
-                      aria-label="Search" 
-                    />
-                    <button className="btn btn-outline-success" type="button" onClick={handleSearchClick}>
-                      <img src="./icons/search-normal.svg" alt="search" />
-                    </button>
-                  </form>
-                  <button onClick={handleLoginClick} className="login-button">
-                    <img src="./icons/user.svg" alt="login" />
-                  </button>
-                </div>
-              </div>
-            </div>
-          </nav>
-        </div>
+        <Navbar />
 
         {/* About Section */}
         <div className="about-page">

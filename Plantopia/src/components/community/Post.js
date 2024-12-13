@@ -5,8 +5,10 @@ import { comments as importedComments } from './data/comments'; // Import commen
 import '../../styles/pages/_posts.scss';
 import Footer from '../Footer';
 import Navbar from '../Navbar';
+import { useAuth } from '../AuthContext';
 
-const Post = () => {    
+const Post = () => {
+    const { isLoggedIn } = useAuth(); // Access the isLoggedIn state    
     const { postId } = useParams(); // Retrieve the number (ID) from the URL
     const navigate = useNavigate(); // Initialize navigate function
 
@@ -18,19 +20,25 @@ const Post = () => {
     };
 
     const handleCommentSubmit = (parentID) => {
+        if (!isLoggedIn) {
+            alert('You must be logged in to submit a comment.');
+            navigate('/Login'); // Redirect to login page
+            return;
+        }
+    
         if (newComment.trim()) {
             const newCommentObject = {
                 id: comments.length > 0 ? comments[comments.length - 1].id + 1 : 1, // Increment ID
                 parentID: parentID, // Link comment to the current post ID
                 textBody: newComment, // User input
                 time: new Date().toISOString(), // Current time
-                author: 'GuestUser', // Temporary author
+                author: 'GuestUser', // Temporary author (or replace with logged-in user)
                 likes: 0 // Default likes
             };
-
+    
             setComments([...comments, newCommentObject]); // Add to local state
             setNewComment(''); // Reset input field
-
+    
             // Show the formatted new comment in an alert
             alert(`New Comment Submitted:\n${JSON.stringify(newCommentObject, null, 2)}`);
         } else {
