@@ -2,6 +2,8 @@
 
 import React, { useRef, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Shopcarusel from './shop/Shopcarusel';
+import Footer from './Footer';
 import '../styles/pages/_main.scss';
 
 const MainPage = () => {
@@ -10,6 +12,8 @@ const MainPage = () => {
   
   const [showInput, setShowInput] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+
+  const [showButton, setShowButton] = useState(false);
 
   const handleSearchClick = () => {
     setShowInput(true);
@@ -24,20 +28,44 @@ const MainPage = () => {
   };
 
   const handleLoginClick = () => {
-    navigate('/login');
+    navigate('/VirtualGarden');
+    // navigate('/login');
   };
 
   const handleShopClick = () => {
     navigate('/shop');
   };
 
+  const handlePlantsClick = () => {
+    navigate('/plants');
+  };
+
+  const handleCommunityClick = () => {
+    navigate('/community');
+  };
+
+  const handleAboutusClick = () => {
+    navigate('/aboutus');
+  };
+
+  const handleMyPageClick = () => {
+    navigate('/mypage');
+  }
+
   useEffect(() => {
     const handleScroll = () => {
+      if (window.scrollY > window.innerHeight) {
+        setShowButton(true); // show button
+      } else {
+        setShowButton(false); // hide button
+      }
       setIsScrolled(window.scrollY > window.innerHeight);
     };
+
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll); 
   }, []);
+  
 
   return (
     <div>
@@ -56,10 +84,10 @@ const MainPage = () => {
               {/* Navbar links */}
               <div className="collapse navbar-collapse nav-center" id="navbarSupportedContent">
                 <ul className="navbar-nav mb-2 mb-lg-0">
-                  <li className="nav-item"><a className="nav-link active" onClick={() => navigate('/plants')} href='plants'>Plants</a></li>
-                  <li className="nav-item"><a className="nav-link active" onClick={() => navigate('/community')} href='community'>Community</a></li>
+                  <li className="nav-item"><a className="nav-link active" onClick={handlePlantsClick} href='plants'>Plants</a></li>
+                  <li className="nav-item"><a className="nav-link active" onClick={handleCommunityClick} href='community'>Community</a></li>
                   <li className="nav-item"><a className="nav-link active" onClick={handleShopClick} href='shop'>Shop</a></li>
-                  <li className="nav-item"><a className="nav-link active" onClick={() => navigate('/aboutus')} href='aboutus'>About Us</a></li>
+                  <li className="nav-item"><a className="nav-link active" onClick={handleAboutusClick} href='aboutus'>About Us</a></li>
                 </ul>
 
                 {/* Right nav (search and login) */}
@@ -91,13 +119,8 @@ const MainPage = () => {
           <h1>Plantopia</h1>
         </div>
       </div>
-
-
-
-
-
-
-
+{/* --------------------------------------------------------------------------------------------------------------- */}
+      
       {/* Second Page Section */}
       <div className="main-second">
         {/* What We Provide Section */}
@@ -122,7 +145,7 @@ const MainPage = () => {
                   <p>Order plants online with delivery and maintenance guidance.</p>
                 </li>
               </ul>
-              <button className="btn btn-success more-info-button mt-3">More Info</button>
+              <button className="btn btn-success more-info-button mt-3" onClick={handleAboutusClick}>More Info</button>
             </div>
           </div>
         </section>
@@ -130,6 +153,14 @@ const MainPage = () => {
         {/* Individual Blogs Section */}
         <section className="individual-blogs py-5">
           <h2 className="text-center blog-title">Individual Blogs</h2>
+          <div className="btn btn more-button-div">
+            <button 
+                className="more-button" 
+                onClick={handlePlantsClick} href='shop'
+              >
+                More...
+            </button>
+          </div>
           <div className="row ">
             <div className="col-md-5 blog-image-box">
               <img src="./images/1.jpg" alt="Blog" className="img-fluid blog-image" />
@@ -184,28 +215,20 @@ const MainPage = () => {
           </div>
         </section>
 
-        {/* Our Products Section */}
-        <section className="our-products py-5">
-          <h2 className="text-center mb-4">Our Products</h2>
-          <div className="row">
-            {[1, 2, 3, 4].map((item) => (
-              <div key={item} className="col-6 col-md-3 mb-4">
-                <div className="card product-item">
-                  <img src={`./images/${item}.jpg`} alt="Product" className="card-img-top" />
-                  <div className="card-body text-center">
-                    <h5 className="card-title">Modern Picture</h5>
-                    <p className="price">$15.99</p>
-                    <button className="btn btn-outline-primary">Add to Cart</button>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
+        {/* Shop Carusel Section */}
+        <Shopcarusel handleShopClick={handleShopClick} />
 
         {/* User Comments Section */}
         <section className="user-comments py-5">
           <h2 className="text-center mb-4">User Comments</h2>
+          <div className="btn btn more-button-div">
+            <button 
+                className="more-button" 
+                onClick={handleCommunityClick} href='shop'
+              >
+                More...
+            </button>
+          </div>
           <div className="comment-box p-4">
             <div className="comment-author mt-3 d-flex align-items-center">
               <img src="./images/4.jpg" alt="User" className="rounded-circle" />
@@ -222,34 +245,17 @@ const MainPage = () => {
             </div>
             <button className="btn btn-link drop-comment mt-3">Drop Comment</button>
           </div>
+          {/* top button */}
+          <button
+            className={`back-to-top ${showButton ? 'visible' : ''}`}
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          >
+            ↑
+          </button>
         </section>
 
         {/* Footer Section */}
-        <footer className="footer py-5">
-          <div className="row text-center">
-            <div className="col-md-3 footer-logo">
-              <img src="./images/logo.png" alt="Plantopia Logo" />
-            </div>
-            <div className="col-md-3 footer-links">
-              <a href="#home">Home</a>
-              <a href="#gardner">Gardner</a>
-              <a href="#contact">Contact</a>
-              <a href="#privacy">Privacy</a>
-            </div>
-            <div className="col-md-3 footer-social">
-              <h3>Social</h3>
-              <a href="#facebook"><i className="fab fa-facebook"></i></a>
-              <a href="#linkedin"><i className="fab fa-linkedin"></i></a>
-              <a href="#instagram"><i className="fab fa-instagram"></i></a>
-            </div>
-            <div className="col-md-3 subscribe">
-              <h3>Subscribe For Updates</h3>
-              <input type="email" placeholder="Enter email..." className="form-control mb-2" />
-              <button className="btn button-subscribe">Subscribe</button>
-            </div>
-          </div>
-          <p className="footer-note text-center mt-4">garden.com © All rights reserved</p>
-        </footer>
+        <Footer />
 
       </div>
     </div>
