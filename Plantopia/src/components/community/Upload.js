@@ -1,53 +1,65 @@
 import React, { useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { posts as importedPosts } from './data/posts'; // Import posts from external file
+import '../../styles/pages/_posts.scss';
+import Footer from '../Footer';
+import Navbar from '../Navbar';
 
-const Upload = () => {
-    const navigate = useNavigate();
+const Post = () => {
+    const [posts, setPosts] = useState(importedPosts); // State to manage posts
     const [title, setTitle] = useState('');
-    const [image, setImage] = useState(null);
-    const [body, setBody] = useState('');
-    const [username, setUsername] = useState('');
+    const [content, setContent] = useState('');
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const uploadTime = new Date().toISOString();
-        const formData = {
-            title,
-            image,
-            body,
-            username,
-            uploadTime
-        };
-        console.log(formData);
-        // Here you can add the code to save the formData to your backend or state management
+    const handlePostSubmit = () => {
+        if (title.trim() && content.trim()) {
+            const newPost = {
+                id: posts.length > 0 ? posts[posts.length - 1].id + 1 : 1, // Increment ID
+                author: 'GuestUser', // Temporary nickname
+                uploadTime: new Date().toISOString(), // Current time
+                title: title,
+                content: content,
+                likes: 0, // Reset to 0
+                answers: 0 // Reset to 0
+            };
+
+            console.log('New Post Submitted:', newPost); // Log the new post structure
+            setPosts([...posts, newPost]); // Add the new post to the list
+            setTitle(''); // Reset title input
+            setContent(''); // Reset content input
+            alert('Post submitted successfully!');
+        } else {
+            alert('Please enter both a title and content.');
+        }
     };
 
     return (
-        <div>
-            <button onClick={() => navigate(-1)}>Go Back</button>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Title:</label>
-                    <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} required />
-                </div>
-                <div>
-                    <label>Image:</label>
-                    <input type="file" onChange={(e) => setImage(e.target.files[0])} required />
-                </div>
-                <div>
-                    <label>Text Body:</label>
-                    <textarea value={body} onChange={(e) => setBody(e.target.value)} required></textarea>
-                </div>
-                <div>
-                    <label>Username:</label>
-                    <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} required />
-                </div>
-                <button type="submit">Submit</button>
-            </form>
+        <div className="page container">
+            <Navbar />
+
+            {/* Input Form for New Post */}
+            <div className="new-post-form mt-4">
+                <h3>Create a New Post</h3>
+                <input
+                    type="text"
+                    placeholder="Enter title"
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                    className="form-control mb-2"
+                />
+                <textarea
+                    placeholder="Enter content"
+                    value={content}
+                    onChange={(e) => setContent(e.target.value)}
+                    className="form-control mb-2"
+                    rows="4"
+                ></textarea>
+                <button className="btn btn-primary" onClick={handlePostSubmit}>
+                    Submit Post
+                </button>
+            </div>
+
+            <Footer />
         </div>
     );
 };
 
-export default Upload;
-
-
+export default Post;

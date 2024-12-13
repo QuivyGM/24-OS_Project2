@@ -11,6 +11,7 @@ import Community from './components/community/Community';
 import Upload from './components/community/Upload';
 import Post from './components/community/Post';
 
+
 import Shop from './components/shop/Shop';
 import ShopCat from './components/shop/ShopCat';
 
@@ -46,6 +47,7 @@ const App = () => {
         <Route path="/post/:postId" element={<Post />} />
         <Route path="/Footer" element={<Footer />} />
         <Route path="/Navbar" element={<Navbar />} />
+        
       </Routes>
     </Router>
   );

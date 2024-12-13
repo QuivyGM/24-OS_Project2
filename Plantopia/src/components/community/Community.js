@@ -5,7 +5,9 @@ import '../../styles/pages/_community.scss';
 import Footer from '../Footer';
 import Navbar from '../Navbar';
 
+
 const Community = () => {
+  
   //for linking
   const navigate = useNavigate();
   const searchInputRef = useRef(null);
@@ -84,7 +86,7 @@ const Community = () => {
 
   const handleSearch = () => {
     alert(`Search Term: ${searchTerm}`);  //search input - 검색 입력값
-    setSearchTerm('');
+    //setSearchTerm('');
   };
 
   const handleKeyPress = (e) => {
@@ -178,9 +180,14 @@ const Community = () => {
                 </div>
                 <h3 className="post-title">{post.title}</h3>
                 <p className="post-content">{post.content}</p>
-                <div className="post-footer">
-                    <span>{post.answers} answers</span>
-                </div>
+                <div className="post-footer d-flex justify-content-between">
+                  <span className="post-likes">
+                      {post.likes} likes
+                  </span>
+                  <span className="post-answers">
+                         {post.answers} answers
+                  </span>
+              </div>
             </div>
         </div>
         
