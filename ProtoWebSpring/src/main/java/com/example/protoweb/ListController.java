@@ -4,8 +4,11 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
@@ -21,15 +24,23 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.protoweb.Accounts.Accounts;
 import com.example.protoweb.Accounts.AccountsService;
+import com.example.protoweb.Comments.CommentsService;
 import com.example.protoweb.Images.ImagesService;
+import com.example.protoweb.PlantRatings.PlantRatings;
 import com.example.protoweb.PlantRatings.PlantRatingsService;
 import com.example.protoweb.Plants.Plants;
 import com.example.protoweb.Plants.PlantsService;
-import com.example.protoweb.PostRatings.PostRatingsService;
+import com.example.protoweb.Posts.Postbads;
+import com.example.protoweb.Posts.PostbadsService;
+import com.example.protoweb.Posts.Postgoods;
+import com.example.protoweb.Posts.PostgoodsService;
 import com.example.protoweb.Posts.Posts;
 import com.example.protoweb.Posts.PostsService;
 import com.example.protoweb.Products.Products;
 import com.example.protoweb.Products.ProductsService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mysql.cj.jdbc.Blob;
 
 @RestController
@@ -43,11 +54,15 @@ public class ListController {
 	@Autowired
     private PostsService postser;
 	@Autowired
+    private PostgoodsService postgoodsser;
+	@Autowired
+    private PostbadsService postbadsser;
+	@Autowired
     private PlantsService plantser;
 	@Autowired
     private PlantRatingsService plantratingser;
 	@Autowired
-    private PostRatingsService postratingser;
+    private CommentsService commentsser;
 	
 	@GetMapping("/api/Accounts")
 	private Map<String, Object> view() {
@@ -77,16 +92,41 @@ public class ListController {
 		return "Ok";
 	}
 	
-	@DeleteMapping("/api/Accounts")
+	/*@DeleteMapping("/api/Accounts")
 	private String DeleteAccounts(@RequestBody Map<String, Object> req) {
+		Accounts ac = sv.findById((int)req.get("id"));
+		
+		
 		sv.deleteById((int)req.get("id"));
+		return "Ok";
+	}*/
+	
+	@PostMapping("/api/Comments")
+	private String SetComments(@RequestBody Map<String, Object> req) {
+		Accounts ac = sv.findById((int)req.get("user_id"));
+		if(ac == null)
+			return "Not Found User";
+		Posts pt = postser.findById((int)req.get("post_id"));
+		if(pt == null)
+			return "Not Found Post";
+		
+		pt.setCommentsCount(pt.getCommentsCount() + 1);
+		commentsser.save(req.get("body").toString(),ac,pt);
 		return "Ok";
 	}
 	
 	@PostMapping("/api/Plants")
 	private String SetPlants(@RequestBody Map<String, Object> req) {
 		if(imgser.isExist((int)req.get("Imgid"))) {
-			plantser.save(req.get("Name").toString(),(int)req.get("Imgid") ,req.get("Description").toString(), req.get("Features").toString(),(int)req.get("Price"));
+			String json = "";
+			try {
+				json = new ObjectMapper().writeValueAsString(req.get("Features"));
+			} catch (JsonProcessingException e) {
+				e.printStackTrace();
+				return "Error";
+			}
+			plantser.save(req.get("Name").toString(),(int)req.get("Imgid") ,req.get("Description").toString(), json,(int)req.get("Price"));
+			
 			return "Ok";
 		} else {
 			return "Not Found Image";
@@ -121,21 +161,37 @@ public class ListController {
 		}
 	}
 	
-	@PostMapping("/api/PostRatings")
-	private String SetPostRatings(@RequestBody Map<String, Object> req) {
-		try {
-			Accounts ac = sv.findById((int)req.get("user_id"));
-			Posts pt = postser.findById((int)req.get("post_id"));
-			pt.setRating(pt.getRating() + (int)req.get("rating"));
-			pt.setRatingCount(pt.getRatingCount() + 1);
-			pt.setAvgRating(Math.floor(pt.getRating() * 100.0 / pt.getRatingCount()) / 100.0);
-			postratingser.save((int)req.get("rating"), ac, pt);
-			return "Ok";
-		} catch(Exception e) {
-			e.printStackTrace();
-			return "Not Found User or Plant";
-		}
+	@PostMapping("/api/Postgoods")
+	private String SetPostgoods(@RequestBody Map<String, Object> req) {
+		Accounts ac = sv.findById((int)req.get("user_id"));
+		if(ac == null) return "Not Found User";
 		
+		Posts pt = postser.findById((int)req.get("post_id"));
+		if(pt == null) return "Not Found Post";
+
+		if (postbadsser.existUAP(ac.getId(), pt.getId())) return "already rated";
+		if (postgoodsser.existUAP(ac.getId(), pt.getId())) return "already rated";
+
+		pt.setGood(pt.getGood() + 1);
+		pt.setLikes(pt.getLikes() + 1);
+		postgoodsser.save(ac, pt);
+		return "Ok";
+	}
+	
+	@PostMapping("/api/Postbads")
+	private String SetPostbads(@RequestBody Map<String, Object> req) {
+		Accounts ac = sv.findById((int)req.get("user_id"));
+		if(ac == null) return "Not Found User";
+		Posts pt = postser.findById((int)req.get("post_id"));
+		if(pt == null) return "Not Found Post";
+		
+		if (postbadsser.existUAP(ac.getId(), pt.getId())) return "already rated";
+		if (postgoodsser.existUAP(ac.getId(), pt.getId())) return "already rated";
+
+		pt.setBad(pt.getBad() + 1);
+		pt.setLikes(pt.getLikes() - 1);
+		postbadsser.save(ac, pt);
+		return "Ok";
 	}
 	
 	@GetMapping("/api/Products")
@@ -176,15 +232,27 @@ public class ListController {
 		Map<String,Object> res = new HashMap<>();
 		Map<String,Object> resMain = new HashMap<>();
 		List<Plants> pllist = plantser.findFirst15OrderByAvgRating();
-		List<String> ress = new ArrayList<>(Arrays.asList(pllist.get(0).getFeature().replaceAll("\\[", "").replaceAll("\\]", "").split(", ")));
+		if(pllist.size() == 0) {
+			res.put("counts", 0);
+			return res;
+		}
 		List<Map<String,Object>> getpl = new ArrayList<>();
 		resMain.put("title", pllist.get(0).getName());
-		resMain.put("features", ress);
+		resMain.put("description", pllist.get(0).getDescription());
+		resMain.put("plantimg", "http://localhost:8080/image?id=" + pllist.get(0).getImgId());
+		try {
+			resMain.put("features", new ObjectMapper().readValue(pllist.get(0).getFeature(), LinkedHashMap.class));
+		} catch (JsonMappingException e) {
+			e.printStackTrace();
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
 		res.put("main", resMain);
 		res.put("counts", pllist.size());
-		for(int i = 0;i < pllist.size();i++) {
+		int itr = pllist.size();
+		for(int i = 0;i < itr;i++) {
 			Map<String,Object> tmp = new HashMap<>();
-			tmp.put("plantimg","http://localhost:8080?id=" + pllist.get(i).getImgId());
+			tmp.put("plantimg","http://localhost:8080/image?id=" + pllist.get(i).getImgId());
 			tmp.put("title",pllist.get(i).getName());
 			tmp.put("rating",pllist.get(i).getAvgRating());
 			getpl.add(tmp);
@@ -193,35 +261,60 @@ public class ListController {
 		return res;
 	}
 	
+	@GetMapping("/Posts")
+	private Map<String,Object> SitePosts() {
+		Map<String,Object> res = new HashMap<>();
+		List<Map<String,Object>> lres = new ArrayList<>();
+		List<Posts> pts = postser.findAllByOrderByIdDesc();
+		int itr = pts.size();
+		for(int i = 0;i < itr;i++) {
+			Map<String, Object> tres = new HashMap<>();
+			Posts pt = pts.get(i);
+			tres.put("username", pt.getUser().getUsername());
+			tres.put("title", pt.getTitle());
+			if(pt.getBody().length() > 34)
+				tres.put("contents", pt.getBody().substring(0, 34) + "...");
+			else
+				tres.put("contents", pt.getBody());
+			tres.put("answernum", pt.getCommentsCount());
+			lres.add(tres);
+		}
+		res.put("postlists", lres);
+		return res;
+	}
+	
 	@GetMapping("/Shop")
 	private Map<String,Object> SiteShop() {
 		Map<String,Object> res = new HashMap<>();
-		
-		//식물 로드
 		Map<String,Object> resMain = new HashMap<>();
 		List<Plants> pllist = plantser.findFirst4OrderByAvgRating();
-		List<String> ress = new ArrayList<>(Arrays.asList(pllist.get(0).getFeature().replaceAll("\\[", "").replaceAll("\\]", "").split(", ")));
+		if(pllist.size() == 0) {
+			res.put("counts", 0);
+			return res;
+		}
 		List<Map<String,Object>> getpl = new ArrayList<>();
 		resMain.put("title", pllist.get(0).getName());
-		resMain.put("features", ress);
+		resMain.put("description", pllist.get(0).getDescription());
+		resMain.put("price", pllist.get(0).getPrice());
+		resMain.put("plantimg", "http://localhost:8080/image?id=" + pllist.get(0).getImgId());
+		try {
+			resMain.put("features", new ObjectMapper().readValue(pllist.get(0).getFeature(), LinkedHashMap.class));
+		} catch (JsonMappingException e) {
+			e.printStackTrace();
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
 		res.put("main", resMain);
 		res.put("counts", pllist.size());
-		for(int i = 0;i < pllist.size();i++) {
+		int itr = pllist.size();
+		for(int i = 0;i < itr;i++) {
 			Map<String,Object> tmp = new HashMap<>();
-			tmp.put("plantimg","http://localhost:8080?id=" + pllist.get(i).getImgId());
+			tmp.put("plantimg","http://localhost:8080/image?id=" + pllist.get(i).getImgId());
 			tmp.put("title",pllist.get(i).getName());
 			tmp.put("price",pllist.get(i).getPrice());
 			getpl.add(tmp);
 		}
 		res.put("plantlists", getpl);
-		
-		//포스트 로드
-		Map<String,Object> resMaincomm = new HashMap<>();
-		List<Posts> ptlist = postser.findTopByOrderByAvgRatingDesc();
-		resMaincomm.put("username", ptlist.get(0).getUser().getUsername());
-		resMaincomm.put("rating", ptlist.get(0).getAvgRating());
-		resMaincomm.put("description", ptlist.get(0).getBody());
-		res.put("comments", resMaincomm);
 		return res;
 	}
 	
@@ -232,15 +325,26 @@ public class ListController {
 		//식물 로드
 		Map<String,Object> resMain = new HashMap<>();
 		List<Plants> pllist = plantser.findFirst4OrderByAvgRating();
-		List<String> ress = new ArrayList<>(Arrays.asList(pllist.get(0).getFeature().replaceAll("\\[", "").replaceAll("\\]", "").split(", ")));
+		if(pllist.size() == 0) {
+			res.put("counts", 0);
+			return res;
+		}
 		List<Map<String,Object>> getpl = new ArrayList<>();
 		resMain.put("title", pllist.get(0).getName());
-		resMain.put("features", ress);
+		resMain.put("description", pllist.get(0).getDescription());
+		resMain.put("plantimg", "http://localhost:8080/image?id=" + pllist.get(0).getImgId());
+		try {
+			resMain.put("features", new ObjectMapper().readValue(pllist.get(0).getFeature(), LinkedHashMap.class));
+		} catch (JsonMappingException e) {
+			e.printStackTrace();
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
 		res.put("main", resMain);
 		res.put("counts", pllist.size());
 		for(int i = 0;i < pllist.size();i++) {
 			Map<String,Object> tmp = new HashMap<>();
-			tmp.put("plantimg","http://localhost:8080?id=" + pllist.get(i).getImgId());
+			tmp.put("plantimg","http://localhost:8080/image?id=" + pllist.get(i).getImgId());
 			tmp.put("title",pllist.get(i).getName());
 			tmp.put("price",pllist.get(i).getPrice());
 			getpl.add(tmp);
@@ -249,10 +353,10 @@ public class ListController {
 		
 		//포스트 로드
 		Map<String,Object> resMaincomm = new HashMap<>();
-		List<Posts> ptlist = postser.findTopByOrderByAvgRatingDesc();
+		List<Posts> ptlist = postser.findTopByOrderByLikesDesc();
 		resMaincomm.put("username", ptlist.get(0).getUser().getUsername());
-		resMaincomm.put("rating", ptlist.get(0).getAvgRating());
 		resMaincomm.put("description", ptlist.get(0).getBody());
+		resMaincomm.put("Likes", ptlist.get(0).getLikes());
 		res.put("comments", resMaincomm);
 		return res;
 	}
@@ -262,8 +366,10 @@ public class ListController {
 		Resource resource = new FileSystemResource(imageName);
 		try {
 			imgser.save(resource.getInputStream().readAllBytes());
+			return "Ok";
 		} catch (Exception e) {
+			e.printStackTrace();
+			return "Failed";
 		}
-		return "Ok";
 	}
 }

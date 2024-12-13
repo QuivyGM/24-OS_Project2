@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface PostsRepository extends JpaRepository<Posts, Integer>  {
-	public List<Posts> findTopByOrderByAvgRatingDesc();
+	public List<Posts> findTopByOrderByLikesDesc();
+	public List<Posts> findAllByOrderByLikesDesc();
+	public List<Posts> findAllByOrderByIdDesc();
 
 }

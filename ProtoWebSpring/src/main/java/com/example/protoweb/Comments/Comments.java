@@ -1,4 +1,4 @@
-package com.example.protoweb.Posts;
+package com.example.protoweb.Comments;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -9,8 +9,7 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import com.example.protoweb.Accounts.Accounts;
-import com.example.protoweb.Comments.Commentbads;
-import com.example.protoweb.Comments.Commentgoods;
+import com.example.protoweb.Posts.Posts;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -29,20 +28,14 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class Posts {
+public class Comments {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) //자동으로 1씩 증가하면서 배정
 	private int id;
 	
 	@Column
-	private String title;
-	
-	@Column
 	@Size(min=0,max=65535)
 	private String body;
-	
-	@Column
-	private String tags;
 	
 	@Column
 	private int good;
@@ -51,36 +44,34 @@ public class Posts {
 	@Column
 	private int likes;
 	
-	@Column
-	private int CommentsCount;
-	
-	@CreationTimestamp
-	private Timestamp created_at;
-	
-	@OneToMany(mappedBy="post", cascade=CascadeType.ALL)
-	@OnDelete(action= OnDeleteAction.CASCADE)
-    private List<Postgoods> postgoods = new ArrayList<>();
-	
-	@OneToMany(mappedBy="post", cascade=CascadeType.ALL)
-	@OnDelete(action= OnDeleteAction.CASCADE)
-    private List<Postbads> postbads = new ArrayList<>();
-	
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "accounts_id")
     private Accounts user;
 	
-	public Posts() {
-		CommentsCount = 0;
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "posts_id")
+    private Posts post;
+	
+	@OneToMany(mappedBy="comment", cascade=CascadeType.ALL)
+	@OnDelete(action= OnDeleteAction.CASCADE)
+    private List<Commentgoods> commentgoods = new ArrayList<>();
+	
+	@OneToMany(mappedBy="comment", cascade=CascadeType.ALL)
+	@OnDelete(action= OnDeleteAction.CASCADE)
+    private List<Commentbads> commentbads = new ArrayList<>();
+	
+	@CreationTimestamp
+	private Timestamp created_at;
+	
+	public Comments() {
 		good = 0;
 		bad = 0;
 		likes = 0;
 	};
-	public Posts(String _title, String _body, String _tags, Accounts _user) {
-		title = _title;
+	public Comments(String _body, Accounts _user, Posts _post) {
 		body = _body;
-		tags = _tags;
+		post = _post;
 		user = _user;
-		CommentsCount = 0;
 		good = 0;
 		bad = 0;
 		likes = 0;

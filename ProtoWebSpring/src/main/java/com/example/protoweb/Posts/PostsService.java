@@ -21,8 +21,20 @@ public class PostsService {
 	}
 
 	@Transactional(readOnly = true)
-	public List<Posts> findTopByOrderByAvgRatingDesc() {
-		List<Posts> acc = postsrepository.findTopByOrderByAvgRatingDesc();
+	public List<Posts> findTopByOrderByLikesDesc() {
+		List<Posts> acc = postsrepository.findTopByOrderByLikesDesc();
+		return acc;
+	}
+
+	@Transactional(readOnly = true)
+	public List<Posts> findAllByOrderByLikesDesc() {
+		List<Posts> acc = postsrepository.findAllByOrderByLikesDesc();
+		return acc;
+	}
+
+	@Transactional(readOnly = true)
+	public List<Posts> findAllByOrderByIdDesc() {
+		List<Posts> acc = postsrepository.findAllByOrderByIdDesc();
 		return acc;
 	}
 	
