@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { posts as importedPosts } from './data/posts'; // Import posts from external file
 import '../../styles/pages/_posts.scss';
 import Footer from '../Footer';
@@ -13,31 +13,44 @@ const Post = () => {
 
     const handlePostSubmit = () => {
         if (title.trim() && content.trim()) {
-            const newPost = {
-                title: title, // Set title
-                body: content, // Use 'body' instead of 'content'
-                tags: "#C++", // Example static tag (replace dynamically if needed)
-                user_id: 1 // Static user ID (can be replaced dynamically)
-            };
-    
-            console.log('New Post Submitted:', newPost); // Log the new post structure
-            setPosts([...posts, newPost]); // Add the new post to the list
-            setTitle(''); // Reset title input
-            setContent(''); // Reset content input
-    
-            // Alert with formatted data
-            alert(
-                `Post submitted successfully!\n\n` +
-                `Title: ${newPost.title}\n` +
-                `Body: ${newPost.body}\n` +
-                `Tags: ${newPost.tags}\n` +
-                `User ID: ${newPost.user_id}`
-            );
+            // POST request to API
+            fetch('your-api-endpoint', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    title: title,   // Use required format
+                    body: content,  // Change "content" to "body"
+                    tags: "#C++",   // Example static tag
+                    user_id: 1      // Static user ID (replace dynamically if needed)
+                }),
+            })
+                .then(res => res.json()) // Convert response to JSON
+                .then(result => {
+                    if (result.message === 'SUCCESS') {
+                        alert('Post submitted successfully!');
+                        // Add new post locally
+                        setPosts([...posts, {
+                            title: title,
+                            body: content,
+                            tags: "#C++",
+                            user_id: 1
+                        }]);
+                        setTitle(''); // Reset title input
+                        setContent(''); // Reset content input
+                    } else {
+                        alert('Failed to submit the post. Please check your input.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error submitting post:', error);
+                    alert('An error occurred. Please try again.');
+                });
         } else {
             alert('Please enter both a title and content.');
         }
     };
-    
 
     const handleBackClick = () => {
         navigate(-1); // Navigate to the previous page
