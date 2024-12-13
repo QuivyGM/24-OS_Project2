@@ -105,3 +105,13 @@
         }
     }
 }
+
+/* 하단 200px 여백 */
+.seo_gap {
+    position: relative;
+    width: 935px;
+    height: 200px;
+    left: 344px;
+    flex-shrink: 0;
+    background-color: rgba(0, 0, 0, 0);
+}

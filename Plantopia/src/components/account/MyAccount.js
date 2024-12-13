@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import '../../styles/pages/_myaccount.scss';
 import Layout_seo from './Layout_seo.js';
+import Navbar from '../Navbar';
+import Footer from '../Footer';
 
 const MyAccount = () => {
     const [currentPassword, setCurrentPassword] = useState('');
@@ -25,6 +27,9 @@ const MyAccount = () => {
     };
     
     return (
+        <div className="ma-big-container">
+        <Navbar />
+
         <div style={{ backgroundColor: 'white', minHeight: '100vh' }}>
         <Layout_seo />
         <div className="topline" style={{ backgroundColor: "rgba(0, 0, 0, 0)" }}>
@@ -69,10 +74,11 @@ const MyAccount = () => {
                 <div className="ma-menu-text" style={{ top: '503px'}} >New Password</div>
 
                 <div className="ma-save-button">save</div>
-                <div className="ma-delete-text" style={{ top: '595px'}} >Delete Your Account</div>
                 </div>
             </div>
         </div>
+        </div>
+        
     );
 };
 
