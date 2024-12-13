@@ -7,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.mysql.cj.jdbc.Blob;
-
 @Service
 public class ImagesService {
 	@Autowired
@@ -29,7 +27,10 @@ public class ImagesService {
 	@Transactional
 	public byte[] findById(int _id) {
 		Optional<Images> tmp = imagerepository.findById(_id);
-		return tmp.get().getImage();
+		if(tmp.isPresent())
+			return tmp.get().getImage();
+		else
+			return null;
 	}
 	
 	public boolean isExist(int _id) {

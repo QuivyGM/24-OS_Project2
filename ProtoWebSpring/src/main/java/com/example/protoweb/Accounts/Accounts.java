@@ -35,7 +35,7 @@ public class Accounts {
 	private int id;
 
 	@Column
-	private String Username;
+	private String username;
 	
 	@Column
 	private String Password;
@@ -77,7 +77,7 @@ public class Accounts {
 	public Accounts() {};
 	public Accounts(String _pass, String _username, String _nickname) {
 		Password = _pass;
-		Username = _username;
+		username = _username;
 		Nickname = _nickname;
 	}
 }

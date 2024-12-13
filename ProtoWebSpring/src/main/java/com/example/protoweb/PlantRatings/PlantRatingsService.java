@@ -30,6 +30,9 @@ public class PlantRatingsService {
 	@Transactional
 	public PlantRatings findById(int _id) {
 		Optional<PlantRatings> tmp = prrepository.findById(_id);
-		return tmp.get();
+		if(tmp.isPresent())
+			return tmp.get();
+		else
+			return null;
 	}
 }

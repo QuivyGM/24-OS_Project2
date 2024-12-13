@@ -9,8 +9,7 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import com.example.protoweb.Accounts.Accounts;
-import com.example.protoweb.Comments.Commentbads;
-import com.example.protoweb.Comments.Commentgoods;
+import com.example.protoweb.Comments.Comments;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -22,6 +21,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
@@ -55,7 +56,12 @@ public class Posts {
 	private int CommentsCount;
 	
 	@CreationTimestamp
+	@Temporal(TemporalType.TIMESTAMP)
 	private Timestamp created_at;
+	
+	@OneToMany(mappedBy="post", cascade=CascadeType.ALL)
+	@OnDelete(action= OnDeleteAction.CASCADE)
+    private List<Comments> comments = new ArrayList<>();
 	
 	@OneToMany(mappedBy="post", cascade=CascadeType.ALL)
 	@OnDelete(action= OnDeleteAction.CASCADE)

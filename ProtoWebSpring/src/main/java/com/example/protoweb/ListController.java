@@ -1,14 +1,12 @@
 package com.example.protoweb;
 
-import java.lang.reflect.Array;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
@@ -17,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,15 +23,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.protoweb.Accounts.Accounts;
 import com.example.protoweb.Accounts.AccountsService;
+import com.example.protoweb.Comments.CommentbadsService;
+import com.example.protoweb.Comments.CommentgoodsService;
+import com.example.protoweb.Comments.Comments;
 import com.example.protoweb.Comments.CommentsService;
 import com.example.protoweb.Images.ImagesService;
-import com.example.protoweb.PlantRatings.PlantRatings;
 import com.example.protoweb.PlantRatings.PlantRatingsService;
 import com.example.protoweb.Plants.Plants;
 import com.example.protoweb.Plants.PlantsService;
-import com.example.protoweb.Posts.Postbads;
 import com.example.protoweb.Posts.PostbadsService;
-import com.example.protoweb.Posts.Postgoods;
 import com.example.protoweb.Posts.PostgoodsService;
 import com.example.protoweb.Posts.Posts;
 import com.example.protoweb.Posts.PostsService;
@@ -41,7 +40,6 @@ import com.example.protoweb.Products.ProductsService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mysql.cj.jdbc.Blob;
 
 @RestController
 public class ListController {
@@ -63,6 +61,10 @@ public class ListController {
     private PlantRatingsService plantratingser;
 	@Autowired
     private CommentsService commentsser;
+	@Autowired
+    private CommentgoodsService commentgoodsser;
+	@Autowired
+    private CommentbadsService commentbadsser;
 	
 	@GetMapping("/api/Accounts")
 	private Map<String, Object> view() {
@@ -115,6 +117,50 @@ public class ListController {
 		return "Ok";
 	}
 	
+	@DeleteMapping("/api/Comments")
+	private String DeleteComments(@RequestBody Map<String, Object> req) {
+		Comments ct = commentsser.findById((int)req.get("id"));
+		if(ct == null) return "Not Found Comment";
+		
+		ct.getPost().setCommentsCount(ct.getPost().getCommentsCount() - 1);
+		commentsser.deleteById((int)req.get("id"));
+		return "Ok";
+	}
+	
+	@PostMapping("/api/Commentgoods")
+	private String SetCommentgoods(@RequestBody Map<String, Object> req) {
+		Accounts ac = sv.findById((int)req.get("user_id"));
+		if(ac == null) return "Not Found User";
+		
+		Comments pt = commentsser.findById((int)req.get("comment_id"));
+		if(pt == null) return "Not Found Comment";
+
+		if (commentbadsser.existUAP(ac.getId(), pt.getId())) return "already rated";
+		if (commentgoodsser.existUAP(ac.getId(), pt.getId())) return "already rated";
+
+		pt.setGood(pt.getGood() + 1);
+		pt.setLikes(pt.getLikes() + 1);
+		commentgoodsser.save(ac, pt);
+		return "Ok";
+	}
+	
+	@PostMapping("/api/Commentbads")
+	private String SetCommentbads(@RequestBody Map<String, Object> req) {
+		Accounts ac = sv.findById((int)req.get("user_id"));
+		if(ac == null) return "Not Found User";
+		
+		Comments pt = commentsser.findById((int)req.get("comment_id"));
+		if(pt == null) return "Not Found Comment";
+
+		if (commentbadsser.existUAP(ac.getId(), pt.getId())) return "already rated";
+		if (commentgoodsser.existUAP(ac.getId(), pt.getId())) return "already rated";
+
+		pt.setBad(pt.getBad() + 1);
+		pt.setLikes(pt.getLikes() - 1);
+		commentbadsser.save(ac, pt);
+		return "Ok";
+	}
+	
 	@PostMapping("/api/Plants")
 	private String SetPlants(@RequestBody Map<String, Object> req) {
 		if(imgser.isExist((int)req.get("Imgid"))) {
@@ -135,30 +181,33 @@ public class ListController {
 	
 	@PostMapping("/api/PlantRatings")
 	private String SetPlantRatings(@RequestBody Map<String, Object> req) {
-		try {
 			Accounts ac = sv.findById((int)req.get("user_id"));
+			if(ac == null) return "Not Found User";
 			Plants pl = plantser.findById((int)req.get("plant_id"));
+			if(pl == null) return "Not Found Plant";
+			
 			pl.setRating(pl.getRating() + (int)req.get("rating"));
 			pl.setRatingCount(pl.getRatingCount() + 1);
 			pl.setAvgRating(Math.floor(pl.getRating() * 100.0 / pl.getRatingCount()) / 100.0);
 			plantratingser.save((int)req.get("rating"), ac, pl);
 			return "Ok";
-		} catch(Exception e) {
-			e.printStackTrace();
-			return "Not Found User or Plant";
-		}
-		
 	}
 	
 	@PostMapping("/api/Posts")
 	private String SetPosts(@RequestBody Map<String, Object> req) {
-		try {
-			Accounts ac = sv.findById((int)req.get("user_id"));
-			postser.save(req.get("title").toString(), req.get("body").toString(), req.get("tags").toString(), ac);
-			return "Ok";
-		} catch(Exception e) {
-			return "Not Found User";
-		}
+		Accounts ac = sv.findById((int)req.get("user_id"));
+		if(ac == null) return "Not Found User";
+		postser.save(req.get("title").toString(), req.get("body").toString(), "NULL", ac);
+		return "Ok";
+	}
+	
+	@DeleteMapping("/api/Posts")
+	private String DeletePosts(@RequestBody Map<String, Object> req) {
+		Posts pt = postser.findById((int)req.get("id"));
+		if(pt == null) return "Not Found Post";
+		
+		postser.deleteById((int)req.get("id"));
+		return "Ok";
 	}
 	
 	@PostMapping("/api/Postgoods")
@@ -258,6 +307,41 @@ public class ListController {
 			getpl.add(tmp);
 		}
 		res.put("plantlists", getpl);
+		return res;
+	}
+	
+	@GetMapping("/Post/{id}")
+	private Map<String, Object> SitePost(@PathVariable("id") String id) {
+		Map<String, Object> res  = new HashMap<>();
+		Posts pt = postser.findById(Integer.parseInt(id));
+		if(pt == null) {
+			res.put("Error", "Not Found Post");
+			return res;
+		}
+		Timestamp tm = pt.getCreated_at();
+		SimpleDateFormat Form = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss");
+		String tms = Form.format(tm);
+		
+		res.put("content", pt.getBody());
+		res.put("title", pt.getTitle());
+		res.put("like", pt.getLikes());
+		res.put("time", tms);
+		res.put("user", pt.getUser().getUsername());
+		
+		List<Map<String,Object>> lres = new ArrayList<>();
+		int itr = pt.getComments().size();
+		for(int i = 0;i < itr;i++) {
+			Map<String, Object> tres = new HashMap<>();
+			tres.put("username", pt.getComments().get(i).getUser().getUsername());
+			tres.put("comment", pt.getComments().get(i).getBody());
+			Timestamp ttm = pt.getCreated_at();
+			SimpleDateFormat tForm = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss");
+			String ttms = tForm.format(ttm);
+			tres.put("time", ttms);
+			lres.add(tres);
+		}
+		res.put("commentlist", lres);
+		
 		return res;
 	}
 	

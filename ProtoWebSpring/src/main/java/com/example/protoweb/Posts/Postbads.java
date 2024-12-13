@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.example.protoweb.Accounts.Accounts;
 
@@ -34,6 +35,7 @@ public class Postbads {
     private Posts post;
 	
 	@CreationTimestamp
+	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
 	private Timestamp created_at;
 	
 	public Postbads() {

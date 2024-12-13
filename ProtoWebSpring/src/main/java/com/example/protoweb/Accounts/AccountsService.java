@@ -33,7 +33,16 @@ public class AccountsService {
 	@Transactional
 	public Accounts findById(int _id) {
 		Optional<Accounts> tmp = Sv.findById(_id);
-		return tmp.get();
+		if(tmp.isPresent())
+			return tmp.get();
+		else
+			return null;
+	}
+	
+	@Transactional
+	public List<Accounts> findByUsername(String _name) {
+		List<Accounts> tmp = Sv.findByUsername(_name);
+		return tmp;
 	}
 	
 	@Transactional

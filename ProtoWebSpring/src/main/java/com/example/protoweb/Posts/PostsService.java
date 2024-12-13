@@ -53,6 +53,15 @@ public class PostsService {
 	@Transactional(readOnly = true)
 	public Posts findById(int _id) {
 		Optional<Posts> tmp = postsrepository.findById(_id);
-		return tmp.get();
+		if(tmp.isPresent())
+			return tmp.get();
+		else
+			return null;
+	}
+	
+	@Transactional
+	public String deleteById(int Id) {
+		postsrepository.deleteById(Id);
+		return "Ok";
 	}
 }

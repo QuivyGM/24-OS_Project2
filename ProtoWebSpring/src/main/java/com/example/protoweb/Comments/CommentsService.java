@@ -37,7 +37,10 @@ public class CommentsService {
 	@Transactional
 	public Comments findById(int _id) {
 		Optional<Comments> tmp = Sv.findById(_id);
-		return tmp.get();
+		if(tmp.isPresent())
+			return tmp.get();
+		else
+			return null;
 	}
 	
 	@Transactional

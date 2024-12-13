@@ -1,7 +1,6 @@
 package com.example.protoweb.Posts;
 
 import java.sql.Timestamp;
-import java.util.List;
 
 import org.hibernate.annotations.CreationTimestamp;
 
