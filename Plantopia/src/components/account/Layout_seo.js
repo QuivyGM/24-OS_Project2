@@ -12,9 +12,9 @@ const Layout_seo = () => {
                 
                 <Link to="/VirtualGarden" className="sb-text" style={{ top: '281px' }}>Virtual Garden</Link>
                 <Link to="/MyPostsAndComments" className="sb-text" style={{ top: '324px' }}>My Posts & Comments</Link>
+                <Link to="/MyShopping" className="sb-text" style={{ top: '367px' }}>My Shopping</Link>
                 <Link to="/MyAccount" className="sb-text" style={{ top: '410px' }}>My Account</Link>
                 <Link to="/LogOut" className="sb-text" style={{ top: '453px' }}>Log Out</Link>
-                {/* <Link to="/MyShopping" className="sb-text" style={{ top: '367px' }}>My Shopping</Link> */}
             </div>
         </div>
     );
