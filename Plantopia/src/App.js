@@ -13,6 +13,7 @@ import Upload from './components/Upload';
 import Shop from './components/Shop';
 import Post from './components/Post';
 import Footer from './components/Footer';
+import Navbar from './components/Navbar';
 
 const App = () => {
   return (
@@ -29,6 +30,7 @@ const App = () => {
         <Route path="/Upload" element={<Upload />} />
         <Route path="/Post" element={<Post />} />
         <Route path="/Footer" element={<Footer />} />
+        <Route path="/Navbar" element={<Navbar />} />
       </Routes>
     </Router>
   );
