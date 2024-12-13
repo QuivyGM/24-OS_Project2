@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import '../../styles/pages/_mpac-ms.scss';
+import '../../styles/pages/_footer.scss';
 import Layout_seo from './Layout_seo.js';
 import Navbar from '../Navbar';
 import Footer from '../Footer';
