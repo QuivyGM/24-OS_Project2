@@ -1,5 +1,7 @@
 Website for Open Source Development Project - Chungbuk University (2024-@nd Sem)
 
+notion: https://www.notion.so/ed536ead0444408699733d40101cc8f4
+
 Plantopia is a website designed to give users easy access to plant based information and products.
 
 The final goal of this website is to inspire people to grow more plants and help make the world a little more greener.
