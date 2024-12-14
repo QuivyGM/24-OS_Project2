@@ -53,6 +53,20 @@ const Shop = () => {
     navigate('/ShopCat');
   };
 
+  // 장바구니 --------- ---------
+  const [subtotal, setSubtotal] = useState(0);
+  const [total, setTotal] = useState(0);
+  const shippingCost = 7.24; // 배송비
+
+  const handleAddToCart = (price) => {
+    setSubtotal(prevSubtotal => {
+      const newSubtotal = prevSubtotal + parseFloat(price.replace('$', ''));
+      setTotal(newSubtotal + shippingCost);
+      return newSubtotal;
+    });
+  };
+
+
   return (
     <div>
       <div className="shop-page container">
@@ -170,7 +184,7 @@ const Shop = () => {
                     >
                       See More
                     </button>
-                    <button className="btn btn-outline-secondary ms-2">Add to cart</button>
+                    <button className="btn btn-outline-secondary ms-2" onClick={() => handleAddToCart(product.price)}>Add to cart</button>
                   </div>
                 </div>
               </div>
@@ -187,9 +201,9 @@ const Shop = () => {
               <p>Echinocereus Cactus - $139.80</p>
               <input type="text" className="form-control mb-2" placeholder="Gift or discount code" />
               <button className="btn btn-primary">Apply</button>
-              <p className="subtotal">Subtotal: $139.80</p>
-              <p className="shipping">Shipping: $7.24</p>
-              <p className="total">Total: $146.28</p>
+              <p className="subtotal">Subtotal: ${subtotal.toFixed(2)}</p>
+              <p className="shipping">Shipping: ${shippingCost.toFixed(2)}</p>
+              <p className="total">Total: ${total.toFixed(2)}</p>
             </div>
             <div className="col-md-6 payment-method">
               <h4>Payment</h4>

@@ -5,7 +5,7 @@
     position: relative;
     width: 1279px;
     height: 1px;
-    top: 279px;
+    top: 120px;
     left: 50%;
     transform: translateX(-50%);
     background-color: #8C8C8C;
@@ -13,12 +13,12 @@
     /* 상단 회색 라인 위 녹색 텍스트 */
     .green-text {
         position: absolute;
-        top: -30px;
+        top: -45px;
         right: 24px;
     
         color: $secondary-color;
         font-family: Poppins;
-        font-size: 20px;
+        font-size: 28px;
         font-style: normal;
         font-weight: 600;
         line-height: normal;
@@ -28,7 +28,7 @@
 /* 사이드바 컨테이너 */
 .sb-container {
     position: absolute;
-    height: 500px;
+    height: 470px;
     width: 300px;
     top: 24px;
 
@@ -41,7 +41,7 @@
         position: absolute;
         width: 150px;
         height: 150px;
-        top: 65px;
+        top: 38px;
         left: 75px;
         object-fit: cover;
 
@@ -54,7 +54,7 @@
     .sb-user-name {
         position: absolute;
         height: 30px;
-        top: 227px;
+        top: 200px;
         left: 50%;
         transform: translateX(-50%);
 
@@ -73,7 +73,7 @@
         position: absolute;
         width: 260px;
         height: 1px;
-        top: 269px;
+        top: 242px;
         left: 50%;
         transform: translateX(-50%);
         background-color: #8C8C8C

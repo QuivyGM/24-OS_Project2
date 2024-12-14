@@ -10,11 +10,11 @@ const Layout_seo = () => {
                 <div className="sb-user-name">Woowangi</div>
                 <div className="sb-line"></div>
                 
-                <Link to="/VirtualGarden" className="sb-text" style={{ top: '281px' }}>Virtual Garden</Link>
-                <Link to="/MyPostsAndComments" className="sb-text" style={{ top: '324px' }}>My Posts & Comments</Link>
-                <Link to="/MyShopping" className="sb-text" style={{ top: '367px' }}>My Shopping</Link>
-                <Link to="/MyAccount" className="sb-text" style={{ top: '410px' }}>My Account</Link>
-                <Link to="/LogOut" className="sb-text" style={{ top: '453px' }}>Log Out</Link>
+                <Link to="/VirtualGarden" className="sb-text" style={{ top: '271px' }}>Virtual Garden</Link>
+                <Link to="/MyPostsAndComments" className="sb-text" style={{ top: '315px' }}>My Posts & Comments</Link>
+                <Link to="/MyAccount" className="sb-text" style={{ top: '359px' }}>My Account</Link>
+                <Link to="/LogOut" className="sb-text" style={{ top: '403px' }}>Log Out</Link>
+                {/* <Link to="/MyShopping" className="sb-text" style={{ top: '453px' }}>My Shopping</Link> */}
             </div>
         </div>
     );

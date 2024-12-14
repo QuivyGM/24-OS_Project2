@@ -1,10 +1,14 @@
 @import '../variables/colors';
 
+.ma-small-container {
+    height: 980px;
+}
+
 /* 정렬 위한 컨테이너 */
 .ma-container {
     position: relative;
     width: 935px;
-    height: 766px;
+    height: 834px;
     top: 24px;
     left: 344px;
     flex-shrink: 0;
@@ -152,7 +156,7 @@
     position: absolute;
     width: 260px;
     height: 31px;
-    top: 623px;
+    top: 603px;
     left: 50%;
     transform: translateX(-50%);
     flex-shrink: 0;
