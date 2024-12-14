@@ -192,5 +192,37 @@ body {
         
     }
 
+    .comment-submit-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.9rem; // Adjust the overall font size
+        color: $primary-color;
+        margin-top: 10px; // Spacing above the button
+        background: none;
+        border: 1px solid #ddd; // Add border
+        border-radius: 15px; // Rounded box border
+        padding: 5px 10px; // Spacing inside the button
+        cursor: pointer;
+        transition: all 0.3s ease; // Smooth hover transitions
+        width: auto; // Adjust to content
+        height: auto;
     
+        strong {
+            font-size: 1.2rem; // Slightly larger font for heart/icon
+            color: red;
+            margin-right: 5px; // Spacing between icon and text
+            transition: transform 0.2s ease; // Smooth scaling for icon
+            transform-origin: center;
+        }
+    
+        &:hover {
+            background-color: #f9f9f9; // Light hover background
+            border-color: #aaa; // Darker border on hover
+        }
+    
+        &:hover strong {
+            transform: scale(1.2); // Scale icon on hover
+        }
+    }
 }

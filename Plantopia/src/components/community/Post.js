@@ -156,11 +156,12 @@ const Post = () => {
                                         rows="3"
                                     ></textarea>
                                     <button
-                                        className="btn btn-primary"
+                                        className="comment-submit-button"
                                         onClick={() => handleCommentSubmit(post.id)}
                                     >
-                                        Submit Comment
+                                        <strong>&#9998;</strong> Submit
                                     </button>
+
                                 </div>
                             </div>
                         );
