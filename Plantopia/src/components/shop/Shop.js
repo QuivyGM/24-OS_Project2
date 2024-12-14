@@ -54,18 +54,18 @@ const Shop = () => {
   };
 
   // 장바구니 --------- ---------
+
   const [subtotal, setSubtotal] = useState(0);
   const [total, setTotal] = useState(0);
   const shippingCost = 7.24; // 배송비
 
   const handleAddToCart = (price) => {
     setSubtotal(prevSubtotal => {
-      const newSubtotal = prevSubtotal + parseFloat(price.replace('$', ''));
+      const newSubtotal = prevSubtotal + (price === '$139.99' ? 139.99 : parseFloat(price.replace('$', '')));
       setTotal(newSubtotal + shippingCost);
       return newSubtotal;
     });
   };
-
 
   return (
     <div>
@@ -130,7 +130,7 @@ const Shop = () => {
             </div>
             <h3 className="price">$139.99</h3>
             <button className="btn btn-success">Check out</button>
-            <button className="btn btn-outline-secondary ms-2">Add to cart</button>
+            <button className="btn btn-outline-secondary ms-2" onClick={() => handleAddToCart('$139.99')}>Add to cart</button>
             <div className="features mt-4">
               <h4>Features</h4>
               <ul>
@@ -197,8 +197,9 @@ const Shop = () => {
           <h2>Payments</h2>
           <div className="row">
             <div className="col-md-6 order-summary">
-              <h4>Order Summary</h4>
-              <p>Echinocereus Cactus - $139.80</p>
+              <h4>Order</h4>
+              {/* <p>Echinocereus Cactus - $139.80</p> */}
+              <p>If you have a gift or discount code, enter it below.</p>
               <input type="text" className="form-control mb-2" placeholder="Gift or discount code" />
               <button className="btn btn-primary">Apply</button>
               <p className="subtotal">Subtotal: ${subtotal.toFixed(2)}</p>
@@ -222,7 +223,7 @@ const Shop = () => {
               <input type="text" className="form-control mt-2" placeholder="Card Number" />
               <input type="text" className="form-control mt-2" placeholder="Expiration Date" />
               <input type="text" className="form-control mt-2" placeholder="CVV" />
-              <button className="btn btn-success mt-3">Pay USD 149.28</button>
+              <button className="btn btn-success mt-3">Pay USD ${total.toFixed(2)}</button>
             </div>
           </div>
         </div>
