@@ -34,6 +34,12 @@ public class CommentsService {
 		return "Ok";
 	}
 
+	@Transactional(readOnly = true)
+	public List<Comments> findAllByOrderByLikesDesc() {
+		List<Comments> acc = Sv.findAllByOrderByLikesDesc();
+		return acc;
+	}
+
 	@Transactional
 	public Comments findById(int _id) {
 		Optional<Comments> tmp = Sv.findById(_id);
