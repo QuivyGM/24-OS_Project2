@@ -81,7 +81,7 @@ const Post = () => {
     return (
         <div className="post-page container">
             <Navbar />
-
+            
             {/* Display the post content */}
             <div className="post container">
                 <button className="back-button" onClick={handleBackClick}>← Back</button>

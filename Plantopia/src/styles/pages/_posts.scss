@@ -15,10 +15,12 @@ body {
 }
 
 .post-page {    
-    max-width: 100%;
+    max-width: 80%;
     margin: 0;
     padding: 0;
     padding-top: 60px;
+    
+
 
     .back-button {
         background: none;
@@ -43,6 +45,8 @@ body {
         max-width: 100%; // Optional: Set a maximum width for better layout
         margin-left: auto;
         margin-right: auto;
+        border-radius: 20px; // Round the corners
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); // Add soft shadows
 
         .post-title {
             
@@ -87,7 +91,7 @@ body {
             justify-content: center;
             font-size: 0.9rem; // Adjust font size
             color: $primary-color;
-            margin-top: 10px; // Margin for spacing
+            margin-top: 50px; // Margin for spacing
             background: none;
             border: 1px solid #ddd; // Rounded box border
             border-radius: 15px; // Adjust for rounded edges
@@ -187,5 +191,6 @@ body {
         }
         
     }
+
     
 }
