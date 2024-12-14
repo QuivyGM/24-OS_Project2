@@ -70,6 +70,7 @@ const Plants = () => {
     };
 
     const yOffsets = [20, 0, 40];
+    const rankNum=[2, 1, 3];
 
     return (
         <div className="plants-page">
@@ -92,7 +93,7 @@ const Plants = () => {
                                 </div>
                                 <img src={plant.image} alt={plant.title} className="plant-image" />
                                 <div className="plant-info">
-                                    <span className="rank">{index + 1}</span>
+                                    <span className="rank">{rankNum[index]}</span>
                                     <h3>{plant.title}</h3>
                                     <p>{plant.likes} likes</p>
                                 </div>
