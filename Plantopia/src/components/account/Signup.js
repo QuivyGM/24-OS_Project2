@@ -1,3 +1,4 @@
+// src/pages/Signup.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../../styles/pages/_signup.scss';
@@ -7,17 +8,17 @@ const Signup = () => {
 
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
+    const [pw, setPw] = useState('');
+    const [checkpw, setCheckpw] = useState('');
 
     const handleBackClick = () => {
         navigate('/'); // Navigate to the main page
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault(); // Prevent form from reloading the page
+    const handleSignupSubmit = (e) => {
+        e.preventDefault(); // Prevent form reloading
 
-        if (password !== confirmPassword) {
+        if (pw !== checkpw) {
             alert('Passwords do not match.');
             return;
         }
@@ -31,7 +32,8 @@ const Signup = () => {
             body: JSON.stringify({
                 name: name,
                 email: email,
-                password: password,
+                pw: pw,
+                checkpw: checkpw,
             }),
         })
             .then((res) => res.json())
@@ -54,21 +56,26 @@ const Signup = () => {
             <div className="row align-items-center justify-content-center">
                 {/* Left Section */}
                 <div className="col-12 col-md-6 text-center signup-left">
-                    <img src="./icons/signup-plant.svg" alt="Plant Pot" className="plant-image" />
+                    <img
+                        src="./icons/signup-plant.svg"
+                        alt="Plant Pot"
+                        className="plant-image"
+                    />
                     <h1 className="logo-text">Plantopia</h1>
                 </div>
 
                 {/* Right Section */}
                 <div className="col-12 col-md-6 signup-right">
-                    <button className="back-button" onClick={handleBackClick}>← Back</button>
+                    <button className="back-button" onClick={handleBackClick}>
+                        ← Back
+                    </button>
                     <h2>Create Account</h2>
                     <p>Sign up to join the Plantopia community and start your journey.</p>
-                    <form className="signup-form" onSubmit={handleSubmit}>
+                    <form className="signup-form" onSubmit={handleSignupSubmit}>
                         <label htmlFor="name">Full Name</label>
                         <input
                             type="text"
                             id="name"
-                            name="name"
                             placeholder="Full Name"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
@@ -79,7 +86,6 @@ const Signup = () => {
                         <input
                             type="email"
                             id="email"
-                            name="email"
                             placeholder="Email Address"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
@@ -90,10 +96,9 @@ const Signup = () => {
                         <input
                             type="password"
                             id="password"
-                            name="password"
                             placeholder="Password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
+                            value={pw}
+                            onChange={(e) => setPw(e.target.value)}
                             required
                         />
 
@@ -101,10 +106,9 @@ const Signup = () => {
                         <input
                             type="password"
                             id="confirm-password"
-                            name="confirm-password"
                             placeholder="Confirm Password"
-                            value={confirmPassword}
-                            onChange={(e) => setConfirmPassword(e.target.value)}
+                            value={checkpw}
+                            onChange={(e) => setCheckpw(e.target.value)}
                             required
                         />
 

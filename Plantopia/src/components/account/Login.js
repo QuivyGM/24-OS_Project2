@@ -1,14 +1,12 @@
+// src/pages/Login.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../../styles/pages/_login.scss';
 
 const Login = () => {
     const navigate = useNavigate();
-
-    // State management for email, password, and "Remember Me"
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [rememberMe, setRememberMe] = useState(false);
 
     const handleBackClick = () => {
         navigate('/'); // Navigate to the main page
@@ -18,50 +16,55 @@ const Login = () => {
         navigate('/Signup'); // Navigate to the signup page
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault(); // Prevent form from refreshing the page
+    const handleLoginSubmit = (e) => {
+        e.preventDefault(); // Prevent default form submission behavior
 
-        // Send login data to the API
-        fetch('http://localhost:8080/api/Login', {
+        fetch('로그인 API주소', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json',
+            },
             body: JSON.stringify({
                 email: email,
-                password: password,
+                pw: password,
             }),
         })
             .then((res) => res.json())
             .then((result) => {
                 if (result.message === 'SUCCESS') {
-                    alert('Login successful!');
-                    navigate('/dashboard'); // Redirect to dashboard after login
+                    alert('로그인 성공!');
+                    navigate('/'); // Navigate to the main page on success
                 } else {
-                    alert('Invalid email or password. Please try again.');
+                    alert('이메일 또는 비밀번호가 잘못되었습니다.');
                 }
             })
             .catch((error) => {
-                console.error('Error communicating with backend:', error);
-                alert('An error occurred. Please try again later.');
+                console.error('Error:', error);
+                alert('로그인 중 문제가 발생했습니다. 다시 시도해 주세요.');
             });
     };
 
     return (
         <div className="login-container container">
             <div className="row align-items-center justify-content-center">
-                {/* Left Section */}
                 <div className="col-12 col-md-6 text-center login-left">
-                    <img src="./icons/login-plant.svg" alt="Plant Pot" className="plant-image" />
+                    <img
+                        src="./icons/login-plant.svg"
+                        alt="Plant Pot"
+                        className="plant-image"
+                    />
                     <h1 className="logo-text">Plantopia</h1>
                 </div>
-
-                {/* Right Section */}
                 <div className="col-12 col-md-6 login-right">
-                    <button className="back-button" onClick={handleBackClick}>← Back</button>
+                    <button className="back-button" onClick={handleBackClick}>
+                        ← Back
+                    </button>
                     <h2>Account Login</h2>
-                    <p>If you are already a member, you can login with your email address and password.</p>
-
-                    {/* Login Form */}
-                    <form className="login-form" onSubmit={handleSubmit}>
+                    <p>
+                        If you are already a member you can login with your email
+                        address and password.
+                    </p>
+                    <form className="login-form" onSubmit={handleLoginSubmit}>
                         <label htmlFor="email">Email address</label>
                         <input
                             type="email"
@@ -70,7 +73,6 @@ const Login = () => {
                             placeholder="Email address"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            required
                         />
 
                         <label htmlFor="password">Password</label>
@@ -81,22 +83,17 @@ const Login = () => {
                             placeholder="Password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                            required
                         />
 
                         <div className="remember-me">
-                            <input
-                                type="checkbox"
-                                id="remember"
-                                checked={rememberMe}
-                                onChange={(e) => setRememberMe(e.target.checked)}
-                            />
+                            <input type="checkbox" id="remember" />
                             <label htmlFor="remember">Remember me</label>
                         </div>
 
-                        <button type="submit" className="login-button">Login</button>
+                        <button type="submit" className="login-button">
+                            Register Account
+                        </button>
                     </form>
-
                     <p className="signup-link">
                         Don’t have an account?{' '}
                         <a onClick={handleSignupClick} href="/Signup">
