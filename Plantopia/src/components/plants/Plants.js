@@ -20,24 +20,23 @@ const medalMap = {
 
 
 
-const allPlants = Array.from({ length: 36 }, (_, index) => ({
-    id: index + 4,
-    image: `/images/${(index % 5) + 1}.jpg`,
-    title: `Chamaedorea Elegans ${index + 4}`,
-    rating: 4.5,
-    reviews: 10,
-    type: index % 2 === 0 ? "Indoor" : "Outdoor",
-    waterNeeds: index % 3 === 0 ? "Low" : "Medium",
-    size: index % 4 === 0 ? "Small" : "Large",
-}));
+// const allPlants = Array.from({ length: 36 }, (_, index) => ({
+//     id: index + 4,
+//     image: `/images/${(index % 5) + 1}.jpg`,
+//     title: `Chamaedorea Elegans ${index + 4}`,
+//     rating: 4.5,
+//     reviews: 10,
+//     type: index % 2 === 0 ? "Indoor" : "Outdoor",
+//     waterNeeds: index % 3 === 0 ? "Low" : "Medium",
+//     size: index % 4 === 0 ? "Small" : "Large",
+// }));
 
 const Plants = () => {
     const navigate = useNavigate();
     const [currentPage, setCurrentPage] = useState(1);
     const [filters, setFilters] = useState({
         type: "",
-        waterNeeds: "",
-        size: "",
+        difficulty: "",
     });
 
     const [selectedPlant, setSelectedPlant] = useState(null); // Stores the clicked plant
@@ -55,11 +54,10 @@ const Plants = () => {
 
     const plantsPerPage = 8;
 
-    const filteredPlants = allPlants.filter((plant) => {
+    const filteredPlants = plantsData.filter((plant) => {
         return (
             (filters.type === "" || plant.type === filters.type) &&
-            (filters.waterNeeds === "" || plant.waterNeeds === filters.waterNeeds) &&
-            (filters.size === "" || plant.size === filters.size)
+            (filters.difficulty === "" || plant.difficulty === filters.difficulty)
         );
     });
 
@@ -130,30 +128,27 @@ const Plants = () => {
                     <div className="filters">
                         <select name="type" value={filters.type} onChange={handleFilterChange}>
                             <option value="">All Types</option>
-                            <option value="Indoor">Indoor</option>
-                            <option value="Outdoor">Outdoor</option>
+                            <option value="indoor">Indoor</option>
+                            <option value="outdoor">Outdoor</option>
                         </select>
-                        <select name="waterNeeds" value={filters.waterNeeds} onChange={handleFilterChange}>
-                            <option value="">All Water Needs</option>
-                            <option value="Low">Low</option>
-                            <option value="Medium">Medium</option>
-                        </select>
-                        <select name="size" value={filters.size} onChange={handleFilterChange}>
-                            <option value="">All Sizes</option>
-                            <option value="Small">Small</option>
-                            <option value="Large">Large</option>
+                        <select name="difficulty" value={filters.difficulty} onChange={handleFilterChange}>
+                            <option value="">All Difficulties</option>
+                            <option value="easy">Easy</option>
+                            <option value="medium">Medium</option>
+                            <option value="hard">Hard</option>
                         </select>
                     </div>
                     <div className="plants-grid">
                         {currentPlants.map((plant) => (
                             <div
-                                key={plant.id}
+                                key={plant.plant_id}
                                 className="plant-card"
                                 onClick={() => handlePlantClick(plant)}
                             >
-                                <img src={plant.image} alt={plant.title} className="plant-image" />
-                                <h4>{plant.title}</h4>
-                                <p>{plant.rating} ★ ({plant.reviews} reviews)</p>
+                                <img src={plant.image_id} alt={plant.title} className="plant-image" />
+                                <h4>{plant.name}</h4>
+                                <p>Type: {plant.type.charAt(0).toUpperCase() + plant.type.slice(1)}</p>
+                                <p>Difficulty: {plant.difficulty}</p>
                             </div>
                         ))}
                     </div>
@@ -180,21 +175,29 @@ const Plants = () => {
             {showModal && selectedPlant && (
                 <div className="modal-overlay" onClick={closeModal}>
                     <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-                        {/* Image Section */}
-                        <img src={selectedPlant.image} alt={selectedPlant.title} className="modal-image" />
-                        
-                        {/* Text Section */}
-                        <div className="modal-text">
-                            <h3>{selectedPlant.title}</h3>
-                            <p>Type: {selectedPlant.type}</p>
-                            <p>Water Needs: {selectedPlant.waterNeeds}</p>
-                            <p>Size: {selectedPlant.size}</p>
-                            <p>Rating: {selectedPlant.rating} ★ ({selectedPlant.reviews} reviews)</p>
+                        {/* Top Section: Image and Plant Info */}
+                        <div className="modal-top">
+                            <img
+                                src={selectedPlant.image_id}
+                                alt={selectedPlant.name}
+                                className="modal-image"
+                            />
+                            <div className="modal-text">
+                                <h3>{selectedPlant.name}</h3>
+                                <p>Type: {selectedPlant.type}</p>
+                                <p>Difficulty: {selectedPlant.difficulty}</p>
+                            </div>
+                        </div>
+
+                        {/* Bottom Section: Description */}
+                        <div className="modal-description">
+                            <p>{selectedPlant.description}</p>
                         </div>
                     </div>
-            </div>
-            
+                </div>
             )}
+
+
 
         </div>
     );
