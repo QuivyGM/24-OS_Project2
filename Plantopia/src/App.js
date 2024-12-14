@@ -11,7 +11,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import MainPage from './components/Main';
 
 // plants
-import Plants from './components/Plants';
+import Plants from './components/plants/Plants';
 
 // community
 import Community from './components/community/Community';

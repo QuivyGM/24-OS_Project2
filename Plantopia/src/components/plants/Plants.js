@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Navbar from "./Navbar";
-import Footer from "./Footer";
-import "../styles/pages/_plants.scss";
+import Navbar from "../Navbar";
+import Footer from "../Footer";
+import "../../styles/pages/_plants.scss";
+
+import plantsData from "./plantsData";
 
 const weeklyTopPlants = [
     
@@ -31,6 +33,19 @@ const Plants = () => {
         size: "",
     });
 
+    const [selectedPlant, setSelectedPlant] = useState(null); // Stores the clicked plant
+    const [showModal, setShowModal] = useState(false); // Controls modal visibility
+
+    const handlePlantClick = (plant) => {
+        setSelectedPlant(plant); // Store the clicked plant's data
+        setShowModal(true); // Show the modal
+    };
+
+    const closeModal = () => {
+        setShowModal(false); // Hide the modal
+    };
+
+
     const plantsPerPage = 8;
 
     const filteredPlants = allPlants.filter((plant) => {
@@ -44,10 +59,6 @@ const Plants = () => {
     const indexOfLastPlant = currentPage * plantsPerPage;
     const indexOfFirstPlant = indexOfLastPlant - plantsPerPage;
     const currentPlants = filteredPlants.slice(indexOfFirstPlant, indexOfLastPlant);
-
-    const handlePlantClick = (plantId) => {
-        navigate(`/post/${plantId}`);
-    };
 
     const handleNextPage = () => {
         if (currentPage < Math.ceil(filteredPlants.length / plantsPerPage)) {
@@ -83,7 +94,7 @@ const Plants = () => {
                             <div
                                 key={plant.id}
                                 className={`top-plant-card rank-${index + 1}`}
-                                onClick={() => handlePlantClick(plant.id)}
+                                onClick={() => handlePlantClick(plant)}
                                 style={{ transform: `translateY(${yOffsets[index]}px)` }}
                             >
                                 <div className="medal">
@@ -126,7 +137,7 @@ const Plants = () => {
                             <div
                                 key={plant.id}
                                 className="plant-card"
-                                onClick={() => handlePlantClick(plant.id)}
+                                onClick={() => handlePlantClick(plant)}
                             >
                                 <img src={plant.image} alt={plant.title} className="plant-image" />
                                 <h4>{plant.title}</h4>
@@ -153,6 +164,26 @@ const Plants = () => {
             </main>
 
             <Footer />
+
+            {showModal && selectedPlant && (
+                <div className="modal-overlay" onClick={closeModal}>
+                    <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+                        {/* Image Section */}
+                        <img src={selectedPlant.image} alt={selectedPlant.title} className="modal-image" />
+                        
+                        {/* Text Section */}
+                        <div className="modal-text">
+                            <h3>{selectedPlant.title}</h3>
+                            <p>Type: {selectedPlant.type}</p>
+                            <p>Water Needs: {selectedPlant.waterNeeds}</p>
+                            <p>Size: {selectedPlant.size}</p>
+                            <p>Rating: {selectedPlant.rating} ★ ({selectedPlant.reviews} reviews)</p>
+                        </div>
+                    </div>
+            </div>
+            
+            )}
+
         </div>
     );
 };

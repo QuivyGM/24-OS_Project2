@@ -7,6 +7,7 @@ import Footer from '../Footer';
 import Navbar from '../Navbar';
 import { useAuth } from '../AuthContext';
 
+
 const Post = () => {
     const { isLoggedIn } = useAuth(); // Access the isLoggedIn state    
     const { postId } = useParams(); // Retrieve the number (ID) from the URL
@@ -69,10 +70,17 @@ const Post = () => {
         }
       };
 
+      const handlePostLike = () => {
+        alert('You liked this post!'); // Temporary alert
+      }
+
+      const handleCommentLike = () => {
+        alert('You liked this comment!'); // Temporary alert
+      }
+
     return (
         <div className="post-page container">
             <Navbar />
-
             {/* Display the post content */}
             <div className="post container">
                 <button className="back-button" onClick={handleBackClick}>← Back</button>
@@ -86,7 +94,7 @@ const Post = () => {
 
                         return (
                             <div key={post.id} className="card text-muted" style={{ padding: '20px' }}>
-                                <h1>{post.title}</h1>
+                                <h1 className='post-title'>{post.title}</h1>
                                 <div className="post-header">
                                     <p className="username">
                                         By: <strong>{post.author}</strong>
@@ -99,9 +107,43 @@ const Post = () => {
                                     <img src={post.image} alt={post.title} className="img-fluid mb-3" />
                                 )}
                                 <p>{post.content}</p>
-                                <span className="post-likes">
-                                    <strong>{post.likes}</strong> likes
-                                </span>
+                                <button
+                                    className="post-like-button"
+                                    onClick={handlePostLike}
+                                >
+                                    <strong>&hearts;</strong> {post.likes} likes
+                                </button>
+
+                                <hr style={{ margin: '40px 0', border: 'none', height: '2.5px', backgroundColor: '#ccc' }} />
+
+                                {/* Comments Section */}
+                                <div className="comments-section mt-4">
+                                    <h3>Comments</h3>
+                                    {filteredComments.length > 0 ? (
+                                        <div className="row">
+                                            {filteredComments.map((comment) => (
+                                                <div key={comment.id} className="col-12 mb-3">
+                                                    <div className="card comment-card p-3">
+                                                        <span>by    <strong className="comment-username">{comment.author}</strong> <span className="comment-time">{getTimeDifference(comment.time)}</span></span>
+                                                        <p className="comment-text">{comment.textBody}</p>
+                                                        <button className="comment-like-button"
+                                                            onClick={handleCommentLike}>
+                                                            <strong>&hearts;</strong> {comment.likes}
+                                                        </button>
+
+
+
+                                                    </div>
+                                                    
+                                                </div>
+                                            ))}
+                                        </div>
+                                    ) : (
+                                        <p>No comments yet.</p>
+                                    )}
+                                </div>
+
+                                <hr style={{ margin: '40px 0', border: 'none', height: '2.5px', backgroundColor: '#ccc' }} />
 
                                 {/* Write Comment Section */}
                                 <div className="write-comment mt-4">
@@ -114,34 +156,12 @@ const Post = () => {
                                         rows="3"
                                     ></textarea>
                                     <button
-                                        className="btn btn-primary"
+                                        className="comment-submit-button"
                                         onClick={() => handleCommentSubmit(post.id)}
                                     >
-                                        Submit Comment
+                                        <strong>&#9998;</strong> Submit
                                     </button>
-                                </div>
 
-                                {/* Comments Section */}
-                                <div className="comments-section mt-4">
-                                    <h3>Comments</h3>
-                                    {filteredComments.length > 0 ? (
-                                        <div className="row">
-                                            {filteredComments.map((comment) => (
-                                                <div key={comment.id} className="col-12 mb-3">
-                                                    <div className="card comment-card p-3">
-                                                        <p>
-                                                            <strong>{comment.author}:</strong> {comment.textBody}
-                                                        </p>
-                                                        <span>
-                                                            {getTimeDifference(comment.time)}
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            ))}
-                                        </div>
-                                    ) : (
-                                        <p>No comments yet.</p>
-                                    )}
                                 </div>
                             </div>
                         );

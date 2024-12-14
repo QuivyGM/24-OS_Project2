@@ -19,6 +19,8 @@ body {
     margin: 0;
     padding: 0;
     padding-top: 60px;
+    
+
 
     .back-button {
         background: none;
@@ -37,20 +39,28 @@ body {
 
     .post {
         padding: 20px 40px;
-        margin-top: 20px;
-        margin-bottom: 20px; // Add a margin only to the bottom of the card
-        width: 100%; // Ensure the card does not stretch unnecessarily
+        margin-top: 40px;
+        margin-bottom: 40px; // Add a margin only to the bottom of the card
+        width: 80%; // Ensure the card does not stretch unnecessarily
         max-width: 100%; // Optional: Set a maximum width for better layout
         margin-left: auto;
         margin-right: auto;
-        
+        border-radius: 20px; // Round the corners
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); // Add soft shadows
+
+        .post-title {
+            
+            font-weight: bold;
+            margin: 10px 0;
+            color: $primary-color;
+        }
 
         .post-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 15px;
-
+            
             .username {
                 font-size: 1rem;
                 font-weight: 500;
@@ -75,10 +85,41 @@ body {
             margin: 10px 0;
         }
 
-        .post-likes {
-            display: inline-block; // Prevent the likes container from stretching
-            margin-top: 15px;
+        .post-like-button {
+            display: flex; // Ensures button respects width and height
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem; // Adjust font size
+            color: $primary-color;
+            margin-top: 50px; // Margin for spacing
+            background: none;
+            border: 1px solid #ddd; // Rounded box border
+            border-radius: 15px; // Adjust for rounded edges
+            width: 80px; // Explicit width
+            height: 30px; // Explicit height
+            line-height: 1; // Prevent text height interference
+            padding: 0; // Remove padding since size is fixed
+            cursor: pointer;
+            transition: all 0.3s ease; // Smooth hover transitions
+        
+            strong {
+                font-size: 1.2rem; // Size for the heart icon
+                color: red;
+                margin-right: 5px; // Spacing between heart and text
+                transition: transform 0.2s ease;
+                transform-origin: center;
+            }
+        
+            &:hover {
+                background-color: #f9f9f9; // Light background on hover
+                border-color: #aaa; // Slightly darker border
+            }
+        
+            &:hover strong {
+                transform: scale(1.2); // Scale heart icon on hover
+            }
         }
+        
     }
 
     .comments-section {
@@ -90,19 +131,21 @@ body {
         border-radius: 8px;
         background-color: #f9f9f9; // Light background for comments
     
-        * {
-            color: #000 !important; // Force text color to black for all children
-        }
-    
         .comment-username {
-            font-weight: 500;
-            color: #333; // Darker text for username
+            font-size: 1.1rem;
             margin-right: 10px;
+            font-weight: 500;
+            color: $primary-color;
         }
     
         .comment-text {
             font-size: 0.9rem;
             color: #000; // Ensure normal black text
+        }
+
+        .comment-time {
+            font-size: 0.7rem;
+            color: #aaa;
         }
     
         .comment-card {
@@ -112,6 +155,74 @@ body {
             padding: 10px;
             color: #000; // Text within the card is black
         }
+
+        .comment-like-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem; // Reduce the overall font size
+            color: $primary-color;
+            margin-top: 5px; // Less margin at the top
+            background: none;
+            border: 1px solid #ddd; // Border for the rounded box
+            border-radius: 15px; // Smaller, rounded box
+            padding: 2px 6px; // Adjust padding for a compact button
+            cursor: pointer;
+            transition: all 0.3s ease; // Smooth transitions for hover effects
+            width: 40px;
+            height: 20px;
+        
+            strong {
+                font-size: 0.7rem; // Slightly reduce heart icon size
+                color: red;
+                margin-right: 3px; // Spacing between heart and text
+                transition: transform 0.2s ease; // Smooth scaling
+                transform-origin: center;
+            }
+        
+            &:hover {
+                background-color: #f1f1f1; // Subtle background color on hover
+                border-color: #aaa; // Darker border on hover
+            }
+        
+            &:hover strong {
+                transform: scale(1.2); // Slight scaling for heart on hover
+            }
+        }
+        
     }
+
+    .comment-submit-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.9rem; // Adjust the overall font size
+        color: $primary-color;
+        margin-top: 10px; // Spacing above the button
+        background: none;
+        border: 1px solid #ddd; // Add border
+        border-radius: 15px; // Rounded box border
+        padding: 5px 10px; // Spacing inside the button
+        cursor: pointer;
+        transition: all 0.3s ease; // Smooth hover transitions
+        width: auto; // Adjust to content
+        height: auto;
     
+        strong {
+            font-size: 1.2rem; // Slightly larger font for heart/icon
+            color: red;
+            margin-right: 5px; // Spacing between icon and text
+            transition: transform 0.2s ease; // Smooth scaling for icon
+            transform-origin: center;
+        }
+    
+        &:hover {
+            background-color: #f9f9f9; // Light hover background
+            border-color: #aaa; // Darker border on hover
+        }
+    
+        &:hover strong {
+            transform: scale(1.2); // Scale icon on hover
+        }
+    }
 }

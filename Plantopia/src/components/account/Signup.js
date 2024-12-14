@@ -25,8 +25,8 @@ const Signup = () => {
                     <h2>Create Account</h2>
                     <p>Sign up to join the Plantopia community and start your journey.</p>
                     <form className="signup-form">
-                        <label htmlFor="name">Full Name</label>
-                        <input type="text" id="name" name="name" placeholder="Full Name" />
+                        <label htmlFor="name">Nickname</label>
+                        <input type="text" id="name" name="name" placeholder="Nickname" />
 
                         <label htmlFor="email">Email Address</label>
                         <input type="email" id="email" name="email" placeholder="Email Address" />
