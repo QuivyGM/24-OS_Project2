@@ -15,6 +15,7 @@ import com.example.protoweb.PlantRatings.PlantRatings;
 import com.example.protoweb.Posts.Postbads;
 import com.example.protoweb.Posts.Postgoods;
 import com.example.protoweb.Posts.Posts;
+import com.example.protoweb.tokens.Tokens;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -38,7 +39,7 @@ public class Accounts {
 	private String username;
 	
 	@Column
-	private String Password;
+	private String password;
 	
 	@Column
 	private String Nickname;
@@ -74,9 +75,13 @@ public class Accounts {
 	@OnDelete(action= OnDeleteAction.CASCADE)
     private List<Commentbads> commentbads = new ArrayList<>();
 	
+	@OneToMany(mappedBy="user", cascade=CascadeType.ALL)
+	@OnDelete(action= OnDeleteAction.CASCADE)
+    private List<Tokens> tokens = new ArrayList<>();
+	
 	public Accounts() {};
 	public Accounts(String _pass, String _username, String _nickname) {
-		Password = _pass;
+		password = _pass;
 		username = _username;
 		Nickname = _nickname;
 	}

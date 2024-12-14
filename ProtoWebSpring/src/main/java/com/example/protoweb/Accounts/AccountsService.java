@@ -46,6 +46,23 @@ public class AccountsService {
 	}
 	
 	@Transactional
+	public List<Accounts> findByusernameAndPassword(String _name, String _pass) {
+		List<Accounts> tmp = Sv.findByusernameAndPassword(_name, _pass);
+		return tmp;
+	}
+	
+	@Transactional
+	public boolean existsByusername(String _name) {
+		boolean tmp = Sv.existsByusername(_name);
+		return tmp;
+	}
+	@Transactional
+	public boolean existsByusernameAndPassword(String _name, String _pass) {
+		boolean tmp = Sv.existsByusernameAndPassword(_name, _pass);
+		return tmp;
+	}
+	
+	@Transactional
 	public String deleteById(int Id) {
 		Sv.deleteById(Id);
 		return "Ok";

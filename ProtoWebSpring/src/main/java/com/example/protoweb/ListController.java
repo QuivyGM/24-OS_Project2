@@ -8,6 +8,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.logging.log4j.CloseableThreadContext.Instance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
@@ -37,6 +38,8 @@ import com.example.protoweb.Posts.Posts;
 import com.example.protoweb.Posts.PostsService;
 import com.example.protoweb.Products.Products;
 import com.example.protoweb.Products.ProductsService;
+import com.example.protoweb.tokens.Tokens;
+import com.example.protoweb.tokens.TokensService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -65,6 +68,8 @@ public class ListController {
     private CommentgoodsService commentgoodsser;
 	@Autowired
     private CommentbadsService commentbadsser;
+	@Autowired
+    private TokensService tokenser;
 	
 	@GetMapping("/api/Accounts")
 	private Map<String, Object> view() {
@@ -270,10 +275,88 @@ public class ListController {
 		sv2.save(req.get("Name").toString(), (Integer)req.get("Price"), req.get("Description").toString());
 		return "Ok";
 	}
+
+	@GetMapping("/MyAccount")
+	private Map<String,Object> SiteMyAccount(@RequestParam(value="token") String tk) {
+		List<Tokens> ac = tokenser.findBytoken(tk);
+		Map<String, Object> res = new HashMap<>();
+		if(ac.size() == 0 || ac == null) {
+			res.put("Error", "Not Found User");
+			return res;
+		}
+		
+		res.put("email", ac.getFirst().getUser().getUsername());
+		res.put("nickname", ac.getFirst().getUser().getNickname());
+		
+		return res;
+	}
+	
+	@GetMapping("/MyPostsAndComments")
+	private Map<String,Object> SiteMyPostsAndComments(@RequestParam(value="token") String tk) {
+		List<Tokens> ac = tokenser.findBytoken(tk);
+		Map<String, Object> res = new HashMap<>();
+		if(ac.size() == 0 || ac == null) {
+			res.put("Error", "Not Found User");
+			return res;
+		}
+		/*if(ac.getFirst().getCreated_at().getTime() + 72000 < System.currentTimeMillis()) {
+			res.put("Error", "세션 시간 초과");
+			res.put("Current", System.currentTimeMillis());
+			res.put("expire", ac.getFirst().getCreated_at().getTime());
+			tokenser.deleteAllById(ac.getFirst().getId());
+			return res;
+		}*/
+		
+		List<String> plres = new ArrayList<>();
+		int itr = ac.getFirst().getUser().getPosts().size();
+		for(int i = 0;i < itr;i++) {
+			plres.add("http://localhost:8080/Post/" + ac.getFirst().getUser().getPosts().get(i).getId());
+		}
+		res.put("postlists", plres);
+
+		List<String> clres = new ArrayList<>();
+		itr = ac.getFirst().getUser().getComments().size();
+		for(int i = 0;i < itr;i++) {
+			clres.add(ac.getFirst().getUser().getComments().get(i).getBody());
+		}
+		res.put("commentlist", clres);
+		
+		return res;
+		
+	}
 	
 	@GetMapping("/image")
 	private ResponseEntity<?> reimg(@RequestParam(value="id") int imageName) {
 		return new ResponseEntity<>(imgser.findById(imageName), HttpStatus.OK); 
+	}
+	
+	@PostMapping("/Login")
+	private Map<String, Object> Login(@RequestBody Map<String, Object> req) {
+		Map<String, Object> res = new HashMap<>();
+		
+		boolean uex = sv.existsByusername(req.get("email").toString());
+		boolean pex = sv.existsByusernameAndPassword(req.get("email").toString(), req.get("pw").toString());
+		
+		if(uex == false) {
+			res.put("Error", "Not Found User");
+			return res;
+		}
+		if(pex == false) {
+			res.put("Error", "Incorrect Password");
+			return res;
+		}
+		
+		char[] ttk = new char[255];
+		for(int i = 0;i < 255;i++) {
+			ttk[i] = (char)(Math.random() * 9 + 48);
+		}
+		
+		String ttks = String.copyValueOf(ttk);
+		Tokens tk = new Tokens(ttks,sv.findByUsername(req.get("email").toString()).getFirst());
+		tokenser.save(tk);
+		res.put("token", ttks);
+		
+		return res;
 	}
 	
 	@GetMapping("/Plants")
@@ -346,8 +429,7 @@ public class ListController {
 	}
 	
 	@GetMapping("/Posts")
-	private Map<String,Object> SitePosts() {
-		Map<String,Object> res = new HashMap<>();
+	private List<Map<String,Object>> SitePosts() {
 		List<Map<String,Object>> lres = new ArrayList<>();
 		List<Posts> pts = postser.findAllByOrderByIdDesc();
 		int itr = pts.size();
@@ -365,10 +447,11 @@ public class ListController {
 			SimpleDateFormat tForm = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss");
 			String ttms = tForm.format(ttm);
 			tres.put("time", ttms);
+			tres.put("id", pt.getId());
 			lres.add(tres);
 		}
-		res.put("postlists", lres);
-		return res;
+		
+		return lres;
 	}
 	
 	@GetMapping("/Shop")
@@ -404,6 +487,20 @@ public class ListController {
 		}
 		res.put("plantlists", getpl);
 		return res;
+	}
+	
+	@PostMapping("/SignUp")
+	private String SiteSignup(@RequestBody Map<String, Object> req) {
+		if(req.get("name") == null || req.get("name").toString() == "") return "Username is must not null";
+		if(req.get("email") == null || req.get("email").toString() == "") return "Email is must not null";
+		if(req.get("pw") == null || req.get("pw").toString() == "") return "Password is must not null";
+		if(req.get("checkpw") == null || req.get("checkpw").toString() == "") return "Password Check is must not null";
+		if(!req.get("pw").toString().equals(req.get("checkpw").toString())) return "Password Check is incorrect";
+		
+		Accounts ac = new Accounts(req.get("pw").toString(),req.get("email").toString(),req.get("name").toString());
+		sv.save(ac);
+		
+		return "Ok";
 	}
 	
 	@GetMapping("/")

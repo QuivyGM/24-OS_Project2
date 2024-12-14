@@ -9,4 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface AccountsRepository extends JpaRepository<Accounts, Integer> {
 	public List<Accounts> findByUsername(String _name);
+	public boolean existsByusername(String username);
+	public boolean existsByusernameAndPassword(String username, String pass);
+	public List<Accounts> findByusernameAndPassword(String username, String pass);
 }
