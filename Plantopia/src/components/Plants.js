@@ -5,8 +5,9 @@ import Footer from "./Footer";
 import "../styles/pages/_plants.scss";
 
 const weeklyTopPlants = [
-    { id: 1, image: "/images/1.jpg", title: "Fiddle Leaf Fig", likes: 120 },
-    { id: 2, image: "/images/2.jpg", title: "Snake Plant", likes: 100 },
+    
+    { id: 1, image: "/images/2.jpg", title: "Snake Plant", likes: 100 },
+    { id: 2, image: "/images/1.jpg", title: "Fiddle Leaf Fig", likes: 120 },
     { id: 3, image: "/images/3.jpg", title: "Peace Lily", likes: 80 },
 ];
 
@@ -68,6 +69,8 @@ const Plants = () => {
         setCurrentPage(1); 
     };
 
+    const yOffsets = [20, 0, 40];
+
     return (
         <div className="plants-page">
             <Navbar />
@@ -80,10 +83,11 @@ const Plants = () => {
                                 key={plant.id}
                                 className={`top-plant-card rank-${index + 1}`}
                                 onClick={() => handlePlantClick(plant.id)}
+                                style={{ transform: `translateY(${yOffsets[index]}px)` }}
                             >
                                 <div className="medal">
-                                    {index === 0 && <img src="/icons/gold.png" alt="Gold Medal" />}
-                                    {index === 1 && <img src="/icons/silver.png" alt="Silver Medal" />}
+                                    {index === 0 && <img src="/icons/silver.png" alt="Silver Medal" />} 
+                                    {index === 1 && <img src="/icons/gold.png" alt="Gold Medal" />}
                                     {index === 2 && <img src="/icons/bronze.png" alt="Bronze Medal" />}
                                 </div>
                                 <img src={plant.image} alt={plant.title} className="plant-image" />

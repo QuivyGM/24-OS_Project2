@@ -70,7 +70,7 @@ const Post = () => {
       };
 
     return (
-        <div className="page container">
+        <div className="post-page container">
             <Navbar />
 
             {/* Display the post content */}

@@ -26,7 +26,7 @@ return (
     <footer className="footer py-5">
       <div className="row logo-links">
         <div className="col-md-3 footer-logo">
-          <img src="./images/logo.png" alt="Plantopia Logo" onClick={handleLogoClick} />
+          <img src="/images/logo.png" alt="Plantopia Logo" onClick={handleLogoClick} />
         </div>
         <div className="col-md-3 footer-links">
           <a className="nav-link active" onClick={handlePlantsClick} href="plants">

@@ -30,10 +30,10 @@ const MainPage = () => {
   };
 
   const handleLoginClick = () => {
-    if (!isLoggedIn) {
+    if (isLoggedIn) {
         navigate('/Login'); // Redirect to login page
     } else {
-        navigate('/mypage'); // Navigate to My Page
+        navigate('/VirtualGarden'); // Navigate to My Page
     }
 };
 

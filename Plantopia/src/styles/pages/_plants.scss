@@ -38,13 +38,15 @@
                     }
 
                     &.rank-1 {
-                        border: 2px solid $gold-color;
-                        box-shadow: 0 8px 12px rgba($gold-color, 0.5);
+                        border: 2px solid $silver-color;
+                        box-shadow: 0 8px 12px rgba($silver-color, 0.5);
                     }
 
                     &.rank-2 {
-                        border: 2px solid $silver-color;
-                        box-shadow: 0 8px 12px rgba($silver-color, 0.5);
+                        
+                        border: 2px solid $gold-color;
+                        
+                        box-shadow: 0 8px 12px rgba($gold-color, 0.5);
                     }
 
                     &.rank-3 {

@@ -24,7 +24,7 @@ const Navbar = () => {
     if (!isLoggedIn) {
         navigate('/Login'); // Redirect to login page
     } else {
-        navigate('/mypage'); // Navigate to My Page
+        navigate('/VirtualGarden'); // Navigate to My Page
     }
 };
 
@@ -40,7 +40,7 @@ const Navbar = () => {
               handleNavigation("/");
             }}
           >
-            <img src="./images/logo.png" alt="logo" />
+            <img src="/images/logo.png" alt="logo" />
           </a>
           <button
             className="navbar-toggler"
@@ -90,11 +90,11 @@ const Navbar = () => {
                   type="button"
                   onClick={handleSearchClick}
                 >
-                  <img src="./icons/search-normal.svg" alt="search" />
+                  <img src="/icons/search-normal.svg" alt="search" />
                 </button>
               </form>
               <button className="login-button"onClick={handleMyPageClick}>
-                <img src="./icons/user.svg" alt="login" />
+                <img src="/icons/user.svg" alt="login" />
               </button>
             </div>
           </div>
