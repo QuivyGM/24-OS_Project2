@@ -1,5 +1,3 @@
-// src/styles/pages/_shop.scss
-
 @import '../variables/colors';
 
 * {
@@ -39,100 +37,6 @@
   }
 }
 
-.nav-center {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.navbar-nav {
-  padding-right: 10px;
-  a {
-    color: $light-color !important; // Set link color
-    position: relative;
-    transition: color 0.3s ease; // Smooth color transition
-    margin: 0px 12px !important;
-    padding: 0;
-
-    &::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: -4px;
-      width: 0;
-      height: 2px;
-      background-color: $light-color; // Bottom line color
-      transition: width 0.3s ease; // Smooth line width transition
-    }
-
-    &:hover {
-      color: $light-color; // Keep the link color on hover
-
-      &::after {
-        width: 100%; // Extend the bottom line on hover
-      }
-    }
-  }
-}
-
-.nav-right {
-  display: flex;
-  gap: 18px;
-
-  button {
-    background-color: transparent !important;
-    border: 0;
-    position: relative;
-    cursor: pointer;
-    padding: 0px;
-    transition: color 0.3s ease;
-
-    img {
-      width: 24px; // Icon size for buttons
-      transition: color 0.3s ease; // Smooth color transition
-    }
-
-    &::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: -8px;
-      width: 0;
-      height: 2px;
-      background-color: $light-color; // Bottom line color for button
-      transition: width 0.3s ease; // Smooth transition for line width
-    }
-
-    &:hover {
-      &::after {
-        width: 100%; // Show full line on hover
-      }
-    }
-  }
-}
-
-.search-button {
-  input {
-    background-color: transparent;
-    color: $light-color; 
-    width: 0;
-    opacity: 0;
-    transition: width 0.5s ease, opacity 0.5s ease; // Ko'rinish va kenglik o'zgarishi uchun animatsiya
-
-    &.show {
-      width: 150px; 
-      opacity: 1; 
-    }
-
-    &.hide {
-      width: 0; 
-      opacity: 0;
-    }
-
-    &::placeholder {
-      color: $dark-color;
-    }
-  }
-}
 
 .shop-page {
   margin-top: 100px;
@@ -243,65 +147,60 @@
       }
     }
   }
+}
 
-  // Footer
-  .footer {
-    background-color: $footer-color;
-    color: $light-color;
-    padding: 24px 0px !important;
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999 !important;
+  overflow-y: auto;
 
-    .logo-links {
-      display: flex;
-      justify-content: space-between;
-      padding: 0px 80px;
-      cursor: pointer;
+  .modal-content {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 700px;
+    padding: 20px;
+    display: flex; /* Ensures image and text are in a horizontal row */
+    flex-direction: row; /* Forces content into a horizontal layout */
+    gap: 20px;
+
+    .modal-image {
+      flex: 0 0 40%; /* Fixed size for the image (40% width) */
+      max-width: 40%; /* Prevents the image from exceeding its container */
+      height: auto; /* Keeps aspect ratio */
+      border-radius: 8px;
+      object-fit: cover;
     }
 
-    .footer-logo {
-      width: 20%;
+    .modal-text {
+      flex: 1; /* Remaining space for the text */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: left;
 
-      img {
-        width: 150px;
+      h3 {
+        font-size: 1.5rem;
+        color: #2a9d8f;
+        margin-bottom: 10px;
+        text-align: center;
       }
-    }
 
-    .footer-links {
-      display: flex;
-      justify-content: space-evenly;
-      gap: 2rem;
-      align-items: center;
-
-      a {
-        color: $light-color;
-        display: block;
-        margin-bottom: 0.5rem;
-        padding: 0;
-        position: relative;
-        text-decoration: none; // Remove default underline
-        transition: transform 0.3s ease; // Smooth scaling effect
-
-        // Hover animation
-        &:hover {
-          transform: scale(1.12); // Slightly enlarge the link on hover
-        }
-
-        // Add an animated underline effect
-        &::after {
-          content: '';
-          position: absolute;
-          left: 0;
-          bottom: -2px;
-          width: 0; // Initially set to 0
-          height: 2px;
-          background-color: $light-color; // Set the underline color
-          transition: width 0.3s ease; // Smoothly expand the underline
-        }
-
-        // On hover, expand the underline
-        &:hover::after {
-          width: 100%; // Fully expand the underline
-        }
+      p {
+        margin: 5px 0;
+        color: #555;
+        font-size: 1rem;
       }
     }
   }
 }
+

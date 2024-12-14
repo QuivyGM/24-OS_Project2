@@ -1,7 +1,7 @@
-// src/components/Shop.js
-
 import React, { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Navbar from "../Navbar";
+import Footer from "../Footer";
 import '../../styles/pages/_shop.scss';
 
 const productCatalogue = [
@@ -12,42 +12,19 @@ const productCatalogue = [
 ];
 
 const Shop = () => {
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+
+  const handleProductClick = (product) => {
+      setSelectedProduct(product);
+      setShowModal(true);
+  };
+
+  const closeModal = () => {
+      setShowModal(false);
+  };
+
   const navigate = useNavigate();
-  const searchInputRef = useRef(null);
-
-  const [showInput, setShowInput] = useState(false);
-
-  const handleSearchClick = () => {
-    setShowInput(true);
-    if (searchInputRef.current) {
-      searchInputRef.current.focus();
-    }
-  };
-
-  const handleLogoClick = (event) => {
-    event.preventDefault();
-    navigate('/');
-  };
-
-  const handleLoginClick = () => {
-    navigate('/login');
-  };
-
-  const handleShopClick = () => {
-    navigate('/shop');
-  };
-
-  const handlePlantsClick = () => {
-    navigate('/plants');
-  };
-
-  const handleCommunityClick = () => {
-    navigate('/community');
-  };
-
-  const handleAboutusClick = () => {
-    navigate('/aboutus');
-  };
 
   const handleShopCatClick = () => {
     navigate('/ShopCat');
@@ -71,50 +48,7 @@ const Shop = () => {
     <div>
       <div className="shop-page container">
         {/* Header Section */}
-        <div className="overlay">
-          <nav className="navbar navbar-expand-lg bg-body-tertiary navbar-main">
-            <div className="container-fluid navbar-box d-flex">
-              {/* Navbar brand/logo with click handler */}
-              <a className="navbar-brand" href="logo" onClick={handleLogoClick}>
-                <img src='./images/logo.png' alt='logo' />
-              </a>
-
-              {/* Navbar toggle button for mobile view */}
-              <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span className="navbar-toggler-icon"></span>
-              </button>
-
-              {/* Navbar links and right-side buttons */}
-              <div className="collapse navbar-collapse nav-center" id="navbarSupportedContent">
-                <ul className="navbar-nav mb-2 mb-lg-0">
-                  <li className="nav-item"><a className="nav-link active" href="Plants">Plants</a></li>
-                  <li className="nav-item"><a className="nav-link active" href="Community">Community</a></li>
-                  <li onClick={handleShopClick} className="nav-item"><a className="nav-link active" href="Shop">Shop</a></li>
-                  <li className="nav-item"><a className="nav-link active" href="Aboutus">About Us</a></li>
-                </ul>
-
-                {/* Right nav (search and login) */}
-                <div className="nav-right">
-                  <form className="d-flex search-button" role="search" onSubmit={(e) => e.preventDefault()}>
-                    <input 
-                      ref={searchInputRef} 
-                      className={`form-control me-2 ${showInput ? 'show' : 'hide'}`}
-                      type="search" 
-                      placeholder="Search" 
-                      aria-label="Search" 
-                    />
-                    <button className="btn btn-outline-success" type="button" onClick={handleSearchClick}>
-                      <img src='./icons/search-normal.svg' alt='search' />
-                    </button>
-                  </form>
-                  <button onClick={handleLoginClick} className="login-button">
-                    <img src='./icons/user.svg' alt='login' />
-                  </button>
-                </div>
-              </div>
-            </div>
-          </nav>
-        </div>
+        <Navbar />
 
         {/* Product Detail Section */}
         <div className="product-detail row">
@@ -155,6 +89,7 @@ const Shop = () => {
             <button onClick={handleShopCatClick} className="btn btn-outline-secondary">
               See More
             </button>
+
           </div>
           <div className="row">
             {productCatalogue.map((product) => (
@@ -177,14 +112,14 @@ const Shop = () => {
                       ))}
                       <span className="review-count">({product.reviews})</span>
                     </div>
-                    <button
-                      className="btn btn-success"
-                      onClick={() => navigate(`/post/${product.id}`)} // Navigate to Post page
-                      style={{ cursor: 'pointer' }}
+                    <button 
+                      className="btn btn-success" 
+                      onClick={() => handleProductClick(product)}
                     >
                       See More
                     </button>
                     <button className="btn btn-outline-secondary ms-2" onClick={() => handleAddToCart(product.price)}>Add to cart</button>
+
                   </div>
                 </div>
               </div>
@@ -230,21 +165,24 @@ const Shop = () => {
       </div>
 
       {/* Footer Section */}
-      <footer className="footer py-5">
-        <div className="row logo-links">
-          <div className="col-md-3 footer-logo">
-            <img src="./images/logo.png" alt="Plantopia Logo" onClick={handleLogoClick} />
-          </div>
-          <div className="col-md-3 footer-links">
-            <a className="nav-link active" onClick={handlePlantsClick} href='plants'>Plants</a>
-            <a className="nav-link active" onClick={handleCommunityClick} href='community'>Community</a>
-            <a className="nav-link active" onClick={handleShopClick} href='shop'>Shop</a>
-            <a className="nav-link active" onClick={handleAboutusClick} href='aboutus'>About Us</a>
+      <Footer />
+      
+      {showModal && selectedProduct && (
+        <div className="modal-overlay" onClick={closeModal}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <img src={selectedProduct.image} alt={selectedProduct.title} className="modal-image" />
+            <div className="modal-text">
+              <h3>{selectedProduct.title}</h3>
+              <p>Price: {selectedProduct.price}</p>
+              <p>Original Price: {selectedProduct.originalPrice}</p>
+              <p>Reviews: {selectedProduct.reviews}</p>
+              <p>Average Score: {selectedProduct.avgReviewScore} ★</p>
+            </div>
           </div>
         </div>
-        <p className="footer-note text-center mt-4">Plantopia © All rights reserved</p>
-      </footer>
+      )}
     </div>
+    
   );
 };
 

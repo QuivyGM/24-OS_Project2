@@ -19,6 +19,21 @@ body {
     max-width: 1700px;
     margin: 110px auto;
     padding: 0 20px;
+    .back-button {
+        background: none;
+        border: none;
+        color: $primary-color;
+        font-size: 1rem;
+        cursor: pointer;
+        margin-bottom: 30px;
+        margin-left: 50px;
+        text-align: center;
+        align-self: flex-start;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
 
     h1 {
         display: flex;
@@ -207,3 +222,59 @@ body {
         gap: 2rem;
     }
 }
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999 !important;
+    overflow-y: auto;
+  
+    .modal-content {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      width: 90%;
+      max-width: 700px;
+      padding: 20px;
+      display: flex; /* Ensures image and text are in a horizontal row */
+      flex-direction: row; /* Forces content into a horizontal layout */
+      gap: 20px;
+  
+      .modal-image {
+        flex: 0 0 40%; /* Fixed size for the image (40% width) */
+        max-width: 40%; /* Prevents the image from exceeding its container */
+        height: auto; /* Keeps aspect ratio */
+        border-radius: 8px;
+        object-fit: cover;
+      }
+  
+      .modal-text {
+        flex: 1; /* Remaining space for the text */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: left;
+  
+        h3 {
+          font-size: 2rem;
+          color: $secondary-color;
+          margin-bottom: 10px;
+          text-align: center;
+        }
+  
+        p {
+          margin: 5px 0;
+          color: #000000;
+          font-size: 1.5rem;
+
+        }
+      }
+    }
+  }

@@ -7,30 +7,36 @@ import "../../styles/pages/_plants.scss";
 import plantsData from "./plantsData";
 
 const weeklyTopPlants = [
-    
-    { id: 1, image: "/images/2.jpg", title: "Snake Plant", likes: 100 },
-    { id: 2, image: "/images/1.jpg", title: "Fiddle Leaf Fig", likes: 120 },
-    { id: 3, image: "/images/3.jpg", title: "Peace Lily", likes: 80 },
+    { id: 1, image: "/images/2.jpg", title: "Snake Plant", likes: 100, medal: "silver", yOffset: 20 },
+    { id: 2, image: "/images/1.jpg", title: "Fiddle Leaf Fig", likes: 120, medal: "gold", yOffset: 0 },
+    { id: 3, image: "/images/3.jpg", title: "Peace Lily", likes: 80, medal: "bronze", yOffset: 40 },
 ];
 
-const allPlants = Array.from({ length: 36 }, (_, index) => ({
-    id: index + 4,
-    image: `/images/${(index % 5) + 1}.jpg`,
-    title: `Chamaedorea Elegans ${index + 4}`,
-    rating: 4.5,
-    reviews: 10,
-    type: index % 2 === 0 ? "Indoor" : "Outdoor",
-    waterNeeds: index % 3 === 0 ? "Low" : "Medium",
-    size: index % 4 === 0 ? "Small" : "Large",
-}));
+const medalMap = {
+    gold: "/icons/gold.png",
+    silver: "/icons/silver.png",
+    bronze: "/icons/bronze.png",
+};
+
+
+
+// const allPlants = Array.from({ length: 36 }, (_, index) => ({
+//     id: index + 4,
+//     image: `/images/${(index % 5) + 1}.jpg`,
+//     title: `Chamaedorea Elegans ${index + 4}`,
+//     rating: 4.5,
+//     reviews: 10,
+//     type: index % 2 === 0 ? "Indoor" : "Outdoor",
+//     waterNeeds: index % 3 === 0 ? "Low" : "Medium",
+//     size: index % 4 === 0 ? "Small" : "Large",
+// }));
 
 const Plants = () => {
     const navigate = useNavigate();
     const [currentPage, setCurrentPage] = useState(1);
     const [filters, setFilters] = useState({
         type: "",
-        waterNeeds: "",
-        size: "",
+        difficulty: "",
     });
 
     const [selectedPlant, setSelectedPlant] = useState(null); // Stores the clicked plant
@@ -48,11 +54,10 @@ const Plants = () => {
 
     const plantsPerPage = 8;
 
-    const filteredPlants = allPlants.filter((plant) => {
+    const filteredPlants = plantsData.filter((plant) => {
         return (
             (filters.type === "" || plant.type === filters.type) &&
-            (filters.waterNeeds === "" || plant.waterNeeds === filters.waterNeeds) &&
-            (filters.size === "" || plant.size === filters.size)
+            (filters.difficulty === "" || plant.difficulty === filters.difficulty)
         );
     });
 
@@ -87,61 +92,63 @@ const Plants = () => {
         <div className="plants-page">
             <Navbar />
             <main className="product-page">
-                <section className="weekly-plants">
-                    <h2 className="section-title">Top Weekly Plants</h2>
-                    <div className="top-plants">
-                        {weeklyTopPlants.map((plant, index) => (
-                            <div
-                                key={plant.id}
-                                className={`top-plant-card rank-${index + 1}`}
-                                onClick={() => handlePlantClick(plant)}
-                                style={{ transform: `translateY(${yOffsets[index]}px)` }}
-                            >
-                                <div className="medal">
-                                    {index === 0 && <img src="/icons/silver.png" alt="Silver Medal" />} 
-                                    {index === 1 && <img src="/icons/gold.png" alt="Gold Medal" />}
-                                    {index === 2 && <img src="/icons/bronze.png" alt="Bronze Medal" />}
-                                </div>
-                                <img src={plant.image} alt={plant.title} className="plant-image" />
-                                <div className="plant-info">
-                                    <span className="rank">{rankNum[index]}</span>
-                                    <h3>{plant.title}</h3>
-                                    <p>{plant.likes} likes</p>
-                                </div>
+            <section className="weekly-plants">
+                <h2 className="section-title">Top Weekly Plants</h2>
+                <div className="top-plants">
+                    {weeklyTopPlants.map((plant, index) => (
+                        <div
+                            key={plant.id}
+                            className={`top-plant-card rank-${index + 1}`}
+                            onClick={() => handlePlantClick(plant)}
+                            style={{
+                                transform: `translateY(${plant.yOffset}px)`,
+                            }}
+                        >
+                            {/* Medal Section */}
+                            <div className="medal">
+                                <img src={medalMap[plant.medal]} alt={`${plant.medal} Medal`} />
                             </div>
-                        ))}
-                    </div>
-                </section>
+
+                            {/* Plant Image */}
+                            <img src={plant.image} alt={plant.title} className="plant-image" />
+
+                            {/* Plant Info */}
+                            <div className="plant-info">
+                                <h3>{plant.title}</h3>
+                                <p>{plant.likes} likes</p>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </section>
+
 
                 <section className="other-plants">
                     <h2 className="section-title">Explore More Plants</h2>
                     <div className="filters">
                         <select name="type" value={filters.type} onChange={handleFilterChange}>
                             <option value="">All Types</option>
-                            <option value="Indoor">Indoor</option>
-                            <option value="Outdoor">Outdoor</option>
+                            <option value="indoor">Indoor</option>
+                            <option value="outdoor">Outdoor</option>
                         </select>
-                        <select name="waterNeeds" value={filters.waterNeeds} onChange={handleFilterChange}>
-                            <option value="">All Water Needs</option>
-                            <option value="Low">Low</option>
-                            <option value="Medium">Medium</option>
-                        </select>
-                        <select name="size" value={filters.size} onChange={handleFilterChange}>
-                            <option value="">All Sizes</option>
-                            <option value="Small">Small</option>
-                            <option value="Large">Large</option>
+                        <select name="difficulty" value={filters.difficulty} onChange={handleFilterChange}>
+                            <option value="">All Difficulties</option>
+                            <option value="easy">Easy</option>
+                            <option value="medium">Medium</option>
+                            <option value="hard">Hard</option>
                         </select>
                     </div>
                     <div className="plants-grid">
                         {currentPlants.map((plant) => (
                             <div
-                                key={plant.id}
+                                key={plant.plant_id}
                                 className="plant-card"
                                 onClick={() => handlePlantClick(plant)}
                             >
-                                <img src={plant.image} alt={plant.title} className="plant-image" />
-                                <h4>{plant.title}</h4>
-                                <p>{plant.rating} ★ ({plant.reviews} reviews)</p>
+                                <img src={plant.image_id} alt={plant.title} className="plant-image" />
+                                <h4>{plant.name}</h4>
+                                <p>Type: {plant.type.charAt(0).toUpperCase() + plant.type.slice(1)}</p>
+                                <p>Difficulty: {plant.difficulty}</p>
                             </div>
                         ))}
                     </div>
@@ -168,21 +175,29 @@ const Plants = () => {
             {showModal && selectedPlant && (
                 <div className="modal-overlay" onClick={closeModal}>
                     <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-                        {/* Image Section */}
-                        <img src={selectedPlant.image} alt={selectedPlant.title} className="modal-image" />
-                        
-                        {/* Text Section */}
-                        <div className="modal-text">
-                            <h3>{selectedPlant.title}</h3>
-                            <p>Type: {selectedPlant.type}</p>
-                            <p>Water Needs: {selectedPlant.waterNeeds}</p>
-                            <p>Size: {selectedPlant.size}</p>
-                            <p>Rating: {selectedPlant.rating} ★ ({selectedPlant.reviews} reviews)</p>
+                        {/* Top Section: Image and Plant Info */}
+                        <div className="modal-top">
+                            <img
+                                src={selectedPlant.image_id}
+                                alt={selectedPlant.name}
+                                className="modal-image"
+                            />
+                            <div className="modal-text">
+                                <h3>{selectedPlant.name}</h3>
+                                <p>Type: {selectedPlant.type}</p>
+                                <p>Difficulty: {selectedPlant.difficulty}</p>
+                            </div>
+                        </div>
+
+                        {/* Bottom Section: Description */}
+                        <div className="modal-description">
+                            <p>{selectedPlant.description}</p>
                         </div>
                     </div>
-            </div>
-            
+                </div>
             )}
+
+
 
         </div>
     );

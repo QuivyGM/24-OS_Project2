@@ -24,6 +24,8 @@
                 gap: 20px;
 
                 .top-plant-card {
+                    height: 90%;
+                    max-height: 700px;
                     flex: 1;
                     max-width: 300px;
                     background: #fff;
@@ -58,6 +60,7 @@
                         position: absolute;
                         top: -5px;
                         left: 10px;
+                        z-index: 10;
                         img {
                             width: 40px;
                             height: 64px;
@@ -76,9 +79,13 @@
                     }
 
                     .plant-image {
-                        width: 100%;
+                        width: 90%;
                         height: 200px;
                         object-fit: cover;
+                        margin-top: 20px;
+                        border-radius: 10px;        // Optional rounded corners
+                        margin-top: 20px;
+                        position: relative;     
                     }
 
                     .plant-info {
@@ -213,59 +220,68 @@
         left: 0;
         height: 100%;
         width: 100%;
-        background: rgba(0, 0, 0, 0.6);
+        background: rgba(0, 0, 0, 0.6); // Dark semi-transparent background
         display: flex;
-        align-items: center;
-        justify-content: center;
+        align-items: center; // Center modal vertically
+        justify-content: center; // Center modal horizontally
         z-index: 1000;
-
+    
         .modal-content {
-            background: #fff; /* White background */
-            width: 90%; /* Takes 90% of the screen */
-            max-width: 1000px; /* Limits modal width */
-            height: auto; /* Dynamic height based on content */
-            max-height: 90vh; /* Optional: ensures it doesn't overflow viewport */
-            border-radius: 15px; /* Rounded corners */
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Soft shadow for depth */
-            padding: 20px;
+            background: #fff;
+            display: flex;
+            flex-direction: column; // Stack image and description vertically
+            width: 90%;
+            max-width: 900px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
             position: relative;
-            overflow: auto; /* Scroll if content exceeds height */
-            display: flex; /* Flexbox for layout */
-            flex-wrap: wrap; /* Allows wrapping on smaller screens */
-            gap: 20px; /* Space between image and text */
-        
-            /* Image on the top-left */
-            .modal-image {
-                flex: 1 1 40%; /* Takes up 40% of the modal */
-                max-width: 500px; /* Maximum size of the image */
-                height: auto; /* Maintain aspect ratio */
-                object-fit: cover; /* Ensures image looks good */
-                border-radius: 10px; /* Rounded corners */
-            }
-        
-            /* Text container on the right */
-            .modal-text {
-                flex: 1 1 55%; /* Takes up remaining space */
+    
+            .modal-top {
                 display: flex;
-                flex-direction: column;
-                justify-content: center; /* Align text vertically */
+                align-items: flex-start; /* Align items to the top */
+                padding: 20px;
+            
+                .modal-image {
+                    width: 200px; /* Fixed width */
+                    height: 200px; /* Fixed height */
+                    object-fit: cover; /* Ensures image is cropped */
+                    border-radius: 10px;
+                    margin-right: 20px; /* Space between image and text */
+                }
+            
+                .modal-text {
+                    flex: 1; /* Take up remaining space */
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center; /* Center text vertically */
+                    text-align: left;
+            
+                    h3 {
+                        font-size: 2rem;
+                        color: #2a9d8f; /* Primary color */
+                        margin-bottom: 10px;
+                        text-align: center;
+                    }
+            
+                    p {
+                        margin-bottom: 8px;
+                        font-size: 1rem;
+                        color: #555;
+                    }
+                }
+            }
+            
+    
+            .modal-description {
+                padding: 20px;
                 font-size: 1rem;
                 color: #333;
-                text-align: left; /* Align text to the left */
+                border-top: 1px solid #ddd; /* Separator line */
                 line-height: 1.5;
-        
-                h3 {
-                    font-size: 1.5rem;
-                    margin-bottom: 10px;
-                    color: #222;
-                }
-        
-                p {
-                    margin-bottom: 8px;
-                }
             }
-        
-            /* Close button */
+            
+    
             .modal-close {
                 position: absolute;
                 top: 10px;
@@ -274,27 +290,11 @@
                 border: none;
                 font-size: 1.5rem;
                 cursor: pointer;
-                transition: color 0.3s;
-        
+    
                 &:hover {
                     color: #333;
                 }
             }
-        
-            /* Responsive for smaller screens */
-            @media (max-width: 768px) {
-                flex-direction: column; /* Stack image and text vertically */
-                align-items: center;
-        
-                .modal-image {
-                    max-width: 100%; /* Full width on smaller screens */
-                }
-        
-                .modal-text {
-                    text-align: center; /* Center text */
-                }
-            }
         }
-        
     }    
 }
