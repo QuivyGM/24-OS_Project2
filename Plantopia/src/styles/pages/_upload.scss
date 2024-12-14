@@ -8,17 +8,19 @@
     font-family: 'Poppins', sans-serif;
 }
 
-body, html {
+body {
     margin: 0;
-    padding: 0; 
-    height: 100%; // Ensure full height for body and html
+    padding: 0;
+    line-height: 1.5;
+    background-color: #f8f9fa; // Light background for the body
 }
 
-.page {    
-    display: flex;
-    flex-direction: column;
-    margin-top: 50px;
-    min-height: 100vh;
+// Upload Page Styles
+.upload-page {
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    padding-top: 60px;
 
     // Back Button
     .back-button {
@@ -28,71 +30,122 @@ body, html {
         font-size: 1rem;
         cursor: pointer;
         margin-bottom: 30px;
-        text-align: center;
         align-self: flex-start;
+        transition: color 0.3s ease;
 
         &:hover {
             text-decoration: underline;
+            color: darken($primary-color, 15%);
         }
     }
 
     // Upload Form Container
-    .post {
-        padding: 20px 40px;
-        margin-top: 20px;
-        margin-bottom: 20px;
-        width: 100%;
-        max-width: 600px; // Set max width for better layout
-        margin-left: auto;
-        margin-right: auto;
-        background: #fff; // Ensure a clean white form container
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    .upload {
+        background: #fff; // Clean white background
+        padding: 30px 40px;
+        margin: 40px auto;
+        width: 80%;
+        max-width: 1200px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 50px;
 
-        .new-post-form {
-            display: flex;
-            flex-direction: column;
+        .post-title{
+            font-size: 2rem;
+            color: $primary-color;
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: bold;
+            border-radius: 1px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 
-            h3 {
-                font-size: 1.5rem;
+            .upload-icon {
+                width: 2em;
+                height: auto;
+                margin-left: 10px;
+                margin-top: 50px;
+                margin-bottom: 50px;
+            }
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            color: $primary-color;
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        // Form Fields
+        .form-group {
+            margin-bottom: 20px;
+
+            label {
+                display: block;
+                font-size: 1rem;
                 color: #333;
-                margin-bottom: 20px;
-                text-align: center;
+                margin-bottom: 8px;
+                font-weight: 600;
             }
 
             input, textarea {
                 width: 100%;
-                padding: 10px;
-                margin-bottom: 15px;
+                padding: 10px 12px;
                 font-size: 1rem;
-                border: 1px solid #ccc;
+                color: #555;
+                border: 1px solid #ddd;
                 border-radius: 5px;
                 outline: none;
+                transition: all 0.3s ease;
 
                 &:focus {
                     border-color: $primary-color;
-                    box-shadow: 0 0 4px rgba(0, 0, 255, 0.3); // Subtle focus effect
+                    box-shadow: 0 0 6px rgba($primary-color, 0.3);
                 }
             }
 
-            button {
-                align-self: center;
-                width: 100%;
-                max-width: 200px;
-                background-color: $primary-color;
-                color: #fff;
-                padding: 10px 15px;
-                border: none;
-                border-radius: 5px;
-                font-size: 1rem;
-                cursor: pointer;
-                transition: background 0.3s ease;
-
-                &:hover {
-                    background-color: darken($primary-color, 10%);
-                }
+            textarea {
+                resize: none; // Prevent textarea resizing
+                height: 150px; // Default height for textarea
             }
         }
+
+        // Submit Button
+        .submit-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px; // Add spacing between icon and text
+            width: 100%;
+            max-width: 200px;
+            margin: 0 auto;
+            padding: 10px 15px;
+            background-color: $primary-color;
+            color: #fff;
+            font-size: 1rem;
+            font-weight: bold;
+            text-align: center;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+
+            i, img {
+                width: 18px; // Icon size
+                height: 18px;
+            }
+
+            &:hover {
+                background-color: darken($primary-color, 10%);
+            }
+        }
+    }
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+    .upload-page .upload {
+        width: 95%; // Adjust the form width for smaller screens
+        padding: 20px;
     }
 }

@@ -81,7 +81,7 @@ const Community = () => {
   };
 
   const handleUploadClick = () => {
-    if (!isLoggedIn) {
+    if (isLoggedIn) {
       alert('You must be logged in to upload a post.');
       navigate('/Login');
     } else {

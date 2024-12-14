@@ -1,78 +1,97 @@
 import React, { useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { posts as importedPosts } from './data/posts'; // Import posts from external file
-import '../../styles/pages/_posts.scss';
+import { useNavigate } from 'react-router-dom';
+import '../../styles/pages/_upload.scss';
 import Footer from '../Footer';
 import Navbar from '../Navbar';
+import { useAuth } from '../AuthContext';
 
-const Post = () => {
-    const [posts, setPosts] = useState(importedPosts); // State to manage posts
-    const [title, setTitle] = useState('');
-    const [content, setContent] = useState('');
-    const navigate = useNavigate(); // Initialize navigate function
+const UploadPost = () => {
+    const { isLoggedIn } = useAuth(); // Check if user is logged in
+    const navigate = useNavigate(); // Navigation function
 
+    const [title, setTitle] = useState(''); // State for the title input
+    const [postBody, setPostBody] = useState(''); // State for the post body input
+    const [posts, setPosts] = useState([]); // State to manage posts
+
+    // Navigate back to the previous page
+    const handleBackClick = () => {
+        navigate(-1);
+    };
+
+    // Handle form submission
     const handlePostSubmit = () => {
-        if (title.trim() && content.trim()) {
+        if (!isLoggedIn) {
+            alert('You must be logged in to upload a post.');
+            navigate('/Login');
+            return;
+        }
+
+        if (title.trim() && postBody.trim()) {
             const newPost = {
-                id: posts.length > 0 ? posts[posts.length - 1].id + 1 : 1, // Increment ID
-                author: 'GuestUser', // Temporary nickname
-                uploadTime: new Date().toISOString(), // Current time
-                title: title,
-                content: content,
-                likes: 0, // Reset to 0
-                answers: 0 // Reset to 0
+                id: posts.length > 0 ? posts[posts.length - 1].id + 1 : 1,
+                title,
+                content: postBody,
+                author: 'GuestUser', // Temporary placeholder
+                uploadTime: new Date().toISOString(),
+                likes: 0,
             };
 
-            console.log('New Post Submitted:', newPost); // Log the new post structure
-            setPosts([...posts, newPost]); // Add the new post to the list
-            setTitle(''); // Reset title input
-            setContent(''); // Reset content input
+            setPosts([...posts, newPost]); // Update posts state
+            setTitle('');
+            setPostBody('');
 
-            // Display formatted new post in alert
-            alert(
-                `Post submitted successfully!\n\n` +
-                `ID: ${newPost.id}\n` +
-                `Author: ${newPost.author}\n` +
-                `Upload Time: ${new Date(newPost.uploadTime).toLocaleString()}\n` +
-                `Title: ${newPost.title}\n` +
-                `Content: ${newPost.content}\n` +
-                `Likes: ${newPost.likes}\n` +
-                `Answers: ${newPost.answers}`
-            );
+            alert('Post uploaded successfully!');
+            console.log('New Post Uploaded:', newPost);
         } else {
-            alert('Please enter both a title and content.');
+            alert('Please fill in both the title and post body before submitting.');
         }
     };
 
-    const handleBackClick = () => {
-        navigate(-1); // Navigate to the previous page
-    };
-
     return (
-        <div className="page container">
+        <div className="upload-page container">
             <Navbar />
 
-            <div className="post container">
-                <button className="back-button" onClick={handleBackClick}>← Back</button>
+            {/* Upload Post Form */}
+            <div className="upload container">
+                <button className="back-button" onClick={handleBackClick}>
+                    ← Back
+                </button>
 
-                {/* Input Form for New Post */}
-                <div className="new-post-form mt-4">
-                    <h3>Create a New Post</h3>
-                    <input
-                        type="text"
-                        placeholder="Enter title"
-                        value={title}
-                        onChange={(e) => setTitle(e.target.value)}
-                        className="form-control mb-2"
-                    />
-                    <textarea
-                        placeholder="Enter content"
-                        value={content}
-                        onChange={(e) => setContent(e.target.value)}
-                        className="form-control mb-2"
-                        rows="4"
-                    ></textarea>
-                    <button className="btn btn-primary" onClick={handlePostSubmit}>
+                <div className="card p-4">
+                    <h1 className="post-title mb-4">Upload a New Post
+                    <img src="/images/upload_icon.png" alt="Upload Icon" className="upload-icon" />
+                    </h1>
+
+                    {/* Form Fields */}
+                    <div className="form-group mb-3">
+                        <label htmlFor="title">Title</label>
+                        <input
+                            type="text"
+                            id="title"
+                            className="form-control"
+                            placeholder="Enter post title"
+                            value={title}
+                            onChange={(e) => setTitle(e.target.value)}
+                        />
+                    </div>
+
+                    <div className="form-group mb-4">
+                        <label htmlFor="postBody">Post Body</label>
+                        <textarea
+                            id="postBody"
+                            className="form-control"
+                            placeholder="Write your post here..."
+                            rows="5"
+                            value={postBody}
+                            onChange={(e) => setPostBody(e.target.value)}
+                        ></textarea>
+                    </div>
+
+                    {/* Submit Button */}
+                    <button
+                        className="submit-button btn btn-success w-100"
+                        onClick={handlePostSubmit}
+                    >
                         Submit Post
                     </button>
                 </div>
@@ -83,4 +102,4 @@ const Post = () => {
     );
 };
 
-export default Post;
+export default UploadPost;
