@@ -44,7 +44,7 @@ const Community = () => {
   };
 
   // Text Animation
-  const text = "Find Your Perfect Plant"; 
+  const text = "Meet your fellow gardeners!"; 
   const [displayedText, setDisplayedText] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
 

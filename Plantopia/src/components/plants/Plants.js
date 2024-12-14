@@ -18,19 +18,6 @@ const medalMap = {
     bronze: "/icons/bronze.png",
 };
 
-
-
-// const allPlants = Array.from({ length: 36 }, (_, index) => ({
-//     id: index + 4,
-//     image: `/images/${(index % 5) + 1}.jpg`,
-//     title: `Chamaedorea Elegans ${index + 4}`,
-//     rating: 4.5,
-//     reviews: 10,
-//     type: index % 2 === 0 ? "Indoor" : "Outdoor",
-//     waterNeeds: index % 3 === 0 ? "Low" : "Medium",
-//     size: index % 4 === 0 ? "Small" : "Large",
-// }));
-
 const Plants = () => {
     const navigate = useNavigate();
     const [currentPage, setCurrentPage] = useState(1);
@@ -91,7 +78,14 @@ const Plants = () => {
     return (
         <div className="plants-page">
             <Navbar />
+            
             <main className="product-page">
+                <h1></h1>
+                <h1>    </h1>
+            <h1 className="title-text">
+                    Find Your Perfect Plant!
+                    <img src="/images/plants_icon.png" alt="Shop Icon" className="shop-icon" />
+                </h1>
             <section className="weekly-plants">
                 <h2 className="section-title">Top Weekly Plants</h2>
                 <div className="top-plants">

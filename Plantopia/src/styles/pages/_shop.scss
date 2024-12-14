@@ -37,13 +37,64 @@
   }
 }
 
+.title-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: $primary-color;
+  margin: 0;
+  font-size: 3em;
+  font-weight: bold;
+  margin-bottom: 50px;
+
+  .shop-icon {
+      width: 4em;
+      height: auto;
+      margin-left: 10px;
+  }
+}
 
 .shop-page {
   margin-top: 100px;
+
+
   .product-detail {
+    display: flex; /* Use Flexbox */
+    justify-content: space-between; /* Space between image and info */
+    align-items: center; /* Align content vertically */
+    
+    .image-frame {
+      display: flex; /* Make the column a flex container */
+      justify-content: center; /* Center horizontally */
+      align-items: center; /* Center vertically */
+    }
+    .medal {
+      position: absolute;
+      top: 350px;
+      left: 180px;
+      z-index: 100;
+      img {
+          width: 70px;
+          height: auto;
+          animation: bounce 2s infinite;
+      }
+
+      @keyframes bounce {
+          0%,
+          100% {
+              transform: translateY(0);
+          }
+          50% {
+              transform: translateY(-5px);
+          }
+      }
+  }
     .product-image {
       width: 100%;
+      max-width: 400px; /* Smaller image */
       border-radius: 8px;
+      margin: 0 auto;
+      align-self: center;
     }
 
     .product-info {

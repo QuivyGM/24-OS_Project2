@@ -50,9 +50,16 @@ const Shop = () => {
         {/* Header Section */}
         <Navbar />
 
+        <h1 className="title-text">
+                    Explore Our Products
+                    <img src="/images/shop_icon.png" alt="Shop Icon" className="shop-icon" />
+                </h1>
         {/* Product Detail Section */}
         <div className="product-detail row">
-          <div className="col-md-6">
+        <div className="medal">
+                                <img src="/icons/gold.png" alt="gold medal" />
+                            </div>
+          <div className="image-frame col-md-6">
             <img src="./images/1.jpg" alt="Echinocereus Cactus" className="product-image" />
           </div>
           <div className="col-md-6 product-info">
@@ -66,14 +73,7 @@ const Shop = () => {
             <button className="btn btn-success">Check out</button>
             <button className="btn btn-outline-secondary ms-2" onClick={() => handleAddToCart('$139.99')}>Add to cart</button>
             <div className="features mt-4">
-              <h4>Features</h4>
-              <ul>
-                <li>Species: Echinocereus spp.</li>
-                <li>Size: Varies by species, 4-12 inches in height</li>
-                <li>Season: Spring or summer</li>
-                <li>Available in various pot sizes</li>
-                <li>Carefully packaged for safe delivery</li>
-              </ul>
+              
             </div>
             <div className="description mt-3">
               <h4>Description</h4>

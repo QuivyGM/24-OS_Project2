@@ -90,10 +90,7 @@ const ShopCat = () => {
                 <button className="back-button" onClick={() => navigate(-1)}>
                     ← Back
                 </button>
-                <h1 className="title-text">
-                    Explore Our Products
-                    <img src="/images/shop_icon.png" alt="Shop Icon" className="shop-icon" />
-                </h1>
+                
                 <Catalogue onProductClick={openModal} />
             </main>
 
