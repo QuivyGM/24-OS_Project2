@@ -1,198 +1,152 @@
-// Import necessary modules and components
-import React, { } from 'react';
-import { useNavigate } from 'react-router-dom';
-import '../styles/pages/_plants.scss';
-import Footer from './Footer';
-import Navbar from './Navbar';
-// Sample Data
-const popularPlants = [
-    { id: 1, image: './images/1.jpg', title: 'Fiddle Leaf Fig' },
-    { id: 2, image: './images/2.jpg', title: 'Snake Plant' },
-    { id: 3, image: './images/3.jpg', title: 'Peace Lily' },
-    { id: 4, image: './images/4.jpg', title: 'Monstera Deliciosa' },
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Navbar from "./Navbar";
+import Footer from "./Footer";
+import "../styles/pages/_plants.scss";
+
+const weeklyTopPlants = [
+    { id: 1, image: "/images/1.jpg", title: "Fiddle Leaf Fig", likes: 120 },
+    { id: 2, image: "/images/2.jpg", title: "Snake Plant", likes: 100 },
+    { id: 3, image: "/images/3.jpg", title: "Peace Lily", likes: 80 },
 ];
 
-// Carousel Item Component
-const CarouselItem = ({ image, title, isActive }) => (
-    <div className={`carousel-item ${isActive ? 'active' : ''}`}>
-        <div className="product-card card mx-auto">
-            <img
-                src={image}
-                alt={title}
-                className="card-img-top"
-                loading="lazy"
-            />
-            <div className="card-body">
-                <h5 className="card-title">{title}</h5>
-            </div>
-        </div>
-    </div>
-);
+const allPlants = Array.from({ length: 36 }, (_, index) => ({
+    id: index + 4,
+    image: `/images/${(index % 5) + 1}.jpg`,
+    title: `Chamaedorea Elegans ${index + 4}`,
+    rating: 4.5,
+    reviews: 10,
+    type: index % 2 === 0 ? "Indoor" : "Outdoor",
+    waterNeeds: index % 3 === 0 ? "Low" : "Medium",
+    size: index % 4 === 0 ? "Small" : "Large",
+}));
 
-// Weekly Others Component
-const WeeklyOthers = () => (
-    <div className="weekly_others">
-    <h2>Other Popular Plants</h2>
-    <div id="horizontalCarousel" className="carousel slide" data-bs-ride="carousel">
-        <div className="carousel-inner">
-            {popularPlants.map((plant, index) => (
-                <CarouselItem
-                    key={plant.id}
-                    image={plant.image}
-                    title={plant.title}
-                    isActive={index === 0}
-                />
-            ))}
-        </div>
-        <button
-            className="carousel-control-prev"
-            type="button"
-            data-bs-target="#horizontalCarousel"
-            data-bs-slide="prev"
-            aria-label="Previous popular plants"
-        >
-            <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-        </button>
-        <button
-            className="carousel-control-next"
-            type="button"
-            data-bs-target="#horizontalCarousel"
-            data-bs-slide="next"
-            aria-label="Next popular plants"
-        >
-            <span className="carousel-control-next-icon" aria-hidden="true"></span>
-        </button>
-    </div>
-</div>
-);
-
-// Catalogue Component
-const Catalogue = () => {
+const Plants = () => {
     const navigate = useNavigate();
-    const plantCatalogue = [
-        { id: 1, image: './images/1.jpg', title: 'Modern Picture 1', rating: 5 },
-        { id: 2, image: './images/2.jpg', title: 'Modern Picture 2', rating: 4 },
-        { id: 3, image: './images/3.jpg', title: 'Modern Picture 3', rating: 3 },
-        { id: 4, image: './images/4.jpg', title: 'Modern Picture 4', rating: 4 },
-        { id: 5, image: './images/5.jpg', title: 'Modern Picture 5', rating: 4 },
-        { id: 6, image: './images/6.jpg', title: 'Modern Picture 6', rating: 4 },
-        { id: 7, image: './images/7.jpg', title: 'Modern Picture 7', rating: 4 },
-        { id: 8, image: './images/8.jpg', title: 'Modern Picture 8', rating: 4 },
-        { id: 9, image: './images/1.jpg', title: 'Modern Picture 1', rating: 5 },
-        { id: 10, image: './images/2.jpg', title: 'Modern Picture 2', rating: 4 },
-        { id: 11, image: './images/3.jpg', title: 'Modern Picture 3', rating: 3 },
-        { id: 12, image: './images/4.jpg', title: 'Modern Picture 4', rating: 4 },
-        { id: 13, image: './images/5.jpg', title: 'Modern Picture 5', rating: 4 },
-        { id: 14, image: './images/6.jpg', title: 'Modern Picture 6', rating: 4 },
-        { id: 15, image: './images/7.jpg', title: 'Modern Picture 7', rating: 4 },
-        { id: 16, image: './images/8.jpg', title: 'Modern Picture 8', rating: 4 },
-        { id: 17, image: './images/1.jpg', title: 'Modern Picture 1', rating: 5 },
-        { id: 18, image: './images/2.jpg', title: 'Modern Picture 2', rating: 4 },
-        { id: 19, image: './images/3.jpg', title: 'Modern Picture 3', rating: 3 },
-        { id: 20, image: './images/4.jpg', title: 'Modern Picture 4', rating: 4 },
-        { id: 21, image: './images/5.jpg', title: 'Modern Picture 5', rating: 4 },
-        { id: 22, image: './images/6.jpg', title: 'Modern Picture 6', rating: 4 },
-        { id: 23, image: './images/7.jpg', title: 'Modern Picture 7', rating: 4 },
-        { id: 34, image: './images/8.jpg', title: 'Modern Picture 8', rating: 4 },
-    ];
+    const [currentPage, setCurrentPage] = useState(1);
+    const [filters, setFilters] = useState({
+        type: "",
+        waterNeeds: "",
+        size: "",
+    });
 
-    const handleSeeMoreClick = (plantId) => {
-        navigate(`/post/${plantId}`); // Navigate to Post.js with plantId as a parameter
+    const plantsPerPage = 8;
+
+    const filteredPlants = allPlants.filter((plant) => {
+        return (
+            (filters.type === "" || plant.type === filters.type) &&
+            (filters.waterNeeds === "" || plant.waterNeeds === filters.waterNeeds) &&
+            (filters.size === "" || plant.size === filters.size)
+        );
+    });
+
+    const indexOfLastPlant = currentPage * plantsPerPage;
+    const indexOfFirstPlant = indexOfLastPlant - plantsPerPage;
+    const currentPlants = filteredPlants.slice(indexOfFirstPlant, indexOfLastPlant);
+
+    const handlePlantClick = (plantId) => {
+        navigate(`/post/${plantId}`);
+    };
+
+    const handleNextPage = () => {
+        if (currentPage < Math.ceil(filteredPlants.length / plantsPerPage)) {
+            setCurrentPage((prev) => prev + 1);
+        }
+    };
+
+    const handlePreviousPage = () => {
+        if (currentPage > 1) {
+            setCurrentPage((prev) => prev - 1);
+        }
+    };
+
+    const handleFilterChange = (e) => {
+        setFilters({
+            ...filters,
+            [e.target.name]: e.target.value,
+        });
+        setCurrentPage(1); 
     };
 
     return (
-        <section className="catalogue">
-            <h2>Catalogue</h2>
-            <div className="row">
-                {plantCatalogue.map((plant) => (
-                    // <div class="row gx-0 gy-2">
-                    <div key={plant.id} className="col-md-3 d-flex justify-content-center">
-                        <div className="product-card card pt-3 pb-3" style={{ height: '90%' }}>
-                            <img
-                                src={plant.image}
-                                alt={plant.title}
-                                className="card-img-top"
-                                loading="lazy"
-                            />
-                            <div className="card-body">
-                                <h5 className="card-title">{plant.title}</h5>
-                                <div className="star-rating">
-                                    {[...Array(5)].map((_, index) => (
-                                        <span
-                                            key={index}
-                                            className={`star ${index < plant.rating ? 'filled' : ''}`}
-                                        >
-                                            &#9733;
-                                        </span>
-                                    ))}
-                                </div>
-                                <button
-                                    className="btn btn-outline-primary"
-                                    onClick={() => handleSeeMoreClick(plant.id)}
-                                >
-                                    See More
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    // </div>
-                ))}
-            </div>
-        </section>  
-    );
-};
-
-// Plants Component
-const Plants = () => {
-
-    return (
         <div className="plants-page">
-            {/* Header Section */}
             <Navbar />
-
-
-            {/* Main Section */}
             <main className="product-page">
-                <h1 className="title-text">
-                    Find Your <br />
-                    Perfect Plant
-                    <img src="/images/plant_icon.png" alt="Plant Icon" className="plant-icon" />
-                </h1>
-                <section className="Weekly_frame">
-                    <h2>Plant of the Week</h2>
-                    <hr className="custom-hr" />
-                    <div className="weekly_plant">
-                        <div className="image_frame">
-                            <img src="/images/1.jpg" alt="Echinocereus Cactus" className="top_plant" />
-                            <img src="/images/crown.png" alt="Crown" className="crown_image" />
-                        </div>
-                        <div className="info_frame">
-                            <h2>Echinocereus Cactus</h2>
-                            <div className="tags">
-                                <span className="badge bg-success">Indoor</span>
-                                <span className="badge bg-success">Cactus</span>
+                <section className="weekly-plants">
+                    <h2 className="section-title">Top Weekly Plants</h2>
+                    <div className="top-plants">
+                        {weeklyTopPlants.map((plant, index) => (
+                            <div
+                                key={plant.id}
+                                className={`top-plant-card rank-${index + 1}`}
+                                onClick={() => handlePlantClick(plant.id)}
+                            >
+                                <div className="medal">
+                                    {index === 0 && <img src="/icons/gold.png" alt="Gold Medal" />}
+                                    {index === 1 && <img src="/icons/silver.png" alt="Silver Medal" />}
+                                    {index === 2 && <img src="/icons/bronze.png" alt="Bronze Medal" />}
+                                </div>
+                                <img src={plant.image} alt={plant.title} className="plant-image" />
+                                <div className="plant-info">
+                                    <span className="rank">{index + 1}</span>
+                                    <h3>{plant.title}</h3>
+                                    <p>{plant.likes} likes</p>
+                                </div>
                             </div>
-                            <hr className="custom-hr" />
-                            <h4>Features</h4>
-                            <ul>
-                                <li>Species: Echinocereus spp.</li>
-                                <li>Size: Varies by species, 4-12 inches in height</li>
-                                <li>Season: Spring or summer</li>
-                                <li>Available in various pot sizes</li>
-                                <li>Carefully packaged for safe delivery</li>
-                            </ul>
-                            <h4>Description</h4>
-                            <p>The Echinocereus Cactus is known for its beauty and resilience. Perfect for indoor and outdoor settings.</p>
-                        </div>
-                        <WeeklyOthers />
+                        ))}
                     </div>
-                    
                 </section>
-                
-                <Catalogue />
+
+                <section className="other-plants">
+                    <h2 className="section-title">Explore More Plants</h2>
+                    <div className="filters">
+                        <select name="type" value={filters.type} onChange={handleFilterChange}>
+                            <option value="">All Types</option>
+                            <option value="Indoor">Indoor</option>
+                            <option value="Outdoor">Outdoor</option>
+                        </select>
+                        <select name="waterNeeds" value={filters.waterNeeds} onChange={handleFilterChange}>
+                            <option value="">All Water Needs</option>
+                            <option value="Low">Low</option>
+                            <option value="Medium">Medium</option>
+                        </select>
+                        <select name="size" value={filters.size} onChange={handleFilterChange}>
+                            <option value="">All Sizes</option>
+                            <option value="Small">Small</option>
+                            <option value="Large">Large</option>
+                        </select>
+                    </div>
+                    <div className="plants-grid">
+                        {currentPlants.map((plant) => (
+                            <div
+                                key={plant.id}
+                                className="plant-card"
+                                onClick={() => handlePlantClick(plant.id)}
+                            >
+                                <img src={plant.image} alt={plant.title} className="plant-image" />
+                                <h4>{plant.title}</h4>
+                                <p>{plant.rating} ★ ({plant.reviews} reviews)</p>
+                            </div>
+                        ))}
+                    </div>
+
+                    <div className="pagination">
+                        <button onClick={handlePreviousPage} disabled={currentPage === 1}>
+                            &lt; Previous
+                        </button>
+                        <span>
+                            {currentPage} of {Math.ceil(filteredPlants.length / plantsPerPage)}
+                        </span>
+                        <button
+                            onClick={handleNextPage}
+                            disabled={currentPage === Math.ceil(filteredPlants.length / plantsPerPage)}
+                        >
+                            Next &gt;
+                        </button>
+                    </div>
+                </section>
             </main>
 
-            {/* Footer */}
             <Footer />
         </div>
     );
