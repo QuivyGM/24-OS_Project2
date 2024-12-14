@@ -15,7 +15,7 @@ body {
 }
 
 .post-page {    
-    max-width: 80%;
+    max-width: 100%;
     margin: 0;
     padding: 0;
     padding-top: 60px;
@@ -39,9 +39,9 @@ body {
 
     .post {
         padding: 20px 40px;
-        margin-top: 20px;
-        margin-bottom: 20px; // Add a margin only to the bottom of the card
-        width: 100%; // Ensure the card does not stretch unnecessarily
+        margin-top: 40px;
+        margin-bottom: 40px; // Add a margin only to the bottom of the card
+        width: 80%; // Ensure the card does not stretch unnecessarily
         max-width: 100%; // Optional: Set a maximum width for better layout
         margin-left: auto;
         margin-right: auto;
