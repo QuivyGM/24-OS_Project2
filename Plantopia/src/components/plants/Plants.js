@@ -7,11 +7,18 @@ import "../../styles/pages/_plants.scss";
 import plantsData from "./plantsData";
 
 const weeklyTopPlants = [
-    
-    { id: 1, image: "/images/2.jpg", title: "Snake Plant", likes: 100 },
-    { id: 2, image: "/images/1.jpg", title: "Fiddle Leaf Fig", likes: 120 },
-    { id: 3, image: "/images/3.jpg", title: "Peace Lily", likes: 80 },
+    { id: 1, image: "/images/2.jpg", title: "Snake Plant", likes: 100, medal: "silver", yOffset: 20 },
+    { id: 2, image: "/images/1.jpg", title: "Fiddle Leaf Fig", likes: 120, medal: "gold", yOffset: 0 },
+    { id: 3, image: "/images/3.jpg", title: "Peace Lily", likes: 80, medal: "bronze", yOffset: 40 },
 ];
+
+const medalMap = {
+    gold: "/icons/gold.png",
+    silver: "/icons/silver.png",
+    bronze: "/icons/bronze.png",
+};
+
+
 
 const allPlants = Array.from({ length: 36 }, (_, index) => ({
     id: index + 4,
@@ -87,31 +94,36 @@ const Plants = () => {
         <div className="plants-page">
             <Navbar />
             <main className="product-page">
-                <section className="weekly-plants">
-                    <h2 className="section-title">Top Weekly Plants</h2>
-                    <div className="top-plants">
-                        {weeklyTopPlants.map((plant, index) => (
-                            <div
-                                key={plant.id}
-                                className={`top-plant-card rank-${index + 1}`}
-                                onClick={() => handlePlantClick(plant)}
-                                style={{ transform: `translateY(${yOffsets[index]}px)` }}
-                            >
-                                <div className="medal">
-                                    {index === 0 && <img src="/icons/silver.png" alt="Silver Medal" />} 
-                                    {index === 1 && <img src="/icons/gold.png" alt="Gold Medal" />}
-                                    {index === 2 && <img src="/icons/bronze.png" alt="Bronze Medal" />}
-                                </div>
-                                <img src={plant.image} alt={plant.title} className="plant-image" />
-                                <div className="plant-info">
-                                    <span className="rank">{rankNum[index]}</span>
-                                    <h3>{plant.title}</h3>
-                                    <p>{plant.likes} likes</p>
-                                </div>
+            <section className="weekly-plants">
+                <h2 className="section-title">Top Weekly Plants</h2>
+                <div className="top-plants">
+                    {weeklyTopPlants.map((plant, index) => (
+                        <div
+                            key={plant.id}
+                            className={`top-plant-card rank-${index + 1}`}
+                            onClick={() => handlePlantClick(plant)}
+                            style={{
+                                transform: `translateY(${plant.yOffset}px)`,
+                            }}
+                        >
+                            {/* Medal Section */}
+                            <div className="medal">
+                                <img src={medalMap[plant.medal]} alt={`${plant.medal} Medal`} />
                             </div>
-                        ))}
-                    </div>
-                </section>
+
+                            {/* Plant Image */}
+                            <img src={plant.image} alt={plant.title} className="plant-image" />
+
+                            {/* Plant Info */}
+                            <div className="plant-info">
+                                <h3>{plant.title}</h3>
+                                <p>{plant.likes} likes</p>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </section>
+
 
                 <section className="other-plants">
                     <h2 className="section-title">Explore More Plants</h2>
