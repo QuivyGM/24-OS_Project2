@@ -1,8 +1,10 @@
 import React, { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../../styles/pages/_shopCat.scss';
+import Navbar from "../Navbar";
+import Footer from "../Footer";
 
-// Sample Data for Product Catalogue
+// Sample Product Data
 const productCatalogue = [
     { id: 1, image: './images/1.jpg', title: 'Modern Picture 1', price: '$15.00', originalPrice: '$25.00', reviews: 10, avgReviewScore: 4.5 },
     { id: 2, image: './images/2.jpg', title: 'Modern Picture 2', price: '$20.00', originalPrice: '$20.00', reviews: 8, avgReviewScore: 4.0 },
@@ -14,156 +16,107 @@ const productCatalogue = [
     { id: 8, image: './images/8.jpg', title: 'Modern Picture 8', price: '$21.00', originalPrice: '$31.00', reviews: 11, avgReviewScore: 4.6 },
 ];
 
-// Catalogue Component
-const Catalogue = () => {
-    const navigate = useNavigate();
+// Product Card Component
+const ProductCard = ({ product, onProductClick }) => {
+    const { image, title, price, originalPrice, reviews, avgReviewScore } = product;
 
     return (
-        <section className="catalogue">
-            <h2>Product Catalogue</h2>
-            <div className="row">
-                {productCatalogue.map((product) => (
-                    <div key={product.id} className="col-md-3">
-                        <div className="product-card card">
-                            <img src={product.image} alt={product.title} className="card-img-top" />
-                            <div className="card-body">
-                                <h5 className="card-title">{product.title}</h5>
-                                <p className="price">
-                                    {product.price}{' '}
-                                    {product.price !== product.originalPrice && (
-                                        <span className="original-price">{product.originalPrice}</span>
-                                    )}
-                                </p>
-                                <div className="review-info">
-                                    {Array.from({ length: 5 }, (_, i) => (
-                                        <span key={i} className={`star ${i < Math.round(product.avgReviewScore) ? 'filled' : ''}`}>
-                                            &#9733;
-                                        </span>
-                                    ))}
-                                    <span className="review-count">({product.reviews})</span>
-                                </div>
-                                <button
-                                    className="btn btn-success"
-                                    onClick={() => navigate(`/post/${product.id}`)} // Navigate to Post page
-                                    style={{ cursor: 'pointer' }}
-                                >
-                                    See More
-                                </button>
-                                <button className="btn btn-outline-secondary ms-2">Add to cart</button>
-                            </div>
-                        </div>
+        <div className="col-md-3">
+            <div className="product-card card">
+                <img src={image} alt={title} className="card-img-top" />
+                <div className="card-body">
+                    <h5 className="card-title">{title}</h5>
+                    <p className="price">
+                        {price}{' '}
+                        {price !== originalPrice && (
+                            <span className="original-price">{originalPrice}</span>
+                        )}
+                    </p>
+                    <div className="review-info">
+                        {Array.from({ length: 5 }, (_, i) => (
+                            <span key={i} className={`star ${i < Math.round(avgReviewScore) ? 'filled' : ''}`}>
+                                &#9733;
+                            </span>
+                        ))}
+                        <span className="review-count">({reviews})</span>
                     </div>
-                ))}
+                    <button className="btn btn-success" onClick={() => onProductClick(product)}>
+                        See More
+                    </button>
+                    <button className="btn btn-outline-secondary ms-2">Add to cart</button>
+                </div>
             </div>
-        </section>
+        </div>
     );
 };
+
+// Catalogue Component
+const Catalogue = ({ onProductClick }) => (
+    <section className="catalogue">
+        <h2>Product Catalogue</h2>
+        <div className="row">
+            {productCatalogue.map((product) => (
+                <ProductCard key={product.id} product={product} onProductClick={onProductClick} />
+            ))}
+        </div>
+    </section>
+);
 
 // ShopCat Component
 const ShopCat = () => {
     const navigate = useNavigate();
     const searchInputRef = useRef(null);
-    const [showInput, setShowInput] = useState(false);
 
-    const handleLogoClick = (event) => {
-        event.preventDefault();
-        navigate('/');
+    const [showModal, setShowModal] = useState(false);
+    const [selectedProduct, setSelectedProduct] = useState(null);
+
+    const openModal = (product) => {
+        setSelectedProduct(product);
+        setShowModal(true);
     };
 
-    const handleLoginClick = () => {
-        navigate('/login');
-    };
-
-    const handleSearchClick = () => {
-        setShowInput(true);
-        if (searchInputRef.current) {
-            searchInputRef.current.focus();
-        }
+    const closeModal = () => {
+        setShowModal(false);
+        setSelectedProduct(null);
     };
 
     return (
         <div className="shop-page">
             {/* Header Section */}
-            <div className="overlay">
-                <nav className="navbar navbar-expand-lg bg-body-tertiary navbar-main">
-                    <div className="container-fluid navbar-box d-flex">
-                        {/* Navbar brand/logo with click handler */}
-                        <a className="navbar-brand" href="logo" onClick={handleLogoClick}>
-                            <img src="./images/logo.png" alt="logo" />
-                        </a>
-
-                        {/* Navbar toggle button for mobile view */}
-                        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                            <span className="navbar-toggler-icon"></span>
-                        </button>
-
-                        {/* Navbar links and right-side buttons */}
-                        <div className="collapse navbar-collapse nav-center" id="navbarSupportedContent">
-                            <ul className="navbar-nav mb-2 mb-lg-0">
-                                <li className="nav-item"><a className="nav-link active" href="Plants">Plants</a></li>
-                                <li className="nav-item"><a className="nav-link active" href="Community">Community</a></li>
-                                <li className="nav-item"><a className="nav-link active" href="Shop">Shop</a></li>
-                                <li className="nav-item"><a className="nav-link active" href="Aboutus">About Us</a></li>
-                            </ul>
-
-                            {/* Right nav (search and login) */}
-                            <div className="nav-right">
-                                <form className="d-flex search-button" role="search" onSubmit={(e) => e.preventDefault()}>
-                                    <input
-                                        ref={searchInputRef}
-                                        className={`form-control me-2 ${showInput ? 'show' : 'hide'}`}
-                                        type="search"
-                                        placeholder="Search"
-                                        aria-label="Search"
-                                    />
-                                    <button className="btn btn-outline-success" type="button" onClick={handleSearchClick}>
-                                        <img src="./icons/search-normal.svg" alt="search" />
-                                    </button>
-                                </form>
-                                <button onClick={handleLoginClick} className="login-button">
-                                    <img src="./icons/user.svg" alt="login" />
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </nav>
-            </div>
+            <Navbar />
 
             {/* Main Section */}
             <main className="product-page">
+                <button className="back-button" onClick={() => navigate(-1)}>
+                    ← Back
+                </button>
                 <h1 className="title-text">
                     Explore Our Products
                     <img src="/images/shop_icon.png" alt="Shop Icon" className="shop-icon" />
                 </h1>
-                <Catalogue />
+                <Catalogue onProductClick={openModal} />
             </main>
 
-            {/* Footer */}
-            <footer className="footer py-5">
-                <div className="row text-center">
-                    <div className="col-md-3 footer-logo">
-                        <img src="./images/logo.png" alt="Plantopia Logo" />
-                    </div>
-                    <div className="col-md-3 footer-links">
-                        <a href="#home">Home</a>
-                        <a href="#gardner">Gardner</a>
-                        <a href="#contact">Contact</a>
-                        <a href="#privacy">Privacy</a>
-                    </div>
-                    <div className="col-md-3 footer-social">
-                        <h3>Social</h3>
-                        <a href="#facebook"><i className="fab fa-facebook"></i></a>
-                        <a href="#linkedin"><i className="fab fa-linkedin"></i></a>
-                        <a href="#instagram"><i className="fab fa-instagram"></i></a>
-                    </div>
-                    <div className="col-md-3 subscribe">
-                        <h3>Subscribe For Updates</h3>
-                        <input type="email" placeholder="Enter email..." className="form-control mb-2" />
-                        <button className="btn button-subscribe">Subscribe</button>
+            {/* Modal */}
+            {showModal && selectedProduct && (
+                <div className="modal-overlay" onClick={closeModal}>
+                    <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+                        <img src={selectedProduct.image} alt={selectedProduct.title} className="modal-image" />
+                        <div className="modal-text">
+                            <h3>{selectedProduct.title}</h3>
+                            <p>Price: {selectedProduct.price}</p>
+                            {selectedProduct.price !== selectedProduct.originalPrice && (
+                                <p>Original Price: {selectedProduct.originalPrice}</p>
+                            )}
+                            <p>Reviews: {selectedProduct.reviews}</p>
+                            <p>Average Score: {selectedProduct.avgReviewScore} ★</p>
+                        </div>
                     </div>
                 </div>
-                <p className="footer-note text-center mt-4">shop.com © All rights reserved</p>
-            </footer>
+            )}
+
+            {/* Footer */}
+            <Footer />
         </div>
     );
 };

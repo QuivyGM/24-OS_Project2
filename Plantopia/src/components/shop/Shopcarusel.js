@@ -1,6 +1,7 @@
 import React from "react";
 import "../../styles/pages/_shopcarusel.scss";
 
+
 const Shopcarusel = ({ handleShopClick }) => {
   const products = [1, 2, 3, 4, 5, 6, 7]; // Example products array
 
