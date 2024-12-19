@@ -1,0 +1,146 @@
+수정.
+#1 Shop
+Get http://localhost:8080/Shop
+
+{
+  // 수정 -> user comment 삭제!
+
+  "counts": 4,
+  "main": {
+    "features": {
+      "plantimg" : img // 수정
+      "climate" : "건조한 기후", // 수정
+      "size" : "size is 4~12 inches" // 수정
+      "season" : "사계절", // 수정
+      "f1" : "다양한 화분 사이즈 이용 가능" // 수정
+      "f2" : "배송시 주의" // 수정
+    },
+    "title": "선인장",
+    "description" : "놀라운 귀요미 선인장", // 수정
+    "price" : "20000" // 수정
+  },
+
+  "plantlists": [
+    {
+      "price": 10000,
+      "plantimg": "http://localhost:8080/image?id=1",
+      "title": "선인장"
+    },
+    {
+      "price": 10000,
+      "plantimg": "http://localhost:8080/image?id=1",
+      "title": "선인장"
+    },
+    {
+      "price": 10000,
+      "plantimg": "http://localhost:8080/image?id=1",
+      "title": "선인장"
+    },
+    {
+      "price": 10000,
+      "plantimg": "http://localhost:8080/image?id=1",
+      "title": "선인장"
+    }
+  ]
+}
+
+
+#2 Plants
+Get http://localhost:8080/Plants
+
+{  
+    // 메인 식물 정보
+    "counts" : (int), //받아온 식물목록(최대 15개)
+    "main" : 
+    {   
+        "plantimg" : img // 수정 
+        "title" : "plant"  
+        "features": {
+            "climate" : "건조한 기후", // 수정
+            "size" : "size is 4~12 inches" // 수정
+            "season" : "사계절", // 수정
+            "f1" : "다양한 화분 사이즈 이용 가능" // 수정
+            "f2" : "배송시 주의" // 수정
+        },
+        "description" : "description" // 수정
+    },
+
+
+    // 식물목록(15가지)
+    "plantslist" : [ 
+        {
+            "plantimg" : img,
+            "title": "plant1",
+            "rating": "1~5"
+        },
+        {
+            "plantimg" : img,
+            "title": "plant1",
+            "rating": "1~5"
+        },
+        {
+            "plantimg" : img,
+            "title": "plant1",
+            "rating": "1~5"
+        },
+        .
+        .
+        .
+        .
+        .
+        {
+            "plantimg" : img,
+            "title": "plant1",
+            "rating": "1~5"
+        }
+        ]
+}
+
+수정.
+#3 Main
+Get http://localhost:8080/
+{
+  "comments": {
+    "rating": 0,
+    "description": "World!",
+    "username": "pooh"
+  },
+
+  "counts": 4,
+  "main" : 
+    {   
+        "plantimg" : img // 수정 
+        "title" : "plant"  
+        "features": {
+            "climate" : "건조한 기후", // 수정
+            "size" : "size is 4~12 inches" // 수정
+            "season" : "사계절", // 수정
+            "f1" : "다양한 화분 사이즈 이용 가능" // 수정
+            "f2" : "배송시 주의" // 수정
+        },
+        "description" : "description" // 수정
+    },
+
+  "plantlists": [
+    {
+      "price": 10000,
+      "plantimg": "http://localhost:8080/image?id=1",
+      "title": "선인장"
+    },
+    {
+      "price": 10000,
+      "plantimg": "http://localhost:8080/image?id=1",
+      "title": "선인장"
+    },
+    {
+      "price": 10000,
+      "plantimg": "http://localhost:8080/image?id=1",
+      "title": "선인장"
+    },
+    {
+      "price": 10000,
+      "plantimg": "http://localhost:8080/image?id=1",
+      "title": "선인장"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+0. 
+
+
+1. MyPostAndComments
+
+Get
+
+url : http://localhost:8080/MyPostsAndComments?token=...
+
+{
+    "postlist" : ["url1","url2",...,"urln"],
+    "commentlist" : ["comment1","comment2",..."comment n"]
+}
+
+
+
+2. MyAccount
+
+Get
+
+url : http://localhost:8080/MyAccount?token=...
+
+{
+    "eamil" : "",
+    "nickname" : ""
+}
