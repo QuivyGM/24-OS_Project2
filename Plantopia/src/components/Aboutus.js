@@ -14,7 +14,7 @@ const Aboutus = () => {
     setShowInput(true);
     if (searchInputRef.current) searchInputRef.current.focus();
   };
-  
+
   return (
     <>
       {/* Page Container */}
@@ -25,7 +25,7 @@ const Aboutus = () => {
         {/* About Section */}
         <div className="about-page">
           <h1>About Us</h1>
-          <p>Learn more about our journey and what makes us passionate about plants.</p>
+          <p>We are the Plantopia team! Learn more about our journey and what makes us passionate about plants.</p>
           <div className="team">
             {['A', 'B', 'C', 'D', 'E'].map((member, index) => (
               <div key={index} className="team-member">
@@ -56,23 +56,13 @@ const Aboutus = () => {
             </div>
           </div>
         </div>
-        <div className="service-page">
-      <div className="services-list">
-        <div className="service-card">
-          <h2>Garden Maintenance</h2>
-          <p>We offer tailored garden maintenance plans to suit your schedule and needs.</p>
+
+        <div className="contacts-page">
+          <h1>Contact Us</h1>
+          <p>Tell us about your thoughts on Plantopia!</p>
+          <p class="contact-seg">Business Email: Plantopia@gmail.com</p>
+          <p class="contact-seg">Contact Number: 123-456-7890</p>
         </div>
-        <div className="service-card">
-          <h2>Plant Consultation</h2>
-          <p>Our experts can help you choose and care for the best plants for your environment.</p>
-        </div>
-        <div className="service-card">
-          <h2>Online Plant Store</h2>
-          <p>Order plants online with delivery options right to your doorstep.</p>
-        </div>
-      </div>
-    </div>
-        <div className="service-page container"></div>
       </div>
 
       {/* Footer Section */}
